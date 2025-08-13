@@ -1328,3 +1328,10 @@
 //     <line x1="3" y1="10" x2="21" y2="10"></line>
 //   </svg>
 // );
+import React from "react";
+
+const page = () => {
+  return <div>page</div>;
+};
+
+export default page;
