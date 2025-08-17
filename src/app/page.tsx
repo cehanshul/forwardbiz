@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Menu,
   X,
@@ -42,9 +42,7 @@ export default function ForwardBizHomepage() {
   const [selectedService, setSelectedService] = useState("Select a service");
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const [animateHero, setAnimateHero] = useState(false);
-
-  // Reference for Lottie animation
-  const lottieRef = useRef<HTMLDivElement>(null);
+  const [animationData, setAnimationData] = useState(null);
 
   // Services data - updated with new services
   const services = [
@@ -161,7 +159,7 @@ export default function ForwardBizHomepage() {
     { value: "200+", label: "Businesses Transformed", icon: Building },
     { value: "2.5K+", label: "Successful Placements", icon: Users },
     { value: "150%", label: "Average Conversion Growth", icon: TrendingUp },
-    { value: "₹500Cr+", label: "Revenue Impact", icon: BarChart4 },
+    // { value: "₹500Cr+", label: "Revenue Impact", icon: BarChart4 },
   ];
 
   // Client Logos - represented as abstract shapes in dark mode
@@ -345,6 +343,17 @@ export default function ForwardBizHomepage() {
     </>
   );
 
+  // Lottie animation directly in the component
+  // const { View } = useLottie(options);
+
+  // Add this useEffect to fetch the animation data
+  useEffect(() => {
+    fetch("/hero-boi.json")
+      .then((response) => response.json())
+      .then((data) => setAnimationData(data))
+      .catch((error) => console.error("Error loading animation:", error));
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-900 font-sans antialiased text-gray-200 overflow-x-hidden">
       {/* Ambient background elements */}
@@ -480,19 +489,16 @@ export default function ForwardBizHomepage() {
                 Business Growth Specialists
               </span>
 
-              <h1
-                className={`text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ${
+              {/* Replace the current h1 element with this */}
+              <div
+                className={`transition-all duration-1000 ${
                   animateHero
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                Building Talent.{" "}
-                <span className="text-blue-400">Driving Conversions.</span>{" "}
-                <span className="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                  Moving Businesses Forward.
-                </span>
-              </h1>
+                <TypewriterText />
+              </div>
 
               <p
                 className={`text-xl text-gray-300 mb-8 max-w-lg transition-all duration-1000 delay-300 ${
@@ -533,7 +539,7 @@ export default function ForwardBizHomepage() {
               </div>
 
               {/* Key Stats */}
-              <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+              <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-6">
                 {businessStats.map((stat, index) => (
                   <div
                     key={index}
@@ -561,19 +567,20 @@ export default function ForwardBizHomepage() {
             <div className="lg:col-span-5 relative">
               <div className="relative z-20 transform">
                 <div
-                  className={`relative z-10 bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-gray-700 border-opacity-50 hover:border-gray-600 hover:border-opacity-50 transition-all duration-300 group transform ${
+                  className={`relative z-10    rounded-2xl  overflow-hidden    transition-all duration-300 group transform ${
                     animateHero
                       ? "opacity-100 translate-x-0"
                       : "opacity-0 translate-x-4"
                   }`}
+                  style={{ height: "400px" }}
                 >
-                  <Lottie
-                    ref={lottieRef}
-                    animationData="/Superhero.lottie"
-                    loop={true}
-                    autoplay={true}
-                    style={{ width: "100%", height: "100%" }}
-                  />
+                  {animationData && (
+                    <Lottie
+                      animationData={animationData}
+                      loop={true}
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  )}
                 </div>
               </div>
 
@@ -1767,5 +1774,80 @@ function FeatureCard({ title, description, color }) {
       {/* Background decoration */}
       <div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full bg-white opacity-0 group-hover:opacity-5 transition-all duration-500"></div>
     </div>
+  );
+}
+
+// Typewriter text component
+// Typewriter text component
+function TypewriterText() {
+  const phrases = [
+    { text: "Building Talent.", className: "text-white" },
+    { text: "Driving Growth.", className: "text-white" },
+    {
+      text: "Advancing Business.",
+      className: "text-white",
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [showCursor, setShowCursor] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  useEffect(() => {
+    const cursorInterval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 500);
+
+    return () => clearInterval(cursorInterval);
+  }, []);
+
+  useEffect(() => {
+    const currentPhrase = phrases[currentIndex].text;
+
+    if (!isDeleting && displayText.length < currentPhrase.length) {
+      // Typing the current phrase
+      const timeoutId = setTimeout(() => {
+        setDisplayText(currentPhrase.substring(0, displayText.length + 1));
+        setTypingSpeed(100);
+      }, typingSpeed);
+      return () => clearTimeout(timeoutId);
+    } else if (!isDeleting && displayText.length === currentPhrase.length) {
+      // Finished typing, pause before deleting
+      const timeoutId = setTimeout(() => {
+        setIsDeleting(true);
+        setTypingSpeed(50); // Faster when deleting
+      }, 200);
+      return () => clearTimeout(timeoutId);
+    } else if (isDeleting && displayText.length > 0) {
+      // Deleting the current phrase
+      const timeoutId = setTimeout(() => {
+        setDisplayText(currentPhrase.substring(0, displayText.length - 1));
+      }, typingSpeed);
+      return () => clearTimeout(timeoutId);
+    } else if (isDeleting && displayText.length === 0) {
+      // Move to next phrase
+      const timeoutId = setTimeout(() => {
+        setIsDeleting(false);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % phrases.length);
+      }, 100);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [displayText, isDeleting, currentIndex, phrases, typingSpeed]);
+
+  return (
+    <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
+      <span className={phrases[currentIndex].className}>
+        {displayText}
+        <span
+          className={`${
+            showCursor ? "opacity-100" : "opacity-0"
+          } transition-opacity duration-100`}
+        >
+          |
+        </span>
+      </span>
+    </h1>
   );
 }
