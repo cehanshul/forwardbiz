@@ -1,38 +1,35 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   Menu,
   X,
   ArrowRight,
   ChevronRight,
   Users,
-  Briefcase,
-  BookOpen,
+  Target,
   BarChart4,
-  ArrowUpRight,
+  Star,
+  Globe,
+  TrendingUp,
+  Zap,
+  Award,
+  Activity,
+  Briefcase,
+  PieChart,
+  LineChart,
+  CheckCircle,
   Mail,
   Phone,
   MapPin,
-  CheckCircle,
   ExternalLink,
   Plus,
   ChevronDown,
-  Star,
-  Globe,
-  LineChart,
+  UserPlus,
+  Building,
+  HeartHandshake,
+  MessageSquare,
+  MousePointer,
   Clock,
-  Award,
-  BarChart,
-  Target,
-  TrendingUp,
-  Zap,
-  Shield,
-  Activity,
-  Cpu,
-  PieChart,
-  Grid,
-  Database,
-  Server,
   Layers,
 } from "lucide-react";
 
@@ -45,54 +42,82 @@ export default function ForwardBizHomepage() {
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const [animateHero, setAnimateHero] = useState(false);
 
-  // Services data
+  // Services data - updated with new services
   const services = [
     {
-      id: "recruitment",
-      title: "Recruitment Services",
+      id: "talent-acquisition",
+      title: "HR Hiring & Strategic Talent Acquisition",
       description:
-        "Forward Business Solutions brings together the expertise of recruitment specialists to assess and identify the best talent for various positions in the corporate hierarchy.",
-      icon: Users,
+        "Building the right teams from scratch, ensuring organizations attract, retain, and grow top talent with our specialized recruitment methodologies.",
+      icon: UserPlus,
       color: "blue",
       metrics: [
-        { label: "Positions Filled", value: "1,000+" },
-        { label: "Time-to-Hire Reduction", value: "40%" },
-        { label: "Retention Rate", value: "94%" },
+        { label: "Successful Placements", value: "2,500+" },
+        { label: "Candidate Retention", value: "94%" },
+        { label: "Hiring Time Reduction", value: "40%" },
       ],
     },
     {
-      id: "tax",
-      title: "TAX Support",
+      id: "team-building",
+      title: "High-Impact Team Building",
       description:
-        "Forward Business Solutions backed by a team of dedicated professional provides TAX Support services such as GST Registration, PAN Registration, PF, ESI.",
-      icon: BarChart4,
+        "Creating resilient, performance-driven teams aligned with business vision through strategic planning, culture development, and leadership training.",
+      icon: Users,
       color: "purple",
       metrics: [
-        { label: "Clients Served", value: "500+" },
-        { label: "Compliance Rate", value: "100%" },
-        { label: "Average Savings", value: "₹8L+" },
+        { label: "Teams Built", value: "350+" },
+        { label: "Performance Increase", value: "65%" },
+        { label: "Team Cohesion", value: "92%" },
       ],
     },
     {
-      id: "training",
-      title: "Training & Placement",
+      id: "sales-leadership",
+      title: "Sales & CX Leadership",
       description:
-        "Forward Business Solutions trains candidates according to the Companies specific requirements. We provided training to many of corporate Clients, in a wide range of subjects.",
-      icon: BookOpen,
+        "Shaping strong sales and customer experience functions to drive retention and expansion with proven methodologies and frameworks.",
+      icon: HeartHandshake,
       color: "teal",
       metrics: [
-        { label: "Professionals Trained", value: "2,500+" },
-        { label: "Placement Rate", value: "92%" },
-        { label: "Companies Partnered", value: "120+" },
+        { label: "Revenue Growth", value: "85%" },
+        { label: "Customer Retention", value: "76%" },
+        { label: "Teams Transformed", value: "200+" },
+      ],
+    },
+    {
+      id: "lead-conversion",
+      title: "Lead Conversion (B2B & B2C)",
+      description:
+        "Designing sales pipelines and closure strategies that maximize conversion rates and revenue through data-driven approaches.",
+      icon: Target,
+      color: "amber",
+      metrics: [
+        { label: "Conversion Increase", value: "120%" },
+        { label: "Revenue Impact", value: "₹250Cr+" },
+        { label: "Deals Optimized", value: "1,800+" },
+      ],
+    },
+    {
+      id: "closure-management",
+      title: "Closure Management",
+      description:
+        "Ensuring leads aren't just generated, they're converted into long-term success with our specialized closure techniques and follow-up systems.",
+      icon: MousePointer,
+      color: "rose",
+      metrics: [
+        { label: "Closure Rate", value: "87%" },
+        { label: "Average Deal Size", value: "+45%" },
+        { label: "Client Retention", value: "92%" },
       ],
     },
   ];
 
   // Service options for dropdown
   const serviceOptions = [
-    "Recruitment Services",
-    "TAX Support",
-    "Training & Placement",
+    "HR Hiring & Strategic Talent Acquisition",
+    "High-Impact Team Building",
+    "Sales & CX Leadership",
+    "Lead Conversion (B2B & B2C)",
+    "Closure Management",
   ];
 
   // Approach steps
@@ -122,51 +147,92 @@ export default function ForwardBizHomepage() {
       number: "04",
       title: "Optimize",
       description:
-        "We measure results and refine our approach for maximum impact.",
+        "We measure results and continually refine our approach for maximum impact",
       icon: TrendingUp,
     },
   ];
 
   // Stats for visual appeal
   const businessStats = [
-    { value: "94%", label: "Client Satisfaction", icon: Award },
-    { value: "3.5K+", label: "Professionals Connected", icon: Users },
-    { value: "40%", label: "Average Growth Rate", icon: TrendingUp },
-    { value: "500+", label: "Global Clients", icon: Globe },
+    { value: "200+", label: "Businesses Transformed", icon: Building },
+    { value: "2.5K+", label: "Successful Placements", icon: Users },
+    { value: "150%", label: "Average Conversion Growth", icon: TrendingUp },
+    { value: "₹500Cr+", label: "Revenue Impact", icon: BarChart4 },
   ];
 
   // Client Logos - represented as abstract shapes in dark mode
   const clientLogos = [
-    { name: "Microsoft", icon: Grid },
-    { name: "Google", icon: Layers },
-    { name: "Infosys", icon: Server },
-    { name: "Apple", icon: Shield },
-    { name: "Amazon", icon: Database },
+    { name: "Tech Leaders", icon: Activity },
+    { name: "Ed-Tech", icon: Award },
+    { name: "SaaS", icon: Zap },
+    { name: "AI Startups", icon: Briefcase },
+    { name: "E-commerce", icon: Globe },
+  ];
+
+  // Updated testimonials based on the new content
+  const testimonials = [
+    {
+      content:
+        "Forward Biz helped us hire the right leaders quickly and effectively. Their talent-first approach is exactly what we needed.",
+      author: "Founder",
+      position: "Data Analytics Company, Bangalore",
+      rating: 5,
+      avatar: "F",
+      bgColor: "bg-blue-600",
+    },
+    {
+      content:
+        "Our conversion rates jumped significantly after working with Forward Biz. They know how to turn leads into real growth.",
+      author: "Head of Marketing",
+      position: "Top Institute, Chennai",
+      rating: 5,
+      avatar: "H",
+      bgColor: "bg-purple-600",
+    },
+    {
+      content:
+        "They built our inside sales team from scratch and trained them to deliver results fast. A true partner in growth.",
+      author: "Founder & CEO",
+      position: "SaaS Company, New Delhi",
+      rating: 5,
+      avatar: "C",
+      bgColor: "bg-teal-600",
+    },
+    {
+      content:
+        "Forward Biz combines hiring expertise with sales conversion strategies. They scaled our team and boosted our B2B outcomes.",
+      author: "CEO",
+      position: "AI Startup, Mumbai & New Jersey, US",
+      rating: 5,
+      avatar: "A",
+      bgColor: "bg-amber-600",
+    },
   ];
 
   // FAQ items
   const faqItems = [
     {
-      question: "What industries do you specialize in for recruitment?",
+      question:
+        "How long does it typically take to see results from your talent acquisition services?",
       answer:
-        "We specialize in recruitment across multiple industries including Technology, Finance, Healthcare, Manufacturing, and Retail. Our specialized recruitment teams understand the unique talent requirements in each sector.",
-    },
-    {
-      question: "How does your TAX support service work?",
-      answer:
-        "Our TAX support services include GST Registration, PAN Registration, PF, and ESI administration. We provide end-to-end management from initial registration to ongoing compliance and optimization, backed by a team of tax professionals.",
+        "Most clients see initial results within 4-6 weeks. Our strategic talent acquisition process begins with a thorough understanding of your organization's needs, followed by targeted sourcing and rigorous vetting. While we can fill urgent positions quickly, building a sustainable talent pipeline and implementing retention strategies typically shows optimal results in 2-3 months.",
     },
     {
       question:
-        "Can you create customized training programs for our specific needs?",
+        "What makes your lead conversion strategies different from others?",
       answer:
-        "Yes, we design training programs tailored to your company's specific requirements. We analyze your needs, develop customized curriculum, and deliver training through industry experts, followed by comprehensive assessment and placement support.",
+        "Our conversion strategies are data-driven and tailored to your specific business context. Unlike generic approaches, we analyze your entire funnel, identify conversion bottlenecks, and implement targeted improvements. We combine behavioral psychology, sales process optimization, and CX improvements to create holistic solutions that address both B2B and B2C scenarios.",
     },
     {
       question:
-        "What makes forwardbiz different from other business solution providers?",
+        "Can you support businesses that operate in multiple locations across India?",
       answer:
-        "Our integrated approach combining recruitment, tax support, and training under one roof provides seamless business solutions. We focus on understanding your unique challenges and developing customized strategies rather than offering one-size-fits-all solutions.",
+        "Absolutely. We have experience working with businesses across all major Indian metros and beyond. Our methodologies are designed to be location-agnostic, and we have the capability to implement solutions remotely or on-site as needed. For multi-location businesses, we can develop standardized yet locally adaptable approaches.",
+    },
+    {
+      question: "Do you work with startups or only established businesses?",
+      answer:
+        "We work with businesses at all stages of growth, from early-stage startups to established enterprises. For startups, we focus on building foundational talent and sales processes that can scale, while for established businesses, we often concentrate on optimization and transformation of existing teams and systems. Our solutions are always tailored to your specific stage, industry, and goals.",
     },
   ];
 
@@ -407,18 +473,21 @@ export default function ForwardBizHomepage() {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-                Business Solutions Provider
+                Business Growth Specialists
               </span>
 
               <h1
-                className={`text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ${
+                className={`text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ${
                   animateHero
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                Business solutions{" "}
-                <span className="text-blue-400">that deliver results</span>
+                Building Talent.{" "}
+                <span className="text-blue-400">Driving Conversions.</span>{" "}
+                <span className="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                  Moving Businesses Forward.
+                </span>
               </h1>
 
               <p
@@ -428,8 +497,9 @@ export default function ForwardBizHomepage() {
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                We provide comprehensive business services designed to optimize
-                your operations and accelerate growth in today's dynamic market.
+                We help businesses build high-performing teams and convert more
+                leads into revenue with our specialized talent and sales
+                solutions.
               </p>
 
               <div
@@ -441,17 +511,21 @@ export default function ForwardBizHomepage() {
               >
                 <a
                   href="/services"
-                  className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 inline-flex items-center shadow-lg hover:translate-y-[-2px]"
+                  className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 inline-flex items-center shadow-lg hover:translate-y-[-2px] group"
                 >
-                  Explore Our Services <ArrowRight size={16} className="ml-2" />
+                  <span>Hire Right. Convert More. Grow Forward.</span>
+                  <ArrowRight
+                    size={16}
+                    className="ml-2 group-hover:ml-3 transition-all duration-300"
+                  />
                 </a>
-
+                {/* 
                 <a
                   href="/contact"
-                  className="px-6 py-3 bg-gray-800 bg-opacity-50 text-gray-200 rounded-lg transition-all duration-300 inline-flex items-center border border-gray-700 border-opacity-50 hover:bg-gray-700 hover:bg-opacity-30 backdrop-blur-sm hover:text-white hover:translate-y-[-2px]"
+                  className="px-6 py-4 bg-gray-800 bg-opacity-50 text-gray-200 rounded-lg transition-all duration-300 inline-flex items-center border border-gray-700 border-opacity-50 hover:bg-gray-700 hover:bg-opacity-30 backdrop-blur-sm hover:text-white hover:translate-y-[-2px]"
                 >
-                  Contact Us
-                </a>
+                  Talk to Our Experts
+                </a> */}
               </div>
 
               {/* Key Stats */}
@@ -507,8 +581,8 @@ export default function ForwardBizHomepage() {
                 >
                   <div className="bg-blue-600 px-6 py-4 text-white relative">
                     <h3 className="font-bold flex items-center">
-                      <Activity size={18} className="mr-2" /> Business Impact
-                      Dashboard
+                      <Activity size={18} className="mr-2" /> Business
+                      Performance Dashboard
                     </h3>
                     <div className="absolute right-2 top-2 w-24 h-12 rounded-full bg-blue-500 bg-opacity-20 blur-xl"></div>
                   </div>
@@ -516,23 +590,23 @@ export default function ForwardBizHomepage() {
                     <div className="flex justify-between items-center mb-8 pb-6 border-b border-gray-700 border-opacity-30 relative z-10">
                       <div>
                         <span className="text-gray-400 text-sm">
-                          Total Impact
+                          Performance Increase
                         </span>
                         <div className="flex items-end gap-2">
                           <span className="text-3xl font-bold text-white">
-                            94%
+                            156%
                           </span>
-                          <span className="text-green-400 text-sm">+2.5%</span>
+                          <span className="text-green-400 text-sm">+12.5%</span>
                         </div>
                       </div>
 
                       {/* Mini chart visualization */}
                       <div className="w-24 h-12 bg-gray-700 bg-opacity-50 rounded-lg backdrop-blur-sm border border-gray-600 border-opacity-30 flex items-end justify-around px-1">
-                        {[3, 5, 4, 7, 6, 8, 7, 9].map((h, i) => (
+                        {[3, 5, 7, 6, 9, 8, 12, 14].map((h, i) => (
                           <div
                             key={i}
                             className="w-1 bg-blue-400 rounded-t"
-                            style={{ height: `${h * 10}%` }}
+                            style={{ height: `${h * 6}%` }}
                           ></div>
                         ))}
                       </div>
@@ -542,48 +616,10 @@ export default function ForwardBizHomepage() {
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full bg-blue-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-blue-800 border-opacity-30">
-                            <Users size={14} className="text-blue-300" />
+                            <UserPlus size={14} className="text-blue-300" />
                           </div>
                           <span className="font-medium text-gray-200">
-                            Recruitment
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="text-white font-semibold mr-2">
-                            1,000+
-                          </span>
-                          <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="w-4/5 h-full bg-blue-400 rounded-full"></div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-purple-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-purple-800 border-opacity-30">
-                            <BarChart4 size={14} className="text-purple-300" />
-                          </div>
-                          <span className="font-medium text-gray-200">
-                            TAX Support
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="text-white font-semibold mr-2">
-                            500+
-                          </span>
-                          <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="w-3/5 h-full bg-purple-400 rounded-full"></div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-teal-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-teal-800 border-opacity-30">
-                            <BookOpen size={14} className="text-teal-300" />
-                          </div>
-                          <span className="font-medium text-gray-200">
-                            Training
+                            Talent Acquisition
                           </span>
                         </div>
                         <div className="flex items-center">
@@ -591,7 +627,48 @@ export default function ForwardBizHomepage() {
                             2,500+
                           </span>
                           <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="w-full h-full bg-teal-400 rounded-full"></div>
+                            <div className="w-5/5 h-full bg-blue-400 rounded-full"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-purple-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-purple-800 border-opacity-30">
+                            <Target size={14} className="text-purple-300" />
+                          </div>
+                          <span className="font-medium text-gray-200">
+                            Lead Conversion
+                          </span>
+                        </div>
+                        <div className="flex items-center">
+                          <span className="text-white font-semibold mr-2">
+                            120%
+                          </span>
+                          <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div className="w-4/5 h-full bg-purple-400 rounded-full"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-amber-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-amber-800 border-opacity-30">
+                            <HeartHandshake
+                              size={14}
+                              className="text-amber-300"
+                            />
+                          </div>
+                          <span className="font-medium text-gray-200">
+                            Sales Leadership
+                          </span>
+                        </div>
+                        <div className="flex items-center">
+                          <span className="text-white font-semibold mr-2">
+                            85%
+                          </span>
+                          <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div className="w-4/5 h-full bg-amber-400 rounded-full"></div>
                           </div>
                         </div>
                       </div>
@@ -602,7 +679,7 @@ export default function ForwardBizHomepage() {
                         href="/case-studies"
                         className="block w-full py-3 px-4 bg-gray-700 bg-opacity-50 hover:bg-opacity-60 rounded-lg font-medium text-center text-gray-200 transition-all duration-300 backdrop-blur-sm border border-gray-600 border-opacity-30 hover:border-gray-500 hover:text-white"
                       >
-                        View Case Studies
+                        View Success Stories
                       </a>
                     </div>
                   </div>
@@ -623,7 +700,7 @@ export default function ForwardBizHomepage() {
         {/* Trusted clients logos section */}
         <div className="max-w-screen-xl mx-auto mt-16 px-6 relative z-10">
           <p className="text-sm text-gray-400 mb-6 text-center">
-            Trusted by leading companies
+            Trusted by innovative companies
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
             {clientLogos.map((client, index) => (
@@ -651,18 +728,17 @@ export default function ForwardBizHomepage() {
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              About Us
+              Our Approach
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Navigating Business Challenges
+              Where Talent Meets Conversion
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed">
-              The emergence of knowledge economy and the technological
-              advancement have transformed the dynamics of business world over.
-              The companies today had to face unprecedented competition and
-              insurmountable pressure to deliver value at every touch point. At
-              forwardbiz, we help you navigate these challenges with our
-              specialized services.
+              In today's competitive landscape, businesses need both exceptional
+              talent and optimized conversion systems to thrive. At forwardbiz,
+              we bridge this gap by providing integrated solutions that build
+              high-performing teams while maximizing lead conversion and revenue
+              growth.
             </p>
 
             {/* Visual element */}
@@ -680,19 +756,19 @@ export default function ForwardBizHomepage() {
                             "bg-blue-500",
                             "bg-purple-500",
                             "bg-teal-500",
-                            "bg-gray-500",
+                            "bg-amber-500",
                           ][i]
                         } bg-opacity-30 flex items-center justify-center`}
                       >
                         <span className="text-white text-xs font-bold">
-                          {["A", "B", "C", "D"][i]}
+                          {["T", "C", "S", "G"][i]}
                         </span>
                       </div>
                     </div>
                   ))}
                 </div>
                 <span className="text-gray-300">
-                  Join our team of specialists
+                  Partner with our specialists
                 </span>
                 <ArrowRight size={16} className="text-blue-400" />
               </div>
@@ -707,37 +783,43 @@ export default function ForwardBizHomepage() {
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Our Services
+              Our Expertise
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Comprehensive Business Solutions
+              Specialized Business Solutions
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We provide tailored services to address your specific business
-              needs and challenges.
+              We deliver tailored strategies to build your team and boost your
+              business growth.
             </p>
           </div>
 
-          {/* Service Tabs */}
+          {/* Service Tabs - Scrollable on mobile */}
           <div className="flex overflow-x-auto mb-10 pb-4 lg:justify-center">
             <div className="inline-flex p-1 bg-gray-800 bg-opacity-50 backdrop-blur-md rounded-lg shadow-inner border border-gray-700 border-opacity-50">
               {services.map((service, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveTab(index)}
-                  className={`whitespace-nowrap px-5 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  className={`whitespace-nowrap px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
                     activeTab === index
                       ? service.color === "blue"
                         ? "bg-blue-600 text-white shadow-lg"
                         : service.color === "purple"
                         ? "bg-purple-600 text-white shadow-lg"
-                        : "bg-teal-600 text-white shadow-lg"
+                        : service.color === "teal"
+                        ? "bg-teal-600 text-white shadow-lg"
+                        : service.color === "amber"
+                        ? "bg-amber-600 text-white shadow-lg"
+                        : "bg-rose-600 text-white shadow-lg"
                       : "text-gray-300 hover:text-white hover:bg-gray-700 hover:bg-opacity-30"
                   }`}
                 >
                   <div className="flex items-center">
                     <service.icon size={16} className="mr-2" />
-                    {service.title}
+                    <span className="truncate">
+                      {service.title.split(" ")[0]}
+                    </span>
                   </div>
                 </button>
               ))}
@@ -761,7 +843,11 @@ export default function ForwardBizHomepage() {
                           ? "bg-blue-900 bg-opacity-30 border-blue-800"
                           : service.color === "purple"
                           ? "bg-purple-900 bg-opacity-30 border-purple-800"
-                          : "bg-teal-900 bg-opacity-30 border-teal-800"
+                          : service.color === "teal"
+                          ? "bg-teal-900 bg-opacity-30 border-teal-800"
+                          : service.color === "amber"
+                          ? "bg-amber-900 bg-opacity-30 border-amber-800"
+                          : "bg-rose-900 bg-opacity-30 border-rose-800"
                       } flex items-center justify-center mb-6 backdrop-blur-sm border border-opacity-30`}
                     >
                       <service.icon
@@ -771,7 +857,11 @@ export default function ForwardBizHomepage() {
                             ? "text-blue-300"
                             : service.color === "purple"
                             ? "text-purple-300"
-                            : "text-teal-300"
+                            : service.color === "teal"
+                            ? "text-teal-300"
+                            : service.color === "amber"
+                            ? "text-amber-300"
+                            : "text-rose-300"
                         }
                       />
                     </div>
@@ -782,7 +872,7 @@ export default function ForwardBizHomepage() {
                     <p className="text-gray-300 mb-8">{service.description}</p>
 
                     <h4 className="text-lg font-semibold mb-4 text-gray-200">
-                      Key Metrics
+                      Key Performance Indicators
                     </h4>
                     <div className="grid grid-cols-3 gap-4 mb-8">
                       {service.metrics.map((metric, i) => (
@@ -796,7 +886,11 @@ export default function ForwardBizHomepage() {
                                 ? "text-blue-400"
                                 : service.color === "purple"
                                 ? "text-purple-400"
-                                : "text-teal-400"
+                                : service.color === "teal"
+                                ? "text-teal-400"
+                                : service.color === "amber"
+                                ? "text-amber-400"
+                                : "text-rose-400"
                             }
                             style={{ fontSize: "1.25rem", fontWeight: "bold" }}
                           >
@@ -813,7 +907,11 @@ export default function ForwardBizHomepage() {
                                 ? "bg-blue-400"
                                 : service.color === "purple"
                                 ? "bg-purple-400"
-                                : "bg-teal-400"
+                                : service.color === "teal"
+                                ? "bg-teal-400"
+                                : service.color === "amber"
+                                ? "bg-amber-400"
+                                : "bg-rose-400"
                             } bg-opacity-10 transition-all duration-300 group-hover:bg-opacity-20`}
                           ></div>
                         </div>
@@ -827,7 +925,11 @@ export default function ForwardBizHomepage() {
                           ? "text-blue-400"
                           : service.color === "purple"
                           ? "text-purple-400"
-                          : "text-teal-400"
+                          : service.color === "teal"
+                          ? "text-teal-400"
+                          : service.color === "amber"
+                          ? "text-amber-400"
+                          : "text-rose-400"
                       } hover:text-white font-medium transition-all duration-300 group`}
                     >
                       Learn More About {service.title}{" "}
@@ -862,7 +964,11 @@ export default function ForwardBizHomepage() {
                                   ? "border-blue-300"
                                   : service.color === "purple"
                                   ? "border-purple-300"
-                                  : "border-teal-300"
+                                  : service.color === "teal"
+                                  ? "border-teal-300"
+                                  : service.color === "amber"
+                                  ? "border-amber-300"
+                                  : "border-rose-300"
                               } rounded-full`}
                               style={{
                                 transform: `scale(${0.5 + i * 0.25})`,
@@ -879,175 +985,145 @@ export default function ForwardBizHomepage() {
                             ? "bg-blue-600"
                             : service.color === "purple"
                             ? "bg-purple-600"
-                            : "bg-teal-600"
+                            : service.color === "teal"
+                            ? "bg-teal-600"
+                            : service.color === "amber"
+                            ? "bg-amber-600"
+                            : "bg-rose-600"
                         } p-5 text-white relative`}
                       >
                         <h3 className="text-xl font-bold flex items-center">
                           <service.icon size={20} className="mr-2" />
-                          Why Choose Our {service.title}
+                          Why Choose Our {service.title.split("&")[0]}
                         </h3>
                       </div>
                       <div className="p-6 relative">
                         <div className="grid grid-cols-2 gap-4 relative z-10">
-                          <div
-                            className={`${
-                              service.color === "blue"
-                                ? "bg-blue-900 bg-opacity-10 border-blue-800"
-                                : service.color === "purple"
-                                ? "bg-purple-900 bg-opacity-10 border-purple-800"
-                                : "bg-teal-900 bg-opacity-10 border-teal-800"
-                            } rounded-lg p-4 backdrop-blur-sm border border-opacity-30 transition-all duration-300 hover:shadow-lg relative overflow-hidden group`}
-                          >
-                            <div
-                              className={`flex items-center justify-center w-8 h-8 rounded-full ${
-                                service.color === "blue"
-                                  ? "bg-blue-900 bg-opacity-30 border-blue-800"
-                                  : service.color === "purple"
-                                  ? "bg-purple-900 bg-opacity-30 border-purple-800"
-                                  : "bg-teal-900 bg-opacity-30 border-teal-800"
-                              } mb-3 border border-opacity-30`}
-                            >
-                              <CheckCircle
-                                size={16}
-                                className={
-                                  service.color === "blue"
-                                    ? "text-blue-300"
-                                    : service.color === "purple"
-                                    ? "text-purple-300"
-                                    : "text-teal-300"
-                                }
+                          {/* Feature cards for each service */}
+                          {service.id === "talent-acquisition" && (
+                            <>
+                              <FeatureCard
+                                title="Deep Industry Knowledge"
+                                description="Specialized recruiters who understand your industry needs"
+                                color={service.color}
                               />
-                            </div>
-                            <h4 className="text-base font-semibold mb-1 text-white">
-                              Expertise
-                            </h4>
-                            <p className="text-gray-300 text-sm">
-                              Our team brings years of specialized experience
-                            </p>
-
-                            {/* Background decoration */}
-                            <div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full bg-white opacity-0 group-hover:opacity-5 transition-all duration-500"></div>
-                          </div>
-
-                          <div
-                            className={`${
-                              service.color === "blue"
-                                ? "bg-blue-900 bg-opacity-10 border-blue-800"
-                                : service.color === "purple"
-                                ? "bg-purple-900 bg-opacity-10 border-purple-800"
-                                : "bg-teal-900 bg-opacity-10 border-teal-800"
-                            } rounded-lg p-4 backdrop-blur-sm border border-opacity-30 transition-all duration-300 hover:shadow-lg relative overflow-hidden group`}
-                          >
-                            <div
-                              className={`flex items-center justify-center w-8 h-8 rounded-full ${
-                                service.color === "blue"
-                                  ? "bg-blue-900 bg-opacity-30 border-blue-800"
-                                  : service.color === "purple"
-                                  ? "bg-purple-900 bg-opacity-30 border-purple-800"
-                                  : "bg-teal-900 bg-opacity-30 border-teal-800"
-                              } mb-3 border border-opacity-30`}
-                            >
-                              <CheckCircle
-                                size={16}
-                                className={
-                                  service.color === "blue"
-                                    ? "text-blue-300"
-                                    : service.color === "purple"
-                                    ? "text-purple-300"
-                                    : "text-teal-300"
-                                }
+                              <FeatureCard
+                                title="Quality Screening"
+                                description="Multi-stage vetting process ensures top talent"
+                                color={service.color}
                               />
-                            </div>
-                            <h4 className="text-base font-semibold mb-1 text-white">
-                              Tailored Approach
-                            </h4>
-                            <p className="text-gray-300 text-sm">
-                              Customized solutions for your needs
-                            </p>
-
-                            {/* Background decoration */}
-                            <div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full bg-white opacity-0 group-hover:opacity-5 transition-all duration-500"></div>
-                          </div>
-
-                          <div
-                            className={`${
-                              service.color === "blue"
-                                ? "bg-blue-900 bg-opacity-10 border-blue-800"
-                                : service.color === "purple"
-                                ? "bg-purple-900 bg-opacity-10 border-purple-800"
-                                : "bg-teal-900 bg-opacity-10 border-teal-800"
-                            } rounded-lg p-4 backdrop-blur-sm border border-opacity-30 transition-all duration-300 hover:shadow-lg relative overflow-hidden group`}
-                          >
-                            <div
-                              className={`flex items-center justify-center w-8 h-8 rounded-full ${
-                                service.color === "blue"
-                                  ? "bg-blue-900 bg-opacity-30 border-blue-800"
-                                  : service.color === "purple"
-                                  ? "bg-purple-900 bg-opacity-30 border-purple-800"
-                                  : "bg-teal-900 bg-opacity-30 border-teal-800"
-                              } mb-3 border border-opacity-30`}
-                            >
-                              <CheckCircle
-                                size={16}
-                                className={
-                                  service.color === "blue"
-                                    ? "text-blue-300"
-                                    : service.color === "purple"
-                                    ? "text-purple-300"
-                                    : "text-teal-300"
-                                }
+                              <FeatureCard
+                                title="Strategic Planning"
+                                description="Long-term talent acquisition roadmaps"
+                                color={service.color}
                               />
-                            </div>
-                            <h4 className="text-base font-semibold mb-1 text-white">
-                              Proven Results
-                            </h4>
-                            <p className="text-gray-300 text-sm">
-                              Track record of measurable impact
-                            </p>
-
-                            {/* Background decoration */}
-                            <div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full bg-white opacity-0 group-hover:opacity-5 transition-all duration-500"></div>
-                          </div>
-
-                          <div
-                            className={`${
-                              service.color === "blue"
-                                ? "bg-blue-900 bg-opacity-10 border-blue-800"
-                                : service.color === "purple"
-                                ? "bg-purple-900 bg-opacity-10 border-purple-800"
-                                : "bg-teal-900 bg-opacity-10 border-teal-800"
-                            } rounded-lg p-4 backdrop-blur-sm border border-opacity-30 transition-all duration-300 hover:shadow-lg relative overflow-hidden group`}
-                          >
-                            <div
-                              className={`flex items-center justify-center w-8 h-8 rounded-full ${
-                                service.color === "blue"
-                                  ? "bg-blue-900 bg-opacity-30 border-blue-800"
-                                  : service.color === "purple"
-                                  ? "bg-purple-900 bg-opacity-30 border-purple-800"
-                                  : "bg-teal-900 bg-opacity-30 border-teal-800"
-                              } mb-3 border border-opacity-30`}
-                            >
-                              <CheckCircle
-                                size={16}
-                                className={
-                                  service.color === "blue"
-                                    ? "text-blue-300"
-                                    : service.color === "purple"
-                                    ? "text-purple-300"
-                                    : "text-teal-300"
-                                }
+                              <FeatureCard
+                                title="Retention Focus"
+                                description="Strategies to keep your best talent engaged"
+                                color={service.color}
                               />
-                            </div>
-                            <h4 className="text-base font-semibold mb-1 text-white">
-                              Ongoing Support
-                            </h4>
-                            <p className="text-gray-300 text-sm">
-                              Continuous assistance for success
-                            </p>
+                            </>
+                          )}
 
-                            {/* Background decoration */}
-                            <div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full bg-white opacity-0 group-hover:opacity-5 transition-all duration-500"></div>
-                          </div>
+                          {service.id === "team-building" && (
+                            <>
+                              <FeatureCard
+                                title="Culture Development"
+                                description="Build teams with aligned values and vision"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Performance Systems"
+                                description="Establish metrics and accountability frameworks"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Team Dynamics"
+                                description="Optimize collaboration and communication"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Leadership Training"
+                                description="Develop your next generation of leaders"
+                                color={service.color}
+                              />
+                            </>
+                          )}
+
+                          {service.id === "sales-leadership" && (
+                            <>
+                              <FeatureCard
+                                title="Sales Frameworks"
+                                description="Proven methodologies that drive revenue"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="CX Excellence"
+                                description="Customer-centric approaches that boost retention"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Team Coaching"
+                                description="Performance enhancement for existing teams"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Revenue Planning"
+                                description="Strategic roadmaps for predictable growth"
+                                color={service.color}
+                              />
+                            </>
+                          )}
+
+                          {service.id === "lead-conversion" && (
+                            <>
+                              <FeatureCard
+                                title="Funnel Optimization"
+                                description="Identify and remove conversion blockers"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Sales Scripts"
+                                description="High-converting messaging frameworks"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Analytics Focus"
+                                description="Data-driven decisions for optimal results"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Multichannel Approach"
+                                description="Integrated B2B and B2C conversion strategies"
+                                color={service.color}
+                              />
+                            </>
+                          )}
+
+                          {service.id === "closure-management" && (
+                            <>
+                              <FeatureCard
+                                title="Objection Handling"
+                                description="Advanced techniques to overcome resistance"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Deal Structure"
+                                description="Optimize pricing and terms for higher close rates"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Follow-up Systems"
+                                description="Never lose a prospect with systematic approaches"
+                                color={service.color}
+                              />
+                              <FeatureCard
+                                title="Revenue Expansion"
+                                description="Strategies to increase deal size and retention"
+                                color={service.color}
+                              />
+                            </>
+                          )}
                         </div>
 
                         <div className="mt-6 text-center relative z-10">
@@ -1058,10 +1134,14 @@ export default function ForwardBizHomepage() {
                                 ? "bg-blue-600 hover:bg-blue-500"
                                 : service.color === "purple"
                                 ? "bg-purple-600 hover:bg-purple-500"
-                                : "bg-teal-600 hover:bg-teal-500"
+                                : service.color === "teal"
+                                ? "bg-teal-600 hover:bg-teal-500"
+                                : service.color === "amber"
+                                ? "bg-amber-600 hover:bg-amber-500"
+                                : "bg-rose-600 hover:bg-rose-500"
                             } text-white rounded-lg font-medium transition-all duration-300 text-sm shadow-lg hover:shadow-xl hover:translate-y-[-2px]`}
                           >
-                            View {service.title} Details
+                            View {service.title.split("&")[0]} Details
                           </a>
                         </div>
                       </div>
@@ -1080,7 +1160,7 @@ export default function ForwardBizHomepage() {
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Our Approach
+              Our Process
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               How We Work
@@ -1155,36 +1235,8 @@ export default function ForwardBizHomepage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                content:
-                  "Forward Business Solutions transformed our hiring process. Their recruitment team understood our technical requirements perfectly and delivered quality candidates consistently.",
-                author: "Rajesh Kumar",
-                position: "CTO, TechDynamics",
-                rating: 5,
-                avatar: "R",
-                bgColor: "bg-blue-600",
-              },
-              {
-                content:
-                  "Their tax support services saved us both time and money. The team's expertise in GST and compliance matters has been invaluable for our growing business.",
-                author: "Priya Sharma",
-                position: "Finance Director, Global Retail",
-                rating: 5,
-                avatar: "P",
-                bgColor: "bg-purple-600",
-              },
-              {
-                content:
-                  "The training program forwardbiz developed for our team was exceptional. It addressed our specific needs and the post-training support helped ensure successful implementation.",
-                author: "Amit Patel",
-                position: "HR Manager, InnovateNow",
-                rating: 5,
-                avatar: "A",
-                bgColor: "bg-teal-600",
-              },
-            ].map((testimonial, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {testimonials.map((testimonial, index) => (
               <div
                 key={index}
                 className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl shadow-lg p-8 border border-gray-700 border-opacity-50 transition-all duration-300 hover:border-gray-600 hover:border-opacity-50 hover:shadow-xl hover:translate-y-[-2px] group relative overflow-hidden"
@@ -1197,25 +1249,16 @@ export default function ForwardBizHomepage() {
                   "
                 </div>
 
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={18}
-                      className="text-yellow-300 fill-yellow-300"
-                    />
-                  ))}
-                </div>
-
-                <p className="text-gray-300 mb-6 relative z-10">
+                {/* Make the content height consistent with min-height */}
+                <p className="text-gray-300 mb-6 relative z-10 min-h-[80px]">
                   "{testimonial.content}"
                 </p>
 
                 <div className="flex items-center relative z-10">
                   <div
-                    className={`w-12 h-12 rounded-full ${testimonial.bgColor} flex items-center justify-center text-white font-bold mr-3 shadow-lg`}
+                    className={`w-12 h-12 rounded-full ${testimonial.bgColor} flex items-center justify-center text-white font-bold mr-3 shadow-lg flex-shrink-0`}
                   >
-                    {testimonial.avatar}
+                    <span className="text-center">{testimonial.avatar}</span>
                   </div>
                   <div>
                     <div className="font-medium text-white">
@@ -1263,7 +1306,7 @@ export default function ForwardBizHomepage() {
               <div className="hidden lg:block">
                 <a
                   href="/faq"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-2px]"
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-2px] group"
                 >
                   View All FAQs{" "}
                   <ArrowRight
@@ -1354,8 +1397,8 @@ export default function ForwardBizHomepage() {
               Ready to Transform Your Business?
             </h2>
             <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
-              Contact us today to discuss how our services can help address your
-              specific business challenges and drive sustainable growth.
+              Let's work together to build your dream team and optimize your
+              conversion systems.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1596,9 +1639,9 @@ export default function ForwardBizHomepage() {
                 </span>
               </a>
               <p className="text-gray-400 mb-6">
-                Forward Business Solutions provides comprehensive business
-                services including recruitment, TAX support, and training &
-                placement to help businesses thrive.
+                Forward Business Solutions helps companies build high-performing
+                teams and optimize lead conversion with specialized talent
+                acquisition and sales strategies.
               </p>
               <div className="flex space-x-4">
                 <a
@@ -1632,26 +1675,34 @@ export default function ForwardBizHomepage() {
               <ul className="space-y-2">
                 <li>
                   <a
-                    href="/services/recruitment"
+                    href="/services/talent-acquisition"
                     className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                   >
-                    Recruitment
+                    Talent Acquisition
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/services/tax-support"
+                    href="/services/team-building"
                     className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                   >
-                    TAX Support
+                    Team Building
                   </a>
                 </li>
                 <li>
                   <a
-                    href="/services/training-placement"
+                    href="/services/sales-leadership"
                     className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                   >
-                    Training
+                    Sales Leadership
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/services/lead-conversion"
+                    className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
+                  >
+                    Lead Conversion
                   </a>
                 </li>
               </ul>
@@ -1761,6 +1812,69 @@ export default function ForwardBizHomepage() {
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+// Reusable feature card component
+function FeatureCard({ title, description, color }) {
+  const getColorClasses = (color) => {
+    switch (color) {
+      case "blue":
+        return {
+          bg: "bg-blue-900 bg-opacity-10 border-blue-800",
+          icon: "bg-blue-900 bg-opacity-30 border-blue-800",
+          text: "text-blue-300",
+        };
+      case "purple":
+        return {
+          bg: "bg-purple-900 bg-opacity-10 border-purple-800",
+          icon: "bg-purple-900 bg-opacity-30 border-purple-800",
+          text: "text-purple-300",
+        };
+      case "teal":
+        return {
+          bg: "bg-teal-900 bg-opacity-10 border-teal-800",
+          icon: "bg-teal-900 bg-opacity-30 border-teal-800",
+          text: "text-teal-300",
+        };
+      case "amber":
+        return {
+          bg: "bg-amber-900 bg-opacity-10 border-amber-800",
+          icon: "bg-amber-900 bg-opacity-30 border-amber-800",
+          text: "text-amber-300",
+        };
+      case "rose":
+        return {
+          bg: "bg-rose-900 bg-opacity-10 border-rose-800",
+          icon: "bg-rose-900 bg-opacity-30 border-rose-800",
+          text: "text-rose-300",
+        };
+      default:
+        return {
+          bg: "bg-blue-900 bg-opacity-10 border-blue-800",
+          icon: "bg-blue-900 bg-opacity-30 border-blue-800",
+          text: "text-blue-300",
+        };
+    }
+  };
+
+  const colorClasses = getColorClasses(color);
+
+  return (
+    <div
+      className={`${colorClasses.bg} rounded-lg p-4 backdrop-blur-sm border border-opacity-30 transition-all duration-300 hover:shadow-lg relative overflow-hidden group`}
+    >
+      <div
+        className={`flex items-center justify-center w-8 h-8 rounded-full ${colorClasses.icon} mb-3 border border-opacity-30`}
+      >
+        <CheckCircle size={16} className={colorClasses.text} />
+      </div>
+      <h4 className="text-base font-semibold mb-1 text-white">{title}</h4>
+      <p className="text-gray-300 text-sm">{description}</p>
+
+      {/* Background decoration */}
+      <div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full bg-white opacity-0 group-hover:opacity-5 transition-all duration-500"></div>
     </div>
   );
 }
