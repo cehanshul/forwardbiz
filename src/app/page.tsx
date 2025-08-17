@@ -158,7 +158,7 @@ export default function ForwardBizHomepage() {
   const businessStats = [
     { value: "200+", label: "Businesses Transformed", icon: Building },
     { value: "2.5K+", label: "Successful Placements", icon: Users },
-    { value: "150%", label: "Average Conversion Growth", icon: TrendingUp },
+    { value: "150%", label: "Conversion Growth", icon: TrendingUp },
     // { value: "₹500Cr+", label: "Revenue Impact", icon: BarChart4 },
   ];
 
@@ -255,17 +255,30 @@ export default function ForwardBizHomepage() {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (serviceDropdownOpen && !event.target.closest(".relative")) {
+    if (!serviceDropdownOpen) return;
+
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(".dropdown-container")) {
         setServiceDropdownOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [serviceDropdownOpen]);
+
+  // Add this useEffect to handle body scrolling
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [mobileMenuOpen]);
 
   // Toggle accordion
   const toggleAccordion = (index) => {
@@ -426,8 +439,13 @@ export default function ForwardBizHomepage() {
 
         {/* Mobile Navigation Menu */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 bg-gray-900 bg-opacity-95 backdrop-blur-xl z-50 lg:hidden">
-            <div className="px-6 py-6 flex justify-between items-center border-b border-gray-800">
+          <div
+            className={`fixed inset-0 bg-gray-900 bg-opacity-95 backdrop-blur-xl z-[9999] lg:hidden overflow-auto transition-opacity duration-300 ${
+              mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
+          >
+            <div className="px-6 py-6 flex justify-between items-center border-b border-gray-800 sticky top-0 bg-gray-900 bg-opacity-95 backdrop-blur-xl">
               <a href="/" className="flex items-center">
                 <div className="mr-2 w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center border border-blue-500 border-opacity-30">
                   <TrendingUp size={20} className="text-blue-400" />
@@ -439,13 +457,13 @@ export default function ForwardBizHomepage() {
               </a>
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-gray-300 hover:text-white transition-colors p-2"
+                className="text-gray-300 hover:text-white transition-colors p-2 bg-gray-800 rounded-full"
               >
                 <X size={24} />
               </button>
             </div>
 
-            <div className="px-6 py-8">
+            <div className="px-6 py-8 min-h-[calc(100vh-73px)]">
               <nav className="flex flex-col space-y-6">
                 {[
                   { url: "/", label: "Home" },
@@ -1442,7 +1460,8 @@ export default function ForwardBizHomepage() {
                   </div>
                 </div>
 
-                <div className="mb-6 relative z-10">
+                {/* Service of Interest dropdown */}
+                <div className="mb-6 relative z-30 dropdown-container">
                   <label className="block text-sm font-medium text-gray-300 mb-1">
                     Service of Interest
                   </label>
@@ -1465,33 +1484,38 @@ export default function ForwardBizHomepage() {
                       </span>
                       <ChevronDown
                         size={20}
-                        className={`text-blue-400 transition-transform duration-300 ${
+                        className={`text-blue-400  ${
                           serviceDropdownOpen ? "rotate-180" : ""
                         }`}
                       />
                     </button>
 
-                    {serviceDropdownOpen && (
-                      <div className="absolute z-20 w-full mt-1 bg-gray-800 border border-gray-600 border-opacity-50 rounded-lg shadow-2xl backdrop-blur-xl">
-                        {serviceOptions.map((option, index) => (
-                          <button
-                            key={index}
-                            type="button"
-                            onClick={() => {
-                              setSelectedService(option);
-                              setServiceDropdownOpen(false);
-                            }}
-                            className="w-full px-4 py-3 text-left hover:bg-gray-700 hover:bg-opacity-50 focus:bg-gray-700 focus:bg-opacity-50 focus:outline-none first:rounded-t-lg last:rounded-b-lg text-gray-200"
-                          >
-                            {option}
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                    {/* Pre-render dropdown but hide it with CSS for better performance */}
+                    <div
+                      className={`absolute z-50 w-full mt-1 bg-gray-800 border border-gray-600 border-opacity-50 rounded-lg shadow-2xl backdrop-blur-md max-h-60 overflow-y-auto transition-all duration-200 ${
+                        serviceDropdownOpen
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-[-8px] pointer-events-none"
+                      }`}
+                    >
+                      {serviceOptions.map((option, index) => (
+                        <button
+                          key={index}
+                          type="button"
+                          onClick={() => {
+                            setSelectedService(option);
+                            setServiceDropdownOpen(false);
+                          }}
+                          className="w-full px-4 py-3 text-left hover:bg-gray-700 hover:bg-opacity-50 focus:bg-gray-700 focus:bg-opacity-50 focus:outline-none first:rounded-t-lg last:rounded-b-lg text-gray-200"
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                <div className="mb-6 relative z-10">
+                <div className="mb-6 relative z-20">
                   <label className="block text-sm font-medium text-gray-300 mb-1">
                     Message
                   </label>
