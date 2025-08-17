@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Menu,
   X,
@@ -32,6 +32,7 @@ import {
   Clock,
   Layers,
 } from "lucide-react";
+import Lottie from "lottie-react";
 
 export default function ForwardBizHomepage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,6 +42,9 @@ export default function ForwardBizHomepage() {
   const [selectedService, setSelectedService] = useState("Select a service");
   const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const [animateHero, setAnimateHero] = useState(false);
+
+  // Reference for Lottie animation
+  const lottieRef = useRef<HTMLDivElement>(null);
 
   // Services data - updated with new services
   const services = [
@@ -477,7 +481,7 @@ export default function ForwardBizHomepage() {
               </span>
 
               <h1
-                className={`text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ${
+                className={`text-3xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white leading-tight mb-6 transition-all duration-1000 ${
                   animateHero
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
@@ -555,23 +559,7 @@ export default function ForwardBizHomepage() {
             </div>
 
             <div className="lg:col-span-5 relative">
-              {/* 3D layered card effect */}
-              <div className="relative z-20 transform perspective-1000">
-                <div
-                  className={`absolute top-8 -right-4 w-full h-full bg-gray-800 bg-opacity-40 rounded-2xl transition-all duration-1000 delay-300 ${
-                    animateHero
-                      ? "opacity-30 translate-x-0"
-                      : "opacity-0 translate-x-12"
-                  }`}
-                ></div>
-                <div
-                  className={`absolute top-4 -right-2 w-full h-full bg-gray-800 bg-opacity-60 rounded-2xl transition-all duration-1000 delay-200 ${
-                    animateHero
-                      ? "opacity-50 translate-x-0"
-                      : "opacity-0 translate-x-8"
-                  }`}
-                ></div>
-
+              <div className="relative z-20 transform">
                 <div
                   className={`relative z-10 bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-gray-700 border-opacity-50 hover:border-gray-600 hover:border-opacity-50 transition-all duration-300 group transform ${
                     animateHero
@@ -579,110 +567,13 @@ export default function ForwardBizHomepage() {
                       : "opacity-0 translate-x-4"
                   }`}
                 >
-                  <div className="bg-blue-600 px-6 py-4 text-white relative">
-                    <h3 className="font-bold flex items-center">
-                      <Activity size={18} className="mr-2" /> Business
-                      Performance Dashboard
-                    </h3>
-                    <div className="absolute right-2 top-2 w-24 h-12 rounded-full bg-blue-500 bg-opacity-20 blur-xl"></div>
-                  </div>
-                  <div className="p-6 relative">
-                    <div className="flex justify-between items-center mb-8 pb-6 border-b border-gray-700 border-opacity-30 relative z-10">
-                      <div>
-                        <span className="text-gray-400 text-sm">
-                          Performance Increase
-                        </span>
-                        <div className="flex items-end gap-2">
-                          <span className="text-3xl font-bold text-white">
-                            156%
-                          </span>
-                          <span className="text-green-400 text-sm">+12.5%</span>
-                        </div>
-                      </div>
-
-                      {/* Mini chart visualization */}
-                      <div className="w-24 h-12 bg-gray-700 bg-opacity-50 rounded-lg backdrop-blur-sm border border-gray-600 border-opacity-30 flex items-end justify-around px-1">
-                        {[3, 5, 7, 6, 9, 8, 12, 14].map((h, i) => (
-                          <div
-                            key={i}
-                            className="w-1 bg-blue-400 rounded-t"
-                            style={{ height: `${h * 6}%` }}
-                          ></div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="space-y-4 relative z-10">
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-blue-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-blue-800 border-opacity-30">
-                            <UserPlus size={14} className="text-blue-300" />
-                          </div>
-                          <span className="font-medium text-gray-200">
-                            Talent Acquisition
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="text-white font-semibold mr-2">
-                            2,500+
-                          </span>
-                          <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="w-5/5 h-full bg-blue-400 rounded-full"></div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-purple-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-purple-800 border-opacity-30">
-                            <Target size={14} className="text-purple-300" />
-                          </div>
-                          <span className="font-medium text-gray-200">
-                            Lead Conversion
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="text-white font-semibold mr-2">
-                            120%
-                          </span>
-                          <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="w-4/5 h-full bg-purple-400 rounded-full"></div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-amber-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-amber-800 border-opacity-30">
-                            <HeartHandshake
-                              size={14}
-                              className="text-amber-300"
-                            />
-                          </div>
-                          <span className="font-medium text-gray-200">
-                            Sales Leadership
-                          </span>
-                        </div>
-                        <div className="flex items-center">
-                          <span className="text-white font-semibold mr-2">
-                            85%
-                          </span>
-                          <div className="w-16 h-2 bg-gray-700 rounded-full overflow-hidden">
-                            <div className="w-4/5 h-full bg-amber-400 rounded-full"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-8 relative z-10">
-                      <a
-                        href="/case-studies"
-                        className="block w-full py-3 px-4 bg-gray-700 bg-opacity-50 hover:bg-opacity-60 rounded-lg font-medium text-center text-gray-200 transition-all duration-300 backdrop-blur-sm border border-gray-600 border-opacity-30 hover:border-gray-500 hover:text-white"
-                      >
-                        View Success Stories
-                      </a>
-                    </div>
-                  </div>
+                  <Lottie
+                    ref={lottieRef}
+                    animationData="/Superhero.lottie"
+                    loop={true}
+                    autoplay={true}
+                    style={{ width: "100%", height: "100%" }}
+                  />
                 </div>
               </div>
 
