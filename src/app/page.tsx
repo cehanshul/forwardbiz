@@ -390,15 +390,13 @@ export default function ForwardBizHomepage() {
         <div className="max-w-screen-xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
           <a href="/" className="flex items-center group relative z-10">
-            <div className="mr-2 w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center border border-blue-500 border-opacity-30">
-              <TrendingUp size={20} className="text-blue-400" />
+            <div className="mr-3">
+              <img
+                src="/biz-logo.png"
+                alt="ForwardBiz Logo"
+                className="h-10 w-auto"
+              />
             </div>
-            <span className="text-xl font-bold">
-              <span className="text-blue-400 group-hover:text-blue-300 transition-all duration-300">
-                forward
-              </span>
-              <span className="text-white">biz</span>
-            </span>
           </a>
 
           {/* Desktop Navigation */}
@@ -436,66 +434,71 @@ export default function ForwardBizHomepage() {
             <Menu size={24} />
           </button>
         </div>
+      </header>
 
-        {/* Mobile Navigation Menu */}
-        {mobileMenuOpen && (
-          <div
-            className={`fixed inset-0 bg-gray-900 bg-opacity-95 backdrop-blur-xl z-[9999] lg:hidden overflow-auto transition-opacity duration-300 ${
-              mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
-          >
-            <div className="px-6 py-6 flex justify-between items-center border-b border-gray-800 sticky top-0 bg-gray-900 bg-opacity-95 backdrop-blur-xl">
-              <a href="/" className="flex items-center">
-                <div className="mr-2 w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center border border-blue-500 border-opacity-30">
-                  <TrendingUp size={20} className="text-blue-400" />
-                </div>
-                <span className="text-lg font-bold">
-                  <span className="text-blue-400">forward</span>
-                  <span className="text-white">biz</span>
-                </span>
-              </a>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-gray-300 hover:text-white transition-colors p-2 bg-gray-800 rounded-full"
-              >
-                <X size={24} />
-              </button>
-            </div>
+      {/* Mobile Menu Overlay - New Implementation */}
+      <div
+        className={`fixed inset-0 z-[9999] transition-opacity duration-300 ${
+          mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gray-900 bg-opacity-95 backdrop-blur-xl"></div>
 
-            <div className="px-6 py-8 min-h-[calc(100vh-73px)]">
-              <nav className="flex flex-col space-y-6">
-                {[
-                  { url: "/", label: "Home" },
-                  { url: "/services", label: "Services" },
-                  { url: "/about", label: "About" },
-                  { url: "/clients", label: "Clients" },
-                  { url: "/contact", label: "Contact" },
-                ].map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.url}
-                    className="text-left text-lg font-medium text-gray-300 hover:text-white transition-all duration-300"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </nav>
+        {/* Menu Content */}
+        <div className="relative h-full overflow-auto">
+          {/* Header */}
+          <div className="px-6 py-6 flex justify-between items-center border-b border-gray-800 sticky top-0 bg-gray-900 bg-opacity-95 backdrop-blur-xl">
+            <a href="/" className="flex items-center">
+              <div className="mr-3">
+                <img
+                  src="/biz-logo.png"
+                  alt="ForwardBiz Logo"
+                  className="h-10 w-auto"
+                />
+              </div>
+            </a>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-gray-300 hover:text-white transition-colors p-2 bg-gray-800 rounded-full"
+            >
+              <X size={24} />
+            </button>
+          </div>
 
-              <div className="mt-8">
+          {/* Menu Items */}
+          <div className="px-6 py-8">
+            <nav className="flex flex-col space-y-6">
+              {[
+                { url: "/", label: "Home" },
+                { url: "/services", label: "Services" },
+                { url: "/about", label: "About" },
+                { url: "/clients", label: "Clients" },
+                { url: "/contact", label: "Contact" },
+              ].map((item, index) => (
                 <a
-                  href="/contact"
-                  className="block w-full px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 text-center shadow-lg shadow-blue-900/20"
+                  key={index}
+                  href={item.url}
+                  className="text-left text-lg font-medium text-gray-300 hover:text-white transition-all duration-300"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Get in Touch
+                  {item.label}
                 </a>
-              </div>
+              ))}
+            </nav>
+
+            <div className="mt-8">
+              <a
+                href="/contact"
+                className="block w-full px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 text-center shadow-lg shadow-blue-900/20"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Get in Touch
+              </a>
             </div>
           </div>
-        )}
-      </header>
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
@@ -868,7 +871,7 @@ export default function ForwardBizHomepage() {
                       activeTab === index ? "opacity-100" : "opacity-0 hidden"
                     }`}
                   >
-                    <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl overflow-hidden shadow-lg border border-gray-700 border-opacity-50 group hover:border-gray-600 hover:border-opacity-50 transition-all duration-300 relative">
+                    <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 shadow-xl p-8 hover:border-gray-600 hover:border-opacity-50 transition-all duration-300 group relative overflow-hidden">
                       {/* Decorative pattern */}
                       <div className="absolute inset-0 opacity-5">
                         <div className="absolute right-0 bottom-0 w-40 h-40">
@@ -1493,7 +1496,9 @@ export default function ForwardBizHomepage() {
                     {/* Pre-render dropdown but hide it with CSS for better performance */}
                     <div
                       className={`absolute z-50 w-full mt-1 bg-gray-800 border border-gray-600 border-opacity-50 rounded-lg shadow-2xl backdrop-blur-md max-h-60 overflow-y-auto transition-all duration-200 ${
-                        serviceDropdownOpen
+                        serviceOptions.length === 0
+                          ? "hidden"
+                          : serviceDropdownOpen
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-[-8px] pointer-events-none"
                       }`}
@@ -1550,15 +1555,13 @@ export default function ForwardBizHomepage() {
                 href="/"
                 className="flex items-center group relative z-10 mb-4"
               >
-                <div className="mr-2 w-10 h-10 bg-blue-600 bg-opacity-20 rounded-lg flex items-center justify-center border border-blue-500 border-opacity-30 group-hover:bg-opacity-30 transition-all duration-300">
-                  <TrendingUp size={20} className="text-blue-400" />
+                <div className="mr-3">
+                  <img
+                    src="/biz-logo.png"
+                    alt="ForwardBiz Logo"
+                    className="h-10 w-auto group-hover:opacity-80 transition-all duration-300"
+                  />
                 </div>
-                <span className="text-xl font-bold">
-                  <span className="text-blue-400 group-hover:text-blue-300 transition-all duration-300">
-                    forward
-                  </span>
-                  <span className="text-white">biz</span>
-                </span>
               </a>
               <p className="text-gray-400 mb-6">
                 Forward Business Solutions helps companies build high-performing
