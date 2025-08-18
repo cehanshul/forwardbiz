@@ -35,12 +35,250 @@ import {
 } from "lucide-react";
 import Lottie from "lottie-react";
 
+// Import the TestimonialCarousel component
+const TestimonialCarousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const testimonialInterval = useRef(null);
+
+  // Testimonials data
+  const testimonials = [
+    {
+      content:
+        "Forward Biz helped us hire the right leaders quickly and effectively. Their talent-first approach is exactly what we needed.",
+      author: "Founder",
+      position: "Data Analytics Company, Bangalore",
+      rating: 5,
+      avatar: "F",
+      bgColor: "bg-blue-600",
+    },
+    {
+      content:
+        "Our conversion rates jumped significantly after working with Forward Biz. They know how to turn leads into real growth.",
+      author: "Head of Marketing",
+      position: "Top Institute, Chennai",
+      rating: 4,
+      avatar: "H",
+      bgColor: "bg-blue-600",
+    },
+    {
+      content:
+        "They built our inside sales team from scratch and trained them to deliver results fast. A true partner in growth.",
+      author: "Founder & CEO",
+      position: "SaaS Company, New Delhi",
+      rating: 5,
+      avatar: "C",
+      bgColor: "bg-blue-600",
+    },
+    {
+      content:
+        "Forward Biz combines hiring expertise with sales conversion strategies. They scaled our team and boosted our B2B outcomes.",
+      author: "CEO",
+      position: "AI Startup, Mumbai & New Jersey, US",
+      rating: 5,
+      avatar: "A",
+      bgColor: "bg-blue-600",
+    },
+    {
+      content:
+        "Their strategic approach to talent acquisition saved us months of trial and error. Top talent, faster growth.",
+      author: "CTO",
+      position: "FinTech Company, Hyderabad",
+      rating: 5,
+      avatar: "D",
+      bgColor: "bg-blue-600",
+    },
+    {
+      content:
+        "When it comes to sales optimization, Forward Biz delivers exceptional results. Our pipeline is now stronger than ever.",
+      author: "Sales Director",
+      position: "Enterprise Software, Pune",
+      rating: 5,
+      avatar: "S",
+      bgColor: "bg-blue-600",
+    },
+  ];
+
+  // Calculate how many testimonials to show based on screen width
+  const [cardsToShow, setCardsToShow] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setCardsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(3);
+      }
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Navigation functions - smoother transitions with controlled timing
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+    );
+  };
+
+  // Auto-rotation with improved cleanup and transition handling
+  useEffect(() => {
+    // Clear any existing interval first to prevent multiple intervals
+    if (testimonialInterval.current) {
+      clearInterval(testimonialInterval.current);
+    }
+
+    testimonialInterval.current = setInterval(() => {
+      nextSlide();
+    }, 8000);
+
+    return () => {
+      if (testimonialInterval.current) {
+        clearInterval(testimonialInterval.current);
+      }
+    };
+  }, [currentIndex, cardsToShow]); // Depend on currentIndex to reset interval after manual navigation
+
+  // Get visible testimonials - improved with modulo operation to ensure smooth cycling
+  const visibleTestimonials = [];
+  for (let i = 0; i < cardsToShow; i++) {
+    const index = (currentIndex + i) % testimonials.length;
+    visibleTestimonials.push(testimonials[index]);
+  }
+
+  return (
+    <section className="py-24 relative bg-gray-950 bg-opacity-50">
+      <div className="absolute inset-0 overflow-hidden opacity-[0.03]">
+        <div className="h-full w-full grid grid-cols-10 grid-rows-10">
+          {[...Array(100)].map((_, i) => (
+            <div key={i} className="border-r border-b border-gray-400"></div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
+            Testimonials
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            What Our Clients Say
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Don't take our word for it — hear what our clients have to say about
+            working with us.
+          </p>
+        </div>
+
+        {/* Testimonial Cards Container */}
+        <div className="relative">
+          {/* Mobile/Tablet/Desktop Testimonial Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500">
+            {visibleTestimonials.map((testimonial, idx) => (
+              <div
+                key={`testimonial-${currentIndex}-${idx}`}
+                className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl p-8 border border-gray-700 border-opacity-50 h-full flex flex-col transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl"
+              >
+                {/* Star Rating */}
+                <div className="flex mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      size={18}
+                      fill={i < testimonial.rating ? "#facc15" : "transparent"}
+                      className={
+                        i < testimonial.rating
+                          ? "text-yellow-400 mr-1"
+                          : "text-gray-600 mr-1"
+                      }
+                    />
+                  ))}
+                </div>
+
+                {/* Testimonial Content */}
+                <p className="text-gray-200 text-lg mb-6 flex-grow">
+                  "{testimonial.content}"
+                </p>
+
+                {/* Author Info */}
+                <div className="flex items-center mt-auto">
+                  <div
+                    className={`w-10 h-10 rounded-full ${testimonial.bgColor} flex items-center justify-center text-white font-medium mr-3`}
+                  >
+                    {testimonial.avatar}
+                  </div>
+                  <div>
+                    <div className="font-medium text-white">
+                      {testimonial.author}
+                    </div>
+                    <div className="text-sm text-gray-400">
+                      {testimonial.position}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Controls - Arrows next to dots */}
+          <div className="mt-10 flex justify-center items-center">
+            {/* Arrow and Dots in one row */}
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={prevSlide}
+                className="w-12 h-12 rounded-full bg-gray-800 bg-opacity-50 border border-gray-700 border-opacity-50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300"
+                aria-label="Previous testimonials"
+              >
+                <ChevronLeft size={24} />
+              </button>
+
+              {/* Indicator Dots */}
+              <div className="flex space-x-2">
+                {Array.from({ length: testimonials.length }).map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      currentIndex === idx ? "bg-blue-500 w-6" : "bg-gray-600"
+                    }`}
+                    aria-label={`Go to testimonial group ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={nextSlide}
+                className="w-12 h-12 rounded-full bg-gray-800 bg-opacity-50 border border-gray-700 border-opacity-50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300"
+                aria-label="Next testimonials"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function ForwardBizHomepage() {
   const [activeAccordion, setActiveAccordion] = useState(null);
   const [animateHero, setAnimateHero] = useState(false);
   const [animationData, setAnimationData] = useState(null);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const testimonialInterval = useRef(null);
+
+  // Removed currentTestimonial state and testimonialInterval ref since they're now in the TestimonialCarousel component
 
   // Services data - reduced to 3 core services
   const services = [
@@ -115,45 +353,7 @@ export default function ForwardBizHomepage() {
     { name: "E-commerce", icon: Globe },
   ];
 
-  // Updated testimonials based on the new content
-  const testimonials = [
-    {
-      content:
-        "Forward Biz helped us hire the right leaders quickly and effectively. Their talent-first approach is exactly what we needed.",
-      author: "Founder",
-      position: "Data Analytics Company, Bangalore",
-      rating: 5,
-      avatar: "F",
-      bgColor: "bg-blue-600",
-    },
-    {
-      content:
-        "Our conversion rates jumped significantly after working with Forward Biz. They know how to turn leads into real growth.",
-      author: "Head of Marketing",
-      position: "Top Institute, Chennai",
-      rating: 4,
-      avatar: "H",
-      bgColor: "bg-blue-600",
-    },
-    {
-      content:
-        "They built our inside sales team from scratch and trained them to deliver results fast. A true partner in growth.",
-      author: "Founder & CEO",
-      position: "SaaS Company, New Delhi",
-      rating: 5,
-      avatar: "C",
-      bgColor: "bg-blue-600",
-    },
-    {
-      content:
-        "Forward Biz combines hiring expertise with sales conversion strategies. They scaled our team and boosted our B2B outcomes.",
-      author: "CEO",
-      position: "AI Startup, Mumbai & New Jersey, US",
-      rating: 5,
-      avatar: "A",
-      bgColor: "bg-blue-600",
-    },
-  ];
+  // Testimonials data removed as it's now inside the TestimonialCarousel component
 
   // FAQ items
   const faqItems = [
@@ -187,29 +387,8 @@ export default function ForwardBizHomepage() {
     setAnimateHero(true);
   }, []);
 
-  // Testimonial carousel controls
-  const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
-    setCurrentTestimonial(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-  };
-
-  // Automatic testimonial rotation
-  useEffect(() => {
-    testimonialInterval.current = setInterval(() => {
-      nextTestimonial();
-    }, 8000);
-
-    return () => {
-      if (testimonialInterval.current) {
-        clearInterval(testimonialInterval.current);
-      }
-    };
-  }, []);
+  // Testimonial navigation functions and automatic rotation useEffect removed
+  // as they're now handled in the TestimonialCarousel component
 
   // Toggle accordion
   const toggleAccordion = (index) => {
@@ -316,9 +495,9 @@ export default function ForwardBizHomepage() {
                     : "opacity-0 translate-y-8"
                 }`}
               >
-                We help businesses build high-performing teams and convert more
-                leads into revenue with our specialized talent and sales
-                solutions.
+                Our core: Strategic hiring and team building.
+                <br />
+                Our edge: ales leadership and conversion excellence.
               </p>
 
               <div
@@ -580,99 +759,8 @@ export default function ForwardBizHomepage() {
         </div>
       </section>
 
-      {/* Testimonials Section - FIXED CAROUSEL */}
-      <section className="py-24 relative bg-gray-950 bg-opacity-50">
-        <GridPattern />
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Testimonials
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              What Our Clients Say
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Don't take our word for it — hear what our clients have to say
-              about working with us.
-            </p>
-          </div>
-
-          {/* Fixed Testimonial Carousel */}
-          <div className="max-w-3xl mx-auto">
-            {/* Current Testimonial */}
-            <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl p-8 border border-gray-700 border-opacity-50 mb-6">
-              {/* Star Rating */}
-              <div className="flex mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={18}
-                    fill="#facc15"
-                    className="text-yellow-400 mr-1"
-                  />
-                ))}
-              </div>
-
-              {/* Testimonial Content */}
-              <p className="text-gray-200 text-lg mb-6">
-                "{testimonials[currentTestimonial].content}"
-              </p>
-
-              {/* Author Info */}
-              <div className="flex items-center">
-                <div
-                  className={`w-10 h-10 rounded-full ${testimonials[currentTestimonial].bgColor} flex items-center justify-center text-white font-medium mr-3`}
-                >
-                  {testimonials[currentTestimonial].avatar}
-                </div>
-                <div>
-                  <div className="font-medium text-white">
-                    {testimonials[currentTestimonial].author}
-                  </div>
-                  <div className="text-sm text-gray-400">
-                    {testimonials[currentTestimonial].position}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Navigation Controls */}
-            <div className="flex justify-between items-center">
-              <button
-                onClick={prevTestimonial}
-                className="w-10 h-10 rounded-full bg-gray-800 bg-opacity-50 border border-gray-700 border-opacity-50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft size={20} />
-              </button>
-
-              {/* Indicator Dots */}
-              <div className="flex space-x-2">
-                {testimonials.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentTestimonial(idx)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      currentTestimonial === idx
-                        ? "bg-blue-500 w-6"
-                        : "bg-gray-600"
-                    }`}
-                    aria-label={`Go to testimonial ${idx + 1}`}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={nextTestimonial}
-                className="w-10 h-10 rounded-full bg-gray-800 bg-opacity-50 border border-gray-700 border-opacity-50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Testimonials Section - UPDATED MULTI-CARD CAROUSEL */}
+      <TestimonialCarousel />
 
       {/* FAQ Section */}
       <section className="py-24 relative">
@@ -804,7 +892,7 @@ export default function ForwardBizHomepage() {
                 className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center hover:translate-y-[-2px] relative group overflow-hidden"
               >
                 <span className="relative z-10">
-                  Let’s Build Growth Together
+                  Let's Build Growth Together
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
               </a>
