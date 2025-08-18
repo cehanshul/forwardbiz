@@ -76,7 +76,8 @@ export default function FinalAboutUsPage() {
     {
       year: "2025",
       title: "Leadership",
-      description: "Recognized as India's leading business growth consultancy.",
+      description:
+        "2025 — A trusted name in India’s business growth landscape.",
     },
   ];
 
@@ -231,12 +232,12 @@ export default function FinalAboutUsPage() {
               Our Journey
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              From vision to market leader
+              From Vision to Scale
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Founded in 2017, forwardbiz has grown from a small Delhi-based
-              team to a nationwide consultancy transforming how businesses
-              approach talent and sales.
+              Since 2018, Forward Biz has evolved from a Chennai-based startup
+              into a trusted nationwide partner, helping organizations hire
+              smarter and convert faster.
             </p>
           </div>
 
@@ -295,8 +296,7 @@ export default function FinalAboutUsPage() {
               Meet our Founder
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              The vision and expertise driving forward business growth across
-              India.
+              Driving Forward Biz with people-first vision and expertise.
             </p>
           </div>
 

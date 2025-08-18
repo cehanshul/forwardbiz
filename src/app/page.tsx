@@ -131,7 +131,7 @@ export default function ForwardBizHomepage() {
         "Our conversion rates jumped significantly after working with Forward Biz. They know how to turn leads into real growth.",
       author: "Head of Marketing",
       position: "Top Institute, Chennai",
-      rating: 5,
+      rating: 4,
       avatar: "H",
       bgColor: "bg-blue-600",
     },
