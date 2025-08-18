@@ -31,93 +31,40 @@ import {
   MousePointer,
   Clock,
   Layers,
+  ChevronLeft,
 } from "lucide-react";
 import Lottie from "lottie-react";
 
 export default function ForwardBizHomepage() {
-  const [activeTab, setActiveTab] = useState(0);
   const [activeAccordion, setActiveAccordion] = useState(null);
-  const [selectedService, setSelectedService] = useState("Select a service");
-  const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const [animateHero, setAnimateHero] = useState(false);
   const [animationData, setAnimationData] = useState(null);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const testimonialInterval = useRef(null);
 
-  // Services data - updated with new services
+  // Services data - reduced to 3 core services
   const services = [
     {
       id: "talent-acquisition",
-      title: "HR Hiring & Strategic Talent Acquisition",
+      title: "Strategic Talent Acquisition",
       description:
-        "Building the right teams from scratch, ensuring organizations attract, retain, and grow top talent with our specialized recruitment methodologies.",
+        "Build high-performing teams with our specialized recruiting strategies that attract, retain, and develop top talent.",
       icon: UserPlus,
-      color: "blue",
-      metrics: [
-        { label: "Successful Placements", value: "2,500+" },
-        { label: "Candidate Retention", value: "94%" },
-        { label: "Hiring Time Reduction", value: "40%" },
-      ],
-    },
-    {
-      id: "team-building",
-      title: "High-Impact Team Building",
-      description:
-        "Creating resilient, performance-driven teams aligned with business vision through strategic planning, culture development, and leadership training.",
-      icon: Users,
-      color: "purple",
-      metrics: [
-        { label: "Teams Built", value: "350+" },
-        { label: "Performance Increase", value: "65%" },
-        { label: "Team Cohesion", value: "92%" },
-      ],
     },
     {
       id: "sales-leadership",
       title: "Sales & CX Leadership",
       description:
-        "Shaping strong sales and customer experience functions to drive retention and expansion with proven methodologies and frameworks.",
+        "Transform your customer experience and sales operations with strategies that increase retention and revenue.",
       icon: HeartHandshake,
-      color: "teal",
-      metrics: [
-        { label: "Revenue Growth", value: "85%" },
-        { label: "Customer Retention", value: "76%" },
-        { label: "Teams Transformed", value: "200+" },
-      ],
     },
     {
       id: "lead-conversion",
-      title: "Lead Conversion (B2B & B2C)",
+      title: "Lead Conversion Systems",
       description:
-        "Designing sales pipelines and closure strategies that maximize conversion rates and revenue through data-driven approaches.",
+        "Convert more prospects into customers with data-driven pipeline optimization and proven closing techniques.",
       icon: Target,
-      color: "amber",
-      metrics: [
-        { label: "Conversion Increase", value: "120%" },
-        { label: "Revenue Impact", value: "₹250Cr+" },
-        { label: "Deals Optimized", value: "1,800+" },
-      ],
     },
-    {
-      id: "closure-management",
-      title: "Closure Management",
-      description:
-        "Ensuring leads aren't just generated, they're converted into long-term success with our specialized closure techniques and follow-up systems.",
-      icon: MousePointer,
-      color: "rose",
-      metrics: [
-        { label: "Closure Rate", value: "87%" },
-        { label: "Average Deal Size", value: "+45%" },
-        { label: "Client Retention", value: "92%" },
-      ],
-    },
-  ];
-
-  // Service options for dropdown
-  const serviceOptions = [
-    "HR Hiring & Strategic Talent Acquisition",
-    "High-Impact Team Building",
-    "Sales & CX Leadership",
-    "Lead Conversion (B2B & B2C)",
-    "Closure Management",
   ];
 
   // Approach steps
@@ -157,7 +104,6 @@ export default function ForwardBizHomepage() {
     { value: "200+", label: "Businesses Transformed", icon: Building },
     { value: "2.5K+", label: "Successful Placements", icon: Users },
     { value: "150%", label: "Conversion Growth", icon: TrendingUp },
-    // { value: "₹500Cr+", label: "Revenue Impact", icon: BarChart4 },
   ];
 
   // Client Logos - represented as abstract shapes in dark mode
@@ -187,7 +133,7 @@ export default function ForwardBizHomepage() {
       position: "Top Institute, Chennai",
       rating: 5,
       avatar: "H",
-      bgColor: "bg-purple-600",
+      bgColor: "bg-blue-600",
     },
     {
       content:
@@ -196,7 +142,7 @@ export default function ForwardBizHomepage() {
       position: "SaaS Company, New Delhi",
       rating: 5,
       avatar: "C",
-      bgColor: "bg-teal-600",
+      bgColor: "bg-blue-600",
     },
     {
       content:
@@ -205,7 +151,7 @@ export default function ForwardBizHomepage() {
       position: "AI Startup, Mumbai & New Jersey, US",
       rating: 5,
       avatar: "A",
-      bgColor: "bg-amber-600",
+      bgColor: "bg-blue-600",
     },
   ];
 
@@ -241,19 +187,29 @@ export default function ForwardBizHomepage() {
     setAnimateHero(true);
   }, []);
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    if (!serviceDropdownOpen) return;
+  // Testimonial carousel controls
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
 
-    const handleClickOutside = (e) => {
-      if (!e.target.closest(".dropdown-container")) {
-        setServiceDropdownOpen(false);
+  const prevTestimonial = () => {
+    setCurrentTestimonial(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
+
+  // Automatic testimonial rotation
+  useEffect(() => {
+    testimonialInterval.current = setInterval(() => {
+      nextTestimonial();
+    }, 8000);
+
+    return () => {
+      if (testimonialInterval.current) {
+        clearInterval(testimonialInterval.current);
       }
     };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [serviceDropdownOpen]);
+  }, []);
 
   // Toggle accordion
   const toggleAccordion = (index) => {
@@ -311,28 +267,6 @@ export default function ForwardBizHomepage() {
       </div>
     </div>
   );
-
-  // Abstract geometric decorations
-  const AbstractShapes = () => (
-    <>
-      {/* Top right decoration */}
-      <div className="absolute top-20 right-20 w-64 h-64 opacity-10">
-        <div className="absolute top-0 right-0 w-32 h-32 border-2 border-blue-300 rounded-lg transform rotate-45"></div>
-        <div className="absolute top-10 right-10 w-32 h-32 border-2 border-purple-300 rounded-lg transform rotate-15"></div>
-        <div className="absolute top-20 right-20 w-32 h-32 border-2 border-teal-300 rounded-lg transform -rotate-15"></div>
-      </div>
-
-      {/* Bottom left decoration */}
-      <div className="absolute bottom-20 left-20 w-64 h-64 opacity-10">
-        <div className="absolute bottom-0 left-0 w-16 h-16 bg-blue-500 rounded-full"></div>
-        <div className="absolute bottom-20 left-10 w-12 h-12 bg-purple-500 rounded-full"></div>
-        <div className="absolute bottom-10 left-20 w-8 h-8 bg-teal-500 rounded-full"></div>
-      </div>
-    </>
-  );
-
-  // Lottie animation directly in the component
-  // const { View } = useLottie(options);
 
   // Add this useEffect to fetch the animation data
   useEffect(() => {
@@ -404,37 +338,17 @@ export default function ForwardBizHomepage() {
                     className="ml-2 group-hover:ml-3 transition-all duration-300"
                   />
                 </a>
-                {/* 
-                <a
-                  href="/contact"
-                  className="px-6 py-4 bg-gray-800 bg-opacity-50 text-gray-200 rounded-lg transition-all duration-300 inline-flex items-center border border-gray-700 border-opacity-50 hover:bg-gray-700 hover:bg-opacity-30 backdrop-blur-sm hover:text-white hover:translate-y-[-2px]"
-                >
-                  Talk to Our Experts
-                </a> */}
               </div>
 
               {/* Key Stats */}
-              <div className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-3 lg:gap-6">
+              <div className="mt-16 grid grid-cols-3 gap-3 lg:gap-6">
                 {businessStats.map((stat, index) => (
-                  <div
+                  <CountUpStat
                     key={index}
-                    className={`bg-gray-800 bg-opacity-30 rounded-lg p-4 backdrop-blur-sm border border-gray-700 border-opacity-30 transition-all duration-1000 hover:border-blue-700 hover:border-opacity-40 ${
-                      animateHero
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-8"
-                    }`}
-                    style={{ transitionDelay: `${700 + index * 100}ms` }}
-                  >
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 mb-3 text-blue-300 border border-blue-800 border-opacity-30">
-                      <stat.icon size={18} />
-                    </div>
-                    <div className="text-xl md:text-2xl font-bold text-white">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs md:text-sm text-gray-400">
-                      {stat.label}
-                    </div>
-                  </div>
+                    stat={stat}
+                    animateHero={animateHero}
+                    index={index}
+                  />
                 ))}
               </div>
             </div>
@@ -442,7 +356,7 @@ export default function ForwardBizHomepage() {
             <div className="lg:col-span-5 relative">
               <div className="relative z-20 transform">
                 <div
-                  className={`relative z-10    rounded-2xl  overflow-hidden    transition-all duration-300 group transform ${
+                  className={`relative z-10 rounded-2xl overflow-hidden transition-all duration-300 group transform ${
                     animateHero
                       ? "opacity-100 translate-x-0"
                       : "opacity-0 translate-x-4"
@@ -550,7 +464,7 @@ export default function ForwardBizHomepage() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Services Section - REDESIGNED */}
       <section className="py-24 relative bg-gray-950 bg-opacity-50">
         <CirclePattern />
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
@@ -567,362 +481,37 @@ export default function ForwardBizHomepage() {
             </p>
           </div>
 
-          {/* Service Tabs - Scrollable on mobile */}
-          <div className="flex overflow-x-auto mb-10 pb-4 lg:justify-center">
-            <div className="inline-flex p-1 bg-gray-800 bg-opacity-50 backdrop-blur-md rounded-lg shadow-inner border border-gray-700 border-opacity-50">
-              {services.map((service, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveTab(index)}
-                  className={`whitespace-nowrap px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
-                    activeTab === index
-                      ? service.color === "blue"
-                        ? "bg-blue-600 text-white shadow-lg"
-                        : service.color === "purple"
-                        ? "bg-purple-600 text-white shadow-lg"
-                        : service.color === "teal"
-                        ? "bg-teal-600 text-white shadow-lg"
-                        : service.color === "amber"
-                        ? "bg-amber-600 text-white shadow-lg"
-                        : "bg-rose-600 text-white shadow-lg"
-                      : "text-gray-300 hover:text-white hover:bg-gray-700 hover:bg-opacity-30"
-                  }`}
+          {/* Clean, cohesive 3-column services layout */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="bg-gray-800 bg-opacity-40 backdrop-blur-md rounded-xl border border-gray-700 border-opacity-50 p-8 hover:shadow-lg transition-all duration-300 hover:border-gray-600 hover:border-opacity-50 hover:translate-y-[-2px] group relative overflow-hidden"
+              >
+                <div className="w-14 h-14 rounded-lg bg-blue-900 bg-opacity-30 border border-blue-800 border-opacity-30 flex items-center justify-center mb-6 backdrop-blur-sm">
+                  <service.icon size={24} className="text-blue-400" />
+                </div>
+
+                <h3 className="text-xl font-bold mb-4 text-white">
+                  {service.title}
+                </h3>
+                <p className="text-gray-300 mb-6">{service.description}</p>
+
+                <a
+                  href={`/services/${service.id}`}
+                  className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-all duration-300 group"
                 >
-                  <div className="flex items-center">
-                    <service.icon size={16} className="mr-2" />
-                    <span className="truncate">
-                      {service.title.split(" ")[0]}
-                    </span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
+                  Learn More{" "}
+                  <ChevronRight
+                    size={16}
+                    className="ml-1 group-hover:ml-2 transition-all duration-300"
+                  />
+                </a>
 
-          {/* Service Content */}
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-6">
-              <div className="relative z-10">
-                {services.map((service, index) => (
-                  <div
-                    key={index}
-                    className={`transition-all duration-500 ${
-                      activeTab === index ? "opacity-100" : "opacity-0 hidden"
-                    }`}
-                  >
-                    <div
-                      className={`w-12 h-12 rounded-lg ${
-                        service.color === "blue"
-                          ? "bg-blue-900 bg-opacity-30 border-blue-800"
-                          : service.color === "purple"
-                          ? "bg-purple-900 bg-opacity-30 border-purple-800"
-                          : service.color === "teal"
-                          ? "bg-teal-900 bg-opacity-30 border-teal-800"
-                          : service.color === "amber"
-                          ? "bg-amber-900 bg-opacity-30 border-amber-800"
-                          : "bg-rose-900 bg-opacity-30 border-rose-800"
-                      } flex items-center justify-center mb-6 backdrop-blur-sm border border-opacity-30`}
-                    >
-                      <service.icon
-                        size={24}
-                        className={
-                          service.color === "blue"
-                            ? "text-blue-300"
-                            : service.color === "purple"
-                            ? "text-purple-300"
-                            : service.color === "teal"
-                            ? "text-teal-300"
-                            : service.color === "amber"
-                            ? "text-amber-300"
-                            : "text-rose-300"
-                        }
-                      />
-                    </div>
-
-                    <h3 className="text-2xl font-bold mb-4 text-white">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-300 mb-8">{service.description}</p>
-
-                    <h4 className="text-lg font-semibold mb-4 text-gray-200">
-                      Key Performance Indicators
-                    </h4>
-                    <div className="grid grid-cols-3 gap-4 mb-8">
-                      {service.metrics.map((metric, i) => (
-                        <div
-                          key={i}
-                          className={`bg-gray-800 bg-opacity-40 backdrop-blur-md p-4 rounded-lg shadow-md border border-gray-700 border-opacity-50 hover:border-gray-600 hover:border-opacity-50 transition-all duration-300 group hover:transform hover:translate-y-[-2px] hover:shadow-lg relative overflow-hidden`}
-                        >
-                          <div
-                            className={
-                              service.color === "blue"
-                                ? "text-blue-400"
-                                : service.color === "purple"
-                                ? "text-purple-400"
-                                : service.color === "teal"
-                                ? "text-teal-400"
-                                : service.color === "amber"
-                                ? "text-amber-400"
-                                : "text-rose-400"
-                            }
-                            style={{ fontSize: "1.25rem", fontWeight: "bold" }}
-                          >
-                            {metric.value}
-                          </div>
-                          <div className="text-gray-400 text-sm">
-                            {metric.label}
-                          </div>
-
-                          {/* Background decoration */}
-                          <div
-                            className={`absolute -right-4 -bottom-4 w-12 h-12 rounded-full ${
-                              service.color === "blue"
-                                ? "bg-blue-400"
-                                : service.color === "purple"
-                                ? "bg-purple-400"
-                                : service.color === "teal"
-                                ? "bg-teal-400"
-                                : service.color === "amber"
-                                ? "bg-amber-400"
-                                : "bg-rose-400"
-                            } bg-opacity-10 transition-all duration-300 group-hover:bg-opacity-20`}
-                          ></div>
-                        </div>
-                      ))}
-                    </div>
-
-                    <a
-                      href={`/services/${service.id}`}
-                      className={`inline-flex items-center ${
-                        service.color === "blue"
-                          ? "text-blue-400"
-                          : service.color === "purple"
-                          ? "text-purple-400"
-                          : service.color === "teal"
-                          ? "text-teal-400"
-                          : service.color === "amber"
-                          ? "text-amber-400"
-                          : "text-rose-400"
-                      } hover:text-white font-medium transition-all duration-300 group`}
-                    >
-                      Learn More About {service.title}{" "}
-                      <ChevronRight
-                        size={16}
-                        className="ml-1 group-hover:ml-2 transition-all duration-300"
-                      />
-                    </a>
-                  </div>
-                ))}
+                {/* Subtle background decoration */}
+                <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-blue-500 opacity-5 rounded-full"></div>
               </div>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="relative">
-                {services.map((service, index) => (
-                  <div
-                    key={index}
-                    className={`transition-all duration-500 ${
-                      activeTab === index ? "opacity-100" : "opacity-0 hidden"
-                    }`}
-                  >
-                    <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 shadow-xl p-8 hover:border-gray-600 hover:border-opacity-50 transition-all duration-300 group relative overflow-hidden">
-                      {/* Decorative pattern */}
-                      <div className="absolute inset-0 opacity-5">
-                        <div className="absolute right-0 bottom-0 w-40 h-40">
-                          {[...Array(3)].map((_, i) => (
-                            <div
-                              key={i}
-                              className={`absolute inset-0 border-2 ${
-                                service.color === "blue"
-                                  ? "border-blue-300"
-                                  : service.color === "purple"
-                                  ? "border-purple-300"
-                                  : service.color === "teal"
-                                  ? "border-teal-300"
-                                  : service.color === "amber"
-                                  ? "border-amber-300"
-                                  : "border-rose-300"
-                              } rounded-full`}
-                              style={{
-                                transform: `scale(${0.5 + i * 0.25})`,
-                                opacity: 0.5 - i * 0.15,
-                              }}
-                            ></div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div
-                        className={`${
-                          service.color === "blue"
-                            ? "bg-blue-600"
-                            : service.color === "purple"
-                            ? "bg-purple-600"
-                            : service.color === "teal"
-                            ? "bg-teal-600"
-                            : service.color === "amber"
-                            ? "bg-amber-600"
-                            : "bg-rose-600"
-                        } p-5 text-white relative`}
-                      >
-                        <h3 className="text-xl font-bold flex items-center">
-                          <service.icon size={20} className="mr-2" />
-                          Why Choose Our {service.title.split("&")[0]}
-                        </h3>
-                      </div>
-                      <div className="p-6 relative">
-                        <div className="grid grid-cols-2 gap-4 relative z-10">
-                          {/* Feature cards for each service */}
-                          {service.id === "talent-acquisition" && (
-                            <>
-                              <FeatureCard
-                                title="Deep Industry Knowledge"
-                                description="Specialized recruiters who understand your industry needs"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Quality Screening"
-                                description="Multi-stage vetting process ensures top talent"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Strategic Planning"
-                                description="Long-term talent acquisition roadmaps"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Retention Focus"
-                                description="Strategies to keep your best talent engaged"
-                                color={service.color}
-                              />
-                            </>
-                          )}
-
-                          {service.id === "team-building" && (
-                            <>
-                              <FeatureCard
-                                title="Culture Development"
-                                description="Build teams with aligned values and vision"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Performance Systems"
-                                description="Establish metrics and accountability frameworks"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Team Dynamics"
-                                description="Optimize collaboration and communication"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Leadership Training"
-                                description="Develop your next generation of leaders"
-                                color={service.color}
-                              />
-                            </>
-                          )}
-
-                          {service.id === "sales-leadership" && (
-                            <>
-                              <FeatureCard
-                                title="Sales Frameworks"
-                                description="Proven methodologies that drive revenue"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="CX Excellence"
-                                description="Customer-centric approaches that boost retention"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Team Coaching"
-                                description="Performance enhancement for existing teams"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Revenue Planning"
-                                description="Strategic roadmaps for predictable growth"
-                                color={service.color}
-                              />
-                            </>
-                          )}
-
-                          {service.id === "lead-conversion" && (
-                            <>
-                              <FeatureCard
-                                title="Funnel Optimization"
-                                description="Identify and remove conversion blockers"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Sales Scripts"
-                                description="High-converting messaging frameworks"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Analytics Focus"
-                                description="Data-driven decisions for optimal results"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Multichannel Approach"
-                                description="Integrated B2B and B2C conversion strategies"
-                                color={service.color}
-                              />
-                            </>
-                          )}
-
-                          {service.id === "closure-management" && (
-                            <>
-                              <FeatureCard
-                                title="Objection Handling"
-                                description="Advanced techniques to overcome resistance"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Deal Structure"
-                                description="Optimize pricing and terms for higher close rates"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Follow-up Systems"
-                                description="Never lose a prospect with systematic approaches"
-                                color={service.color}
-                              />
-                              <FeatureCard
-                                title="Revenue Expansion"
-                                description="Strategies to increase deal size and retention"
-                                color={service.color}
-                              />
-                            </>
-                          )}
-                        </div>
-
-                        <div className="mt-6 text-center relative z-10">
-                          <a
-                            href={`/services/${service.id}`}
-                            className={`inline-flex items-center px-5 py-2 ${
-                              service.color === "blue"
-                                ? "bg-blue-600 hover:bg-blue-500"
-                                : service.color === "purple"
-                                ? "bg-purple-600 hover:bg-purple-500"
-                                : service.color === "teal"
-                                ? "bg-teal-600 hover:bg-teal-500"
-                                : service.color === "amber"
-                                ? "bg-amber-600 hover:bg-amber-500"
-                                : "bg-rose-600 hover:bg-rose-500"
-                            } text-white rounded-lg font-medium transition-all duration-300 text-sm shadow-lg hover:shadow-xl hover:translate-y-[-2px]`}
-                          >
-                            View {service.title.split("&")[0]} Details
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -991,7 +580,7 @@ export default function ForwardBizHomepage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section - FIXED CAROUSEL */}
       <section className="py-24 relative bg-gray-950 bg-opacity-50">
         <GridPattern />
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
@@ -1008,45 +597,79 @@ export default function ForwardBizHomepage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl shadow-lg p-8 border border-gray-700 border-opacity-50 transition-all duration-300 hover:border-gray-600 hover:border-opacity-50 hover:shadow-xl hover:translate-y-[-2px] group relative overflow-hidden"
-              >
-                {/* Quote mark decoration */}
-                <div className="absolute top-4 right-4 text-4xl text-gray-700 opacity-20 font-serif">
-                  "
-                </div>
-                <div className="absolute bottom-4 left-4 text-4xl text-gray-700 opacity-20 font-serif transform rotate-180">
-                  "
-                </div>
-
-                {/* Make the content height consistent with min-height */}
-                <p className="text-gray-300 mb-6 relative z-10 min-h-[80px]">
-                  "{testimonial.content}"
-                </p>
-
-                <div className="flex items-center relative z-10">
-                  <div
-                    className={`w-12 h-12 rounded-full ${testimonial.bgColor} flex items-center justify-center text-white font-bold mr-3 shadow-lg flex-shrink-0`}
-                  >
-                    <span className="text-center">{testimonial.avatar}</span>
-                  </div>
-                  <div>
-                    <div className="font-medium text-white">
-                      {testimonial.author}
-                    </div>
-                    <div className="text-sm text-gray-400">
-                      {testimonial.position}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Background decoration */}
-                <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-blue-600 opacity-5 group-hover:opacity-10 transition-all duration-500"></div>
+          {/* Fixed Testimonial Carousel */}
+          <div className="max-w-3xl mx-auto">
+            {/* Current Testimonial */}
+            <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl p-8 border border-gray-700 border-opacity-50 mb-6">
+              {/* Star Rating */}
+              <div className="flex mb-6">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={18}
+                    fill="#facc15"
+                    className="text-yellow-400 mr-1"
+                  />
+                ))}
               </div>
-            ))}
+
+              {/* Testimonial Content */}
+              <p className="text-gray-200 text-lg mb-6">
+                "{testimonials[currentTestimonial].content}"
+              </p>
+
+              {/* Author Info */}
+              <div className="flex items-center">
+                <div
+                  className={`w-10 h-10 rounded-full ${testimonials[currentTestimonial].bgColor} flex items-center justify-center text-white font-medium mr-3`}
+                >
+                  {testimonials[currentTestimonial].avatar}
+                </div>
+                <div>
+                  <div className="font-medium text-white">
+                    {testimonials[currentTestimonial].author}
+                  </div>
+                  <div className="text-sm text-gray-400">
+                    {testimonials[currentTestimonial].position}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Navigation Controls */}
+            <div className="flex justify-between items-center">
+              <button
+                onClick={prevTestimonial}
+                className="w-10 h-10 rounded-full bg-gray-800 bg-opacity-50 border border-gray-700 border-opacity-50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={20} />
+              </button>
+
+              {/* Indicator Dots */}
+              <div className="flex space-x-2">
+                {testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentTestimonial(idx)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      currentTestimonial === idx
+                        ? "bg-blue-500 w-6"
+                        : "bg-gray-600"
+                    }`}
+                    aria-label={`Go to testimonial ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={nextTestimonial}
+                className="w-10 h-10 rounded-full bg-gray-800 bg-opacity-50 border border-gray-700 border-opacity-50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -1170,8 +793,9 @@ export default function ForwardBizHomepage() {
               Ready to Transform Your Business?
             </h2>
             <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
-              Let's work together to build your dream team and optimize your
-              conversion systems.
+              We specialize in helping businesses attract, hire, and retain
+              exceptional talent. And with our sales expertise, we also help you
+              turn leads into lasting customers.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -1179,7 +803,9 @@ export default function ForwardBizHomepage() {
                 href="/contact"
                 className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center hover:translate-y-[-2px] relative group overflow-hidden"
               >
-                <span className="relative z-10">Schedule a Consultation</span>
+                <span className="relative z-10">
+                  Let’s Build Growth Together
+                </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
               </a>
               <a
@@ -1194,29 +820,29 @@ export default function ForwardBizHomepage() {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact Section - REDESIGNED */}
       <section className="py-24 relative">
         <GridPattern />
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Contact Info Column */}
+            <div>
               <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
                 Contact Us
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 Get In Touch
               </h2>
-              <p className="text-xl text-gray-300 mb-8">
+              <p className="text-xl text-gray-300 mb-8 max-w-lg">
                 Have questions or ready to start? Contact us today to discuss
                 how we can help your business succeed.
               </p>
 
-              <div className="space-y-8">
-                <div className="flex items-start group hover:translate-y-[-2px] transition-all duration-300">
-                  <div className="mt-1">
-                    <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 group-hover:bg-blue-800 group-hover:bg-opacity-40 transition-all duration-300">
-                      <MapPin size={20} />
-                    </div>
+              {/* Contact Details */}
+              <div className="space-y-6 mb-8">
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
+                    <MapPin size={20} />
                   </div>
                   <div className="ml-4">
                     <h3 className="font-semibold text-white mb-1">
@@ -1232,165 +858,81 @@ export default function ForwardBizHomepage() {
                   </div>
                 </div>
 
-                <div className="flex items-start group hover:translate-y-[-2px] transition-all duration-300">
-                  <div className="mt-1">
-                    <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 group-hover:bg-blue-800 group-hover:bg-opacity-40 transition-all duration-300">
-                      <Mail size={20} />
-                    </div>
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
+                    <Mail size={20} />
                   </div>
                   <div className="ml-4">
                     <h3 className="font-semibold text-white mb-1">Email Us</h3>
                     <a
                       href="mailto:info@forwardbiz.com"
-                      className="text-blue-400 hover:text-blue-300 group-hover:underline"
+                      className="text-blue-400 hover:text-blue-300 hover:underline"
                     >
                       info@forwardbiz.com
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start group hover:translate-y-[-2px] transition-all duration-300">
-                  <div className="mt-1">
-                    <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 group-hover:bg-blue-800 group-hover:bg-opacity-40 transition-all duration-300">
-                      <Phone size={20} />
-                    </div>
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
+                    <Phone size={20} />
                   </div>
                   <div className="ml-4">
                     <h3 className="font-semibold text-white mb-1">Call Us</h3>
                     <a
                       href="tel:+911234567890"
-                      className="text-blue-400 hover:text-blue-300 group-hover:underline"
+                      className="text-blue-400 hover:text-blue-300 hover:underline"
                     >
                       +91 (123) 456-7890
                     </a>
                   </div>
                 </div>
               </div>
-
-              {/* Visual decoration */}
-              <div className="mt-12 hidden lg:block relative">
-                <div className="w-48 h-48 border-2 border-blue-600 border-opacity-20 rounded-full absolute"></div>
-                <div
-                  className="w-48 h-48 border-2 border-purple-600 border-opacity-20 rounded-full absolute"
-                  style={{ transform: "translateX(20px) translateY(20px)" }}
-                ></div>
-                <div
-                  className="w-48 h-48 border-2 border-teal-600 border-opacity-20 rounded-full absolute"
-                  style={{ transform: "translateX(40px) translateY(40px)" }}
-                ></div>
-              </div>
             </div>
 
-            <div className="lg:col-span-7">
-              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 shadow-xl p-8 hover:border-gray-600 hover:border-opacity-50 transition-all duration-300 group relative overflow-hidden">
-                {/* Background decoration */}
-                <div className="absolute -top-20 -right-20 w-40 h-40 border-2 border-blue-400 border-opacity-10 rounded-full"></div>
-                <div className="absolute -bottom-20 -left-20 w-40 h-40 border-2 border-blue-400 border-opacity-10 rounded-full"></div>
-
-                <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-                  <Mail size={20} className="mr-2 text-blue-400" /> Send Us a
+            {/* Contact Form Column */}
+            <div>
+              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg">
+                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+                  <Mail size={18} className="mr-2 text-blue-400" /> Send Us a
                   Message
                 </h3>
 
-                {/* Contact Form */}
-                <div className="grid md:grid-cols-2 gap-6 mb-6 relative z-10">
+                {/* Simplified Form */}
+                <form className="space-y-6">
+                  {/* Name Field */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Full Name
                     </label>
                     <input
                       type="text"
-                      className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:border-opacity-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
                       placeholder="Your name"
                     />
                   </div>
 
+                  {/* Email Field */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Email Address
                     </label>
                     <input
                       type="email"
-                      className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:border-opacity-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
                       placeholder="your@email.com"
                     />
                   </div>
-                </div>
 
-                {/* Service of Interest dropdown */}
-                <div className="mb-6 relative z-30 dropdown-container">
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
-                    Service of Interest
-                  </label>
-                  <div className="relative">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setServiceDropdownOpen(!serviceDropdownOpen)
-                      }
-                      className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:border-opacity-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none text-white text-left flex items-center justify-between"
-                    >
-                      <span
-                        className={
-                          selectedService === "Select a service"
-                            ? "text-gray-400"
-                            : "text-white"
-                        }
-                      >
-                        {selectedService}
-                      </span>
-                      <ChevronDown
-                        size={20}
-                        className={`text-blue-400  ${
-                          serviceDropdownOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-
-                    {/* Pre-render dropdown but hide it with CSS for better performance */}
-                    <div
-                      className={`absolute z-50 w-full mt-1 bg-gray-800 border border-gray-600 border-opacity-50 rounded-lg shadow-2xl backdrop-blur-md max-h-60 overflow-y-auto transition-all duration-200 ${
-                        serviceOptions.length === 0
-                          ? "hidden"
-                          : serviceDropdownOpen
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-[-8px] pointer-events-none"
-                      }`}
-                    >
-                      {serviceOptions.map((option, index) => (
-                        <button
-                          key={index}
-                          type="button"
-                          onClick={() => {
-                            setSelectedService(option);
-                            setServiceDropdownOpen(false);
-                          }}
-                          className="w-full px-4 py-3 text-left hover:bg-gray-700 hover:bg-opacity-50 focus:bg-gray-700 focus:bg-opacity-50 focus:outline-none first:rounded-t-lg last:rounded-b-lg text-gray-200"
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mb-6 relative z-20">
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
-                    Message
-                  </label>
-                  <textarea
-                    rows={4}
-                    className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:border-opacity-50 rounded-lg focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none text-white placeholder-gray-400"
-                    placeholder="How can we help you?"
-                  ></textarea>
-                </div>
-
-                <a
-                  href="/contact/submit"
-                  className="block w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 text-center shadow-lg hover:shadow-xl hover:translate-y-[-2px] relative z-10"
-                >
-                  Send Message
-                </a>
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 flex items-center justify-center"
+                  >
+                    <span>Send Message</span>
+                    <ArrowRight size={16} className="ml-2" />
+                  </button>
+                </form>
               </div>
             </div>
           </div>
@@ -1400,70 +942,6 @@ export default function ForwardBizHomepage() {
   );
 }
 
-// Reusable feature card component
-function FeatureCard({ title, description, color }) {
-  const getColorClasses = (color) => {
-    switch (color) {
-      case "blue":
-        return {
-          bg: "bg-blue-900 bg-opacity-10 border-blue-800",
-          icon: "bg-blue-900 bg-opacity-30 border-blue-800",
-          text: "text-blue-300",
-        };
-      case "purple":
-        return {
-          bg: "bg-purple-900 bg-opacity-10 border-purple-800",
-          icon: "bg-purple-900 bg-opacity-30 border-purple-800",
-          text: "text-purple-300",
-        };
-      case "teal":
-        return {
-          bg: "bg-teal-900 bg-opacity-10 border-teal-800",
-          icon: "bg-teal-900 bg-opacity-30 border-teal-800",
-          text: "text-teal-300",
-        };
-      case "amber":
-        return {
-          bg: "bg-amber-900 bg-opacity-10 border-amber-800",
-          icon: "bg-amber-900 bg-opacity-30 border-amber-800",
-          text: "text-amber-300",
-        };
-      case "rose":
-        return {
-          bg: "bg-rose-900 bg-opacity-10 border-rose-800",
-          icon: "bg-rose-900 bg-opacity-30 border-rose-800",
-          text: "text-rose-300",
-        };
-      default:
-        return {
-          bg: "bg-blue-900 bg-opacity-10 border-blue-800",
-          icon: "bg-blue-900 bg-opacity-30 border-blue-800",
-          text: "text-blue-300",
-        };
-    }
-  };
-
-  const colorClasses = getColorClasses(color);
-
-  return (
-    <div
-      className={`${colorClasses.bg} rounded-lg p-4 backdrop-blur-sm border border-opacity-30 transition-all duration-300 hover:shadow-lg relative overflow-hidden group`}
-    >
-      <div
-        className={`flex items-center justify-center w-8 h-8 rounded-full ${colorClasses.icon} mb-3 border border-opacity-30`}
-      >
-        <CheckCircle size={16} className={colorClasses.text} />
-      </div>
-      <h4 className="text-base font-semibold mb-1 text-white">{title}</h4>
-      <p className="text-gray-300 text-sm">{description}</p>
-
-      {/* Background decoration */}
-      <div className="absolute -bottom-8 -right-8 w-16 h-16 rounded-full bg-white opacity-0 group-hover:opacity-5 transition-all duration-500"></div>
-    </div>
-  );
-}
-
-// Typewriter text component
 // Typewriter text component
 function TypewriterText() {
   const phrases = [
@@ -1504,7 +982,7 @@ function TypewriterText() {
       const timeoutId = setTimeout(() => {
         setIsDeleting(true);
         setTypingSpeed(50); // Faster when deleting
-      }, 200);
+      }, 2000);
       return () => clearTimeout(timeoutId);
     } else if (isDeleting && displayText.length > 0) {
       // Deleting the current phrase
@@ -1517,7 +995,7 @@ function TypewriterText() {
       const timeoutId = setTimeout(() => {
         setIsDeleting(false);
         setCurrentIndex((prevIndex) => (prevIndex + 1) % phrases.length);
-      }, 100);
+      }, 500);
       return () => clearTimeout(timeoutId);
     }
   }, [displayText, isDeleting, currentIndex, phrases, typingSpeed]);
@@ -1535,5 +1013,85 @@ function TypewriterText() {
         </span>
       </span>
     </h1>
+  );
+}
+
+// CountUpStat component for animated statistics
+function CountUpStat({ stat, animateHero, index }) {
+  const { value, label, icon: Icon } = stat;
+
+  // Parse the string to extract numeric value and suffix
+  const parseValueAndSuffix = () => {
+    if (value.includes("K+")) {
+      const numPart = parseFloat(value.replace("K+", ""));
+      return {
+        number: numPart * 1000, // Convert K to actual thousands
+        displayFunc: (num) => {
+          const inK = (num / 1000).toFixed(1).replace(/\.0$/, "");
+          return `${inK}K+`;
+        },
+      };
+    } else if (value.includes("+")) {
+      const numPart = parseInt(value.replace("+", ""));
+      return {
+        number: numPart,
+        displayFunc: (num) => `${Math.round(num)}+`,
+      };
+    } else if (value.includes("%")) {
+      const numPart = parseInt(value.replace("%", ""));
+      return {
+        number: numPart,
+        displayFunc: (num) => `${Math.round(num)}%`,
+      };
+    } else {
+      return {
+        number: parseInt(value),
+        displayFunc: (num) => `${Math.round(num)}`,
+      };
+    }
+  };
+
+  const { number: targetNumber, displayFunc } = parseValueAndSuffix();
+  const [currentNumber, setCurrentNumber] = useState(0);
+
+  useEffect(() => {
+    if (!animateHero) return;
+
+    const duration = 2000; // 2 seconds animation
+    const startTime = Date.now();
+
+    const animateCount = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smoother animation
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      const newValue = targetNumber * easedProgress;
+
+      setCurrentNumber(newValue);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateCount);
+      }
+    };
+
+    requestAnimationFrame(animateCount);
+  }, [animateHero, targetNumber]);
+
+  return (
+    <div
+      className={`bg-gray-800 bg-opacity-30 rounded-lg p-4 backdrop-blur-sm border border-gray-700 border-opacity-30 transition-all duration-1000 hover:border-blue-700 hover:border-opacity-40 ${
+        animateHero ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      }`}
+      style={{ transitionDelay: `${700 + index * 100}ms` }}
+    >
+      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 mb-3 text-blue-300 border border-blue-800 border-opacity-30">
+        <Icon size={18} />
+      </div>
+      <div className="text-xl md:text-2xl font-bold text-white">
+        {displayFunc(currentNumber)}
+      </div>
+      <div className="text-xs md:text-sm text-gray-400">{label}</div>
+    </div>
   );
 }
