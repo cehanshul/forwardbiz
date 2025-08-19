@@ -1,563 +1,509 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  UserPlus,
+  HeartHandshake,
+  Target,
+  ArrowRight,
+  ChevronRight,
+  Check,
+  PieChart,
+  LineChart,
+  BarChart4,
+  Users,
+  Building,
+  Phone,
+  Mail,
+} from "lucide-react";
 
 export default function ServicesPage() {
-  const [activeSection, setActiveSection] = useState(null);
-  const [expandedCard, setExpandedCard] = useState(null);
+  const [animatePage, setAnimatePage] = useState(false);
+  const [activeService, setActiveService] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [service, setService] = useState("");
 
   // Core services data
   const services = [
     {
       id: "talent-acquisition",
       title: "Strategic Talent Acquisition",
-      emoji: "👥",
+      subtitle: "Build high-performing teams",
       description:
-        "Build high-performing teams aligned with your culture and objectives. Our specialized recruiting strategies help you identify, attract, and retain top talent.",
+        "Create sustainable competitive advantage through strategic hiring, retention, and team development tailored to your business goals.",
+      icon: UserPlus,
       color: "blue",
       keyPoints: [
-        "Reduce hiring timelines by up to 35%",
-        "Improve retention rates with better cultural fit",
-        "Build scalable talent pipelines for growth",
-        "Design seamless onboarding experiences",
+        "Role-specific sourcing strategies",
+        "Competency-based selection frameworks",
+        "Onboarding and retention systems",
+        "Leadership development pipelines",
+        "Performance optimization",
       ],
-      results:
-        "Over 2,500 successful placements with 92% retention rate after 18 months",
+      metrics: [
+        { label: "Retention Rate", value: "94%" },
+        { label: "Time-to-Hire Reduction", value: "45%" },
+        { label: "Performance Improvement", value: "3x" },
+      ],
     },
     {
       id: "sales-leadership",
       title: "Sales & CX Leadership",
-      emoji: "🤝",
+      subtitle: "Transform customer experience",
       description:
-        "Optimize customer journey and sales operations to increase satisfaction, retention, and revenue growth. Transform your customer experience.",
+        "Develop customer-centric sales strategies and leadership capabilities that drive both retention and sustainable revenue growth.",
+      icon: HeartHandshake,
       color: "purple",
       keyPoints: [
-        "Increase customer retention by up to 40%",
-        "Enhance team performance with proven frameworks",
-        "Create seamless customer journey touchpoints",
-        "Implement data-driven improvement systems",
+        "Sales leadership development",
+        "Customer journey optimization",
+        "Performance management systems",
+        "Sales process refinement",
+        "Service-sales integration",
       ],
-      results:
-        "Average 32% revenue growth and 28% higher NPS scores for clients",
+      metrics: [
+        { label: "Revenue Growth", value: "63%" },
+        { label: "Conversion Rate", value: "42%" },
+        { label: "Customer Satisfaction", value: "89%" },
+      ],
     },
     {
       id: "lead-conversion",
       title: "Lead Conversion Systems",
-      emoji: "🎯",
+      subtitle: "Optimize your pipeline",
       description:
-        "Convert more prospects into customers with data-driven pipeline optimization and proven closing techniques that maximize revenue.",
+        "Transform your sales pipeline with data-driven strategies and optimized processes that increase conversion rates at every stage.",
+      icon: Target,
       color: "teal",
       keyPoints: [
-        "Increase conversion rates by up to 150%",
-        "Shorten sales cycles and improve efficiency",
-        "Recover lost opportunities through re-engagement",
-        "Identify and prioritize high-value prospects",
+        "Lead qualification frameworks",
+        "Pipeline optimization",
+        "Conversion analytics",
+        "Sales enablement tools",
+        "Nurture sequence design",
       ],
-      results:
-        "Helped clients achieve 42% lead recovery and 30% faster sales cycles",
-    },
-  ];
-
-  // Success stories/case studies
-  const successStories = [
-    {
-      client: "Tech Startup, Bangalore",
-      service: "talent-acquisition",
-      challenge:
-        "Needed to build a leadership team capable of securing Series B funding",
-      solution:
-        "Implemented a comprehensive executive search and integration program",
-      results: [
-        "7 key executive roles filled in 10 weeks",
-        "Series B funding secured within 6 months",
-        "92% retention after 18 months",
+      metrics: [
+        { label: "Pipeline Efficiency", value: "78%" },
+        { label: "Conversion Increase", value: "52%" },
+        { label: "Sales Cycle Reduction", value: "31%" },
       ],
-      quote:
-        "Forward Biz transformed our hiring from chaotic to strategic. The leadership team they helped us build has been fundamental to our growth trajectory.",
-      author: "Founder & CEO",
-    },
-    {
-      client: "SaaS Provider, Mumbai",
-      service: "sales-leadership",
-      challenge: "Faced declining renewal rates despite product improvements",
-      solution:
-        "Reimagined their customer journey with our integrated Sales-CX methodology",
-      results: [
-        "40% increase in customer lifetime value",
-        "28% improvement in Net Promoter Score",
-        "65% increase in referral-based acquisitions",
-      ],
-      quote:
-        "The difference in our customer experience is night and day. They helped us see blind spots in our approach and build a customer-obsessed culture.",
-      author: "Head of Marketing",
-    },
-    {
-      client: "EdTech Company, Chennai",
-      service: "lead-conversion",
-      challenge: "Only 3% of prospects converting with long sales cycles",
-      solution:
-        "Implemented our multi-touchpoint conversion framework with messaging optimization",
-      results: [
-        "Conversion rate increased from 3% to 7.5%",
-        "Sales cycle reduced by 30% on average",
-        "42% of previously lost leads recovered",
-      ],
-      quote:
-        "Forward Biz's conversion system transformed our business model. We're now converting leads we previously thought were impossible to close.",
-      author: "Growth Director",
     },
   ];
 
-  // Industries served
-  const industries = [
+  // Process steps
+  const processSteps = [
     {
-      name: "Technology & SaaS",
-      icon: "⚡",
-      description: "From startups to established platforms",
+      number: "01",
+      title: "Discovery & Assessment",
+      description:
+        "We begin with a thorough analysis of your current systems, team capabilities, and business objectives.",
+      icon: PieChart,
     },
     {
-      name: "Education & EdTech",
-      icon: "🎓",
-      description: "Traditional and digital learning companies",
+      number: "02",
+      title: "Strategy Development",
+      description:
+        "Our experts create a tailored approach based on your specific challenges and growth targets.",
+      icon: LineChart,
     },
     {
-      name: "Healthcare",
-      icon: "🏥",
-      description: "Providers, services, and health tech",
+      number: "03",
+      title: "Implementation",
+      description:
+        "We execute the plan with precision, providing training and systems to support your team.",
+      icon: BarChart4,
     },
     {
-      name: "Financial Services",
-      icon: "💰",
-      description: "FinTech, banking, and insurance",
-    },
-    {
-      name: "E-commerce",
-      icon: "🛒",
-      description: "Online retail and marketplaces",
-    },
-    {
-      name: "Manufacturing",
-      icon: "🏭",
-      description: "Production and industrial services",
+      number: "04",
+      title: "Measurement & Refinement",
+      description:
+        "We track key metrics and continuously optimize for maximum impact and ROI.",
+      icon: Target,
     },
   ];
 
-  // Our methodology steps
-  const methodology = [
+  // Results showcases
+  const results = [
     {
-      title: "Discover",
+      company: "Tech Startup",
+      highlight: "3x Growth",
       description:
-        "We analyze your current systems, team structure, and business goals to identify key opportunities.",
-      icon: "🔍",
+        "Implemented talent acquisition strategy and sales leadership program, resulting in 3x revenue growth in 18 months.",
     },
     {
-      title: "Design",
+      company: "Education Provider",
+      highlight: "42% Conversion",
       description:
-        "Our experts create tailored strategies built specifically for your unique business context.",
-      icon: "📐",
+        "Redesigned lead conversion systems, increasing enrollment conversion rates from 29% to 42%.",
     },
     {
-      title: "Develop",
+      company: "Financial Services",
+      highlight: "62% Retention",
       description:
-        "We build your customized systems, processes, and team capabilities with proven frameworks.",
-      icon: "🛠️",
-    },
-    {
-      title: "Deploy",
-      description:
-        "Implementation with continuous monitoring, optimization, and refinement for maximum impact.",
-      icon: "🚀",
+        "Developed talent and leadership systems that improved team retention from 38% to 62% annually.",
     },
   ];
 
-  // Client transformation examples
-  const transformations = [
-    { from: "Reactive hiring", to: "Strategic talent acquisition", icon: "👥" },
-    {
-      from: "Transactional sales",
-      to: "Value-based relationships",
-      icon: "🤝",
-    },
-    {
-      from: "Fragmented customer journey",
-      to: "Seamless experience",
-      icon: "🌟",
-    },
-    {
-      from: "Low conversion rates",
-      to: "Optimized revenue pipeline",
-      icon: "📈",
-    },
-    { from: "Team silos", to: "Cross-functional excellence", icon: "🔄" },
-    { from: "Static processes", to: "Adaptive growth systems", icon: "⚙️" },
-  ];
-
-  // Get color classes based on service color
-  const getColorClass = (color, type) => {
-    const colorMap = {
-      blue: {
-        bg: "bg-blue-600",
-        bgLight: "bg-blue-600/10",
-        bgMedium: "bg-blue-600/20",
-        text: "text-blue-500",
-        textLight: "text-blue-300",
-        border: "border-blue-500/30",
-        shadow: "shadow-blue-500/20",
-        gradient: "bg-gradient-to-br from-blue-600 to-blue-700",
-      },
-      purple: {
-        bg: "bg-purple-600",
-        bgLight: "bg-purple-600/10",
-        bgMedium: "bg-purple-600/20",
-        text: "text-purple-500",
-        textLight: "text-purple-300",
-        border: "border-purple-500/30",
-        shadow: "shadow-purple-500/20",
-        gradient: "bg-gradient-to-br from-purple-600 to-purple-700",
-      },
-      teal: {
-        bg: "bg-teal-600",
-        bgLight: "bg-teal-600/10",
-        bgMedium: "bg-teal-600/20",
-        text: "text-teal-500",
-        textLight: "text-teal-300",
-        border: "border-teal-500/30",
-        shadow: "shadow-teal-500/20",
-        gradient: "bg-gradient-to-br from-teal-600 to-teal-700",
-      },
-    };
-
-    return colorMap[color][type];
-  };
-
-  // Handle intersection observer for scroll animations
+  // Animate on page load
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-            entry.target.classList.add("animate-in");
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+    setAnimatePage(true);
 
-    // Observe all sections
-    document.querySelectorAll("section").forEach((section) => {
-      observer.observe(section);
-    });
+    // Add animation classes on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll(".animate-on-scroll");
+      elements.forEach((element) => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementBottom = element.getBoundingClientRect().bottom;
+        const isVisible =
+          elementTop < window.innerHeight - 100 && elementBottom > 0;
 
-    return () => {
-      document.querySelectorAll("section").forEach((section) => {
-        observer.unobserve(section);
+        if (isVisible) {
+          element.classList.add("animate-fade-in");
+        }
       });
     };
+
+    window.addEventListener("scroll", animateOnScroll);
+    // Initial check
+    animateOnScroll();
+
+    return () => window.removeEventListener("scroll", animateOnScroll);
   }, []);
 
-  // Toggle expanded card
-  const toggleExpandedCard = (id) => {
-    setExpandedCard(expandedCard === id ? null : id);
+  // Handle form submission
+  const handleSubmit = () => {
+    console.log("Form submitted:", { name, email, service });
+    // In a real implementation, this would send the data to a server
+
+    // Reset form
+    setName("");
+    setEmail("");
+    setService("");
+
+    // Show success message or redirect
+    alert("Thank you for your interest! We'll contact you shortly.");
+  };
+
+  // Get color classes for services
+  const getColorClasses = (serviceId) => {
+    const colors = {
+      "talent-acquisition": {
+        bg: "bg-blue-600",
+        bgLight: "bg-blue-500/10",
+        bgMedium: "bg-blue-600/30",
+        bgDark: "bg-blue-900/20",
+        border: "border-blue-500/20",
+        text: "text-blue-400",
+        hover: "hover:bg-blue-500",
+        shadow: "shadow-blue-500/10",
+        gradient: "from-blue-600 to-blue-800",
+      },
+      "sales-leadership": {
+        bg: "bg-purple-600",
+        bgLight: "bg-purple-500/10",
+        bgMedium: "bg-purple-600/30",
+        bgDark: "bg-purple-900/20",
+        border: "border-purple-500/20",
+        text: "text-purple-400",
+        hover: "hover:bg-purple-500",
+        shadow: "shadow-purple-500/10",
+        gradient: "from-purple-600 to-purple-800",
+      },
+      "lead-conversion": {
+        bg: "bg-teal-600",
+        bgLight: "bg-teal-500/10",
+        bgMedium: "bg-teal-600/30",
+        bgDark: "bg-teal-900/20",
+        border: "border-teal-500/20",
+        text: "text-teal-400",
+        hover: "hover:bg-teal-500",
+        shadow: "shadow-teal-500/10",
+        gradient: "from-teal-600 to-teal-800",
+      },
+    };
+
+    return colors[serviceId] || colors["talent-acquisition"];
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 font-sans antialiased text-gray-200 overflow-x-hidden">
-      {/* Background elements */}
-      <div className="fixed inset-0 z-0">
+    <div className="bg-gray-900 font-sans antialiased text-gray-200">
+      {/* Fixed background elements */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-purple-500 opacity-10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-        <div className="absolute top-1/4 left-1/4 w-1/4 h-1/4 bg-teal-500 opacity-5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 left-1/4 w-1/4 h-1/4 bg-teal-500 opacity-5 rounded-full blur-3xl"></div>
 
-        {/* Subtle grid overlay */}
+        {/* Grid overlay */}
         <div className="absolute inset-0 opacity-[0.03]">
-          <div className="h-full w-full grid grid-cols-12 grid-rows-12">
-            {[...Array(144)].map((_, i) => (
-              <div key={i} className="border-r border-b border-gray-300"></div>
+          <div className="h-full w-full grid grid-cols-10 grid-rows-10">
+            {[...Array(100)].map((_, i) => (
+              <div key={i} className="border-r border-b border-gray-400"></div>
             ))}
           </div>
         </div>
       </div>
 
       {/* Hero Section */}
-      <section id="hero" className="relative pt-32 pb-24 overflow-hidden">
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Our Services
+      <section className="relative min-h-[70vh] flex items-center pt-24 pb-16">
+        <div className="max-w-screen-xl mx-auto px-6 relative z-10 w-full">
+          <div className="flex flex-col items-center text-center">
+            <div
+              className={`inline-block px-4 py-1.5 rounded-full bg-blue-900/30 text-blue-300 text-sm font-medium mb-8 backdrop-blur-sm border border-blue-800/30 transition-all duration-500 ${
+                animatePage
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: "200ms" }}
+            >
+              Our Expertise
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Specialized Solutions for
-              <span className="text-blue-400"> Business Growth</span>
+
+            <h1
+              className={`text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight transition-all duration-700 ${
+                animatePage
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "400ms" }}
+            >
+              Specialized solutions for <br />
+              <span className="text-blue-400">exceptional growth</span>
             </h1>
-            <p className="text-xl text-gray-300">
-              We help businesses build high-performing teams and convert more
-              leads into revenue with our integrated talent and sales solutions.
+
+            <p
+              className={`text-xl text-gray-300 max-w-2xl mb-12 transition-all duration-700 ${
+                animatePage
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "600ms" }}
+            >
+              We deliver integrated business growth strategies combining talent
+              acquisition, sales leadership, and conversion optimization.
             </p>
+
+            <div
+              className={`transition-all duration-700 ${
+                animatePage
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "800ms" }}
+            >
+              <button
+                onClick={() => {
+                  const servicesSection = document.getElementById("services");
+                  servicesSection.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-lg hover:shadow-xl font-medium transition-all duration-300 inline-flex items-center hover:translate-y-[-2px] group"
+              >
+                <span>Explore Our Services</span>
+                <ArrowRight
+                  className="ml-2 group-hover:ml-3 transition-all duration-300"
+                  size={16}
+                />
+              </button>
+            </div>
           </div>
 
-          {/* Featured Services */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className={`bg-gray-800/40 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 hover:${getColorClass(
-                  service.color,
-                  "border"
-                )} transition-all duration-500 group transform hover:-translate-y-1 ${getColorClass(
-                  service.color,
-                  "shadow"
-                )}`}
-              >
-                <div
-                  className={`h-2 ${getColorClass(service.color, "bg")}`}
-                ></div>
-                <div className="p-8">
-                  <div className="flex items-center mb-5">
-                    <div
-                      className={`w-14 h-14 rounded-xl ${getColorClass(
-                        service.color,
-                        "bgLight"
-                      )} flex items-center justify-center text-3xl mr-4`}
-                    >
-                      {service.emoji}
-                    </div>
-                    <h3 className="text-xl font-bold text-white">
-                      {service.title}
-                    </h3>
-                  </div>
+          {/* Abstract visual element */}
+          <div
+            className={`mt-16 relative max-w-3xl mx-auto transition-all duration-1000 ${
+              animatePage
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-12"
+            }`}
+            style={{ transitionDelay: "1000ms" }}
+          >
+            <div className="relative h-24 md:h-32">
+              <div className="absolute top-0 left-1/4 w-48 h-48 md:w-64 md:h-64 bg-blue-600/10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute top-0 right-1/4 w-48 h-48 md:w-64 md:h-64 bg-purple-600/10 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute bottom-0 left-1/2 w-48 h-48 md:w-64 md:h-64 bg-teal-600/10 rounded-full blur-2xl -translate-x-1/2 translate-y-1/2"></div>
 
-                  <p className="text-gray-300 mb-6">{service.description}</p>
-
-                  <div className="space-y-3 mb-6">
-                    {service.keyPoints.map((point, idx) => (
-                      <div key={idx} className="flex items-start">
-                        <span
-                          className={`text-sm ${getColorClass(
-                            service.color,
-                            "text"
-                          )} mr-2`}
-                        >
-                          ✓
-                        </span>
-                        <p className="text-gray-300 text-sm">{point}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div
-                    className={`p-4 rounded-lg ${getColorClass(
-                      service.color,
-                      "bgLight"
-                    )} ${getColorClass(service.color, "textLight")}`}
-                  >
-                    <p className="text-sm font-medium">{service.results}</p>
-                  </div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 rounded-full bg-blue-600/20 backdrop-blur-md border border-blue-500/30 flex items-center justify-center">
+                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-600 flex items-center justify-center text-white">
+                  <ArrowRight size={16} />
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Our Methodology Section */}
-      <section id="methodology" className="relative py-24 bg-gray-950/50">
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Our Approach
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Growth Methodology
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our structured approach ensures consistent results and exceptional
-              service delivery.
-            </p>
-          </div>
-
-          <div className="relative">
-            {/* Connecting line */}
-            <div className="absolute top-0 bottom-0 left-16 md:left-1/2 w-1 bg-blue-600/20 hidden sm:block"></div>
-
-            <div className="space-y-16 sm:space-y-0">
-              {methodology.map((step, index) => (
-                <div
-                  key={index}
-                  className="relative sm:grid sm:grid-cols-2 gap-8 items-center mb-16"
-                >
-                  {/* Step number + visual */}
-                  <div
-                    className={`${
-                      index % 2 === 1 ? "sm:order-2" : ""
-                    } relative z-10 sm:pl-0`}
-                  >
-                    <div
-                      className={`flex items-start gap-6 ${
-                        index % 2 === 1 ? "sm:justify-end" : ""
-                      }`}
-                    >
-                      <div className="flex flex-col items-center sm:order-1">
-                        <div className="w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-2xl relative z-10">
-                          {index + 1}
-                        </div>
-                        <div className="w-1 h-16 bg-blue-500/20 sm:hidden"></div>
-                      </div>
-
-                      <div
-                        className={`${
-                          index % 2 === 1 ? "sm:text-right" : ""
-                        } sm:order-2`}
-                      >
-                        <div className="w-16 h-16 rounded-xl bg-blue-600/10 flex items-center justify-center text-3xl mb-4">
-                          {step.icon}
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">
-                          {step.title}
-                        </h3>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <div className={`${index % 2 === 1 ? "sm:order-1" : ""}`}>
-                    <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
-                      <p className="text-gray-300">{step.description}</p>
-                    </div>
-                  </div>
+              <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-purple-600/20 backdrop-blur-md border border-purple-500/30 flex items-center justify-center">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-purple-600 flex items-center justify-center text-white">
+                  <UserPlus size={12} />
                 </div>
-              ))}
+              </div>
+
+              <div className="absolute top-1/2 right-1/3 transform translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-teal-600/20 backdrop-blur-md border border-teal-500/30 flex items-center justify-center">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-teal-600 flex items-center justify-center text-white">
+                  <Target size={12} />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Success Stories */}
-      <section id="success-stories" className="relative py-24">
+      {/* Services Section - COMPLETELY REDESIGNED */}
+      <section id="services" className="py-24 relative">
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Client Success
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Transformational Results
+          <div className="flex flex-col items-center text-center mb-20">
+            <span className="inline-block px-3 py-1 rounded-full bg-blue-900/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800/30">
+              Core Services
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Comprehensive Business Solutions
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              See how our services have helped businesses achieve remarkable
-              growth.
+            <p className="text-xl text-gray-300 max-w-2xl">
+              Our specialized services work independently or as an integrated
+              system to accelerate your business growth.
             </p>
           </div>
 
-          <div className="space-y-12">
-            {successStories.map((story, index) => {
-              const service = services.find((s) => s.id === story.service);
-              const isExpanded = expandedCard === index;
+          {/* Services Container - NEW PREMIUM DESIGN */}
+          <div className="relative space-y-32">
+            {services.map((service, index) => {
+              const colorClasses = getColorClasses(service.id);
 
               return (
                 <div
-                  key={index}
-                  className={`bg-gray-800/30 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/50 transition-all duration-500 ${
-                    isExpanded
-                      ? `${getColorClass(
-                          service.color,
-                          "border"
-                        )} shadow-lg ${getColorClass(service.color, "shadow")}`
-                      : ""
-                  }`}
+                  key={service.id}
+                  className={`relative animate-on-scroll opacity-0`}
                 >
-                  <div
-                    className={`py-6 px-8 cursor-pointer flex justify-between items-center ${
-                      isExpanded
-                        ? getColorClass(service.color, "gradient")
-                        : "bg-gray-800/50"
-                    }`}
-                    onClick={() => toggleExpandedCard(index)}
-                  >
-                    <div>
-                      <div className="flex items-center">
-                        <span className="text-2xl mr-3">{service.emoji}</span>
-                        <h3 className="text-xl font-bold text-white">
-                          {story.client}
-                        </h3>
-                      </div>
-                      <p
-                        className={`text-sm ${
-                          isExpanded ? "text-white/80" : "text-gray-400"
-                        }`}
-                      >
-                        {service.title}
-                      </p>
-                    </div>
-                    <div className="text-white">{isExpanded ? "−" : "+"}</div>
-                  </div>
+                  {/* Service Card */}
+                  <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center relative">
+                    {/* Service Visual Side */}
+                    <div
+                      className={`order-2 ${
+                        index % 2 === 0 ? "md:order-1" : "md:order-2"
+                      }`}
+                    >
+                      <div className="relative">
+                        {/* Main service visual */}
+                        <div
+                          className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${colorClasses.gradient}`}
+                        >
+                          <div className="aspect-[4/3] p-8 flex flex-col justify-center items-center text-center">
+                            <div className="absolute inset-0 opacity-20">
+                              {/* Abstract pattern */}
+                              <div className="absolute inset-0 grid grid-cols-6 grid-rows-4">
+                                {[...Array(24)].map((_, i) => (
+                                  <div
+                                    key={i}
+                                    className="border border-white/10"
+                                  ></div>
+                                ))}
+                              </div>
 
-                  <div
-                    className={`overflow-hidden transition-all duration-500 ${
-                      isExpanded ? "max-h-[600px]" : "max-h-0"
-                    }`}
-                  >
-                    <div className="p-8 border-t border-gray-700/30">
-                      <div className="grid md:grid-cols-2 gap-8">
-                        <div>
-                          <div className="mb-6">
-                            <h4 className="text-gray-400 text-sm uppercase tracking-wider mb-2">
-                              Challenge
-                            </h4>
-                            <p className="text-gray-200">{story.challenge}</p>
-                          </div>
-
-                          <div className="mb-6">
-                            <h4 className="text-gray-400 text-sm uppercase tracking-wider mb-2">
-                              Solution
-                            </h4>
-                            <p className="text-gray-200">{story.solution}</p>
-                          </div>
-                        </div>
-
-                        <div>
-                          <div
-                            className={`bg-gray-900/50 rounded-xl p-6 border ${getColorClass(
-                              service.color,
-                              "border"
-                            )}`}
-                          >
-                            <h4 className="text-white font-semibold mb-4 flex items-center">
-                              <span className="text-xl mr-2">📈</span> Results
-                            </h4>
-
-                            <div className="space-y-3">
-                              {story.results.map((result, idx) => (
-                                <div key={idx} className="flex items-start">
-                                  <span
-                                    className={`text-sm ${getColorClass(
-                                      service.color,
-                                      "text"
-                                    )} mr-2`}
-                                  >
-                                    ✓
-                                  </span>
-                                  <p className="text-gray-300">{result}</p>
-                                </div>
-                              ))}
+                              {/* Decorative elements */}
+                              <div className="absolute top-1/4 right-1/4 w-32 h-32 bg-white/5 rounded-full blur-md"></div>
+                              <div className="absolute bottom-1/3 left-1/3 w-48 h-48 bg-white/5 rounded-full blur-md"></div>
                             </div>
 
-                            <div className="mt-6 pt-6 border-t border-gray-700/50">
-                              <div className="flex items-start">
-                                <span className="text-3xl mr-3">💬</span>
-                                <div>
-                                  <p className="italic text-gray-300 mb-2">
-                                    "{story.quote}"
-                                  </p>
-                                  <p className="text-sm text-white">
-                                    {story.author}
-                                  </p>
-                                </div>
+                            {/* Icon and content */}
+                            <div className="relative z-10">
+                              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                                <service.icon
+                                  size={36}
+                                  className="text-white"
+                                />
+                              </div>
+
+                              <h3 className="text-3xl font-bold text-white mb-3">
+                                {service.title}
+                              </h3>
+                              <p className="text-white/80 text-lg max-w-xs mx-auto">
+                                {service.subtitle}
+                              </p>
+
+                              {/* Metrics display */}
+                              <div className="mt-10 grid grid-cols-3 gap-2">
+                                {service.metrics.map((metric, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="text-center p-3 bg-white/10 backdrop-blur-sm rounded-xl"
+                                  >
+                                    <div className="text-2xl font-bold text-white">
+                                      {metric.value}
+                                    </div>
+                                    <div className="text-xs text-white/70">
+                                      {metric.label}
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
                             </div>
                           </div>
                         </div>
+
+                        {/* Floating elements */}
+                        <div
+                          className={`absolute -top-5 -right-5 w-16 h-16 ${colorClasses.bgLight} backdrop-blur-md rounded-xl border ${colorClasses.border} rotate-12`}
+                        ></div>
+                        <div
+                          className={`absolute -bottom-5 -left-5 w-16 h-16 ${colorClasses.bgLight} backdrop-blur-md rounded-full border ${colorClasses.border}`}
+                        ></div>
                       </div>
                     </div>
+
+                    {/* Service Content Side */}
+                    <div
+                      className={`order-1 ${
+                        index % 2 === 0 ? "md:order-2" : "md:order-1"
+                      }`}
+                    >
+                      <div
+                        className={`inline-block px-3 py-1 rounded-full ${colorClasses.bgLight} ${colorClasses.text} text-sm font-medium mb-6 backdrop-blur-sm ${colorClasses.border}`}
+                      >
+                        {service.id === "talent-acquisition"
+                          ? "Talent"
+                          : service.id === "sales-leadership"
+                          ? "Leadership"
+                          : "Conversion"}
+                      </div>
+
+                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        {service.title}
+                      </h3>
+
+                      <p className="text-xl text-gray-300 mb-8">
+                        {service.description}
+                      </p>
+
+                      {/* Key points */}
+                      <div className="space-y-4 mb-10">
+                        {service.keyPoints.map((point, idx) => (
+                          <div key={idx} className="flex items-start">
+                            <div
+                              className={`w-6 h-6 rounded-full ${colorClasses.bgMedium} flex items-center justify-center mt-0.5 mr-3 flex-shrink-0`}
+                            >
+                              <Check size={14} className="text-white" />
+                            </div>
+                            <p className="text-gray-300">{point}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* CTA Button */}
+                      <button
+                        onClick={() => {
+                          const contactSection =
+                            document.getElementById("contact");
+                          contactSection.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className={`inline-flex items-center px-6 py-3 ${colorClasses.bg} ${colorClasses.hover} text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:translate-y-[-2px] group`}
+                      >
+                        <span>Get Started</span>
+                        <ChevronRight
+                          className="ml-1 group-hover:ml-2 transition-all duration-300"
+                          size={18}
+                        />
+                      </button>
+                    </div>
                   </div>
+
+                  {/* Connector Line (except for last item) */}
+                  {index < services.length - 1 && (
+                    <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-4rem] h-8 w-px bg-gradient-to-b from-blue-500/50 to-transparent"></div>
+                  )}
                 </div>
               );
             })}
@@ -565,217 +511,467 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Transformation Showcase */}
-      <section id="transformations" className="relative py-24 bg-gray-950/50">
+      {/* Integration Section */}
+      <section className="py-24 relative bg-gray-950/50">
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Business Evolution
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="animate-on-scroll opacity-0">
+              <span className="inline-block px-3 py-1 rounded-full bg-blue-900/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800/30">
+                Integrated Approach
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                How Our Services Work Together
+              </h2>
+              <p className="text-xl text-gray-300 mb-8">
+                Our unique value comes from the integration of talent,
+                leadership, and conversion strategies into a cohesive growth
+                system.
+              </p>
+
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center mr-4 mt-1">
+                    <span className="text-blue-400 font-bold">1</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      Strategic Talent Foundation
+                    </h3>
+                    <p className="text-gray-300">
+                      We build high-performing teams with the right skills and
+                      cultural alignment to execute your business strategy.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-purple-600/20 flex items-center justify-center mr-4 mt-1">
+                    <span className="text-purple-400 font-bold">2</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      Leadership Development
+                    </h3>
+                    <p className="text-gray-300">
+                      We establish sales leadership capabilities that create a
+                      customer-centric culture and operational excellence.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-teal-600/20 flex items-center justify-center mr-4 mt-1">
+                    <span className="text-teal-400 font-bold">3</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      Conversion Optimization
+                    </h3>
+                    <p className="text-gray-300">
+                      We implement systems that maximize pipeline efficiency and
+                      convert more opportunities into revenue.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            {/* Visual Element */}
+            <div className="animate-on-scroll opacity-0">
+              <div className="relative">
+                {/* Central hub */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-36 bg-blue-900/20 backdrop-blur-md rounded-full border border-blue-500/20 flex items-center justify-center z-20">
+                  <div className="text-center">
+                    <p className="text-xs text-blue-300 uppercase tracking-wider">
+                      Integrated
+                    </p>
+                    <p className="text-white font-bold">Growth</p>
+                    <p className="text-white font-bold">System</p>
+                  </div>
+                </div>
+
+                {/* Connection lines */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-full h-full max-w-md max-h-md relative">
+                    {/* Three outer circles */}
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/4 w-28 h-28 bg-blue-600/10 backdrop-blur-md rounded-full border border-blue-500/20 flex items-center justify-center z-10">
+                      <div className="text-center">
+                        <UserPlus
+                          size={20}
+                          className="text-blue-400 mx-auto mb-1"
+                        />
+                        <p className="text-xs text-white">Talent</p>
+                      </div>
+
+                      {/* Connection line */}
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-16 bg-gradient-to-b from-blue-500/50 to-transparent"></div>
+                    </div>
+
+                    <div className="absolute bottom-0 left-0 transform -translate-x-1/4 translate-y-1/4 w-28 h-28 bg-purple-600/10 backdrop-blur-md rounded-full border border-purple-500/20 flex items-center justify-center z-10">
+                      <div className="text-center">
+                        <HeartHandshake
+                          size={20}
+                          className="text-purple-400 mx-auto mb-1"
+                        />
+                        <p className="text-xs text-white">Leadership</p>
+                      </div>
+
+                      {/* Connection line */}
+                      <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 rotate-45 w-0.5 h-16 bg-gradient-to-t from-purple-500/50 to-transparent"></div>
+                    </div>
+
+                    <div className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4 w-28 h-28 bg-teal-600/10 backdrop-blur-md rounded-full border border-teal-500/20 flex items-center justify-center z-10">
+                      <div className="text-center">
+                        <Target
+                          size={20}
+                          className="text-teal-400 mx-auto mb-1"
+                        />
+                        <p className="text-xs text-white">Conversion</p>
+                      </div>
+
+                      {/* Connection line */}
+                      <div className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 -rotate-45 w-0.5 h-16 bg-gradient-to-t from-teal-500/50 to-transparent"></div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Outer ring */}
+                <div className="relative mx-auto w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
+                  <div className="absolute inset-0 rounded-full border border-gray-500/20 animate-[spin_60s_linear_infinite]"></div>
+                  <div className="absolute inset-2 rounded-full border border-gray-500/10 animate-[spin_40s_linear_infinite_reverse]"></div>
+                  <div className="absolute inset-4 rounded-full border border-gray-500/5"></div>
+
+                  {/* Decorative elements */}
+                  {[...Array(8)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute w-2 h-2 bg-blue-500/50 rounded-full"
+                      style={{
+                        top: `${50 + 45 * Math.sin((i * Math.PI) / 4)}%`,
+                        left: `${50 + 45 * Math.cos((i * Math.PI) / 4)}%`,
+                      }}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-24 relative">
+        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col items-center text-center mb-20 animate-on-scroll opacity-0">
+            <span className="inline-block px-3 py-1 rounded-full bg-blue-900/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800/30">
+              Our Approach
+            </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              From... To... Transformations
+              A Systematic Process for Results
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              See how our clients evolve with our strategic partnership.
+            <p className="text-xl text-gray-300 max-w-2xl">
+              Our methodology is designed to deliver consistent, measurable
+              outcomes through a structured approach.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {transformations.map((item, index) => (
+          <div className="relative animate-on-scroll opacity-0">
+            {/* Process timeline line - visible on medium+ screens */}
+            <div className="hidden md:block absolute left-0 right-0 top-[85px] h-0.5 bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"></div>
+
+            {/* Steps */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+              {processSteps.map((step, index) => (
+                <div key={index} className="relative">
+                  {/* Step number and icon - desktop */}
+                  <div className="hidden md:flex flex-col items-center mb-8">
+                    <div className="w-16 h-16 rounded-full bg-blue-900/30 backdrop-blur-md border border-blue-500/30 flex items-center justify-center text-white text-xl font-bold mb-4 z-10">
+                      {step.number}
+                    </div>
+                    <div className="w-12 h-12 rounded-xl bg-blue-600/20 flex items-center justify-center">
+                      <step.icon size={24} className="text-blue-400" />
+                    </div>
+                  </div>
+
+                  {/* Step content */}
+                  <div className="bg-gray-800/30 backdrop-blur-md rounded-xl border border-gray-700/30 p-6 hover:border-blue-500/20 transition-all duration-300 h-full">
+                    {/* Step number and icon - mobile */}
+                    <div className="flex md:hidden items-center mb-4">
+                      <div className="w-12 h-12 rounded-full bg-blue-900/30 backdrop-blur-md border border-blue-500/30 flex items-center justify-center text-white font-bold text-lg mr-4">
+                        {step.number}
+                      </div>
+                      <div className="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center">
+                        <step.icon size={20} className="text-blue-400" />
+                      </div>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-white mb-3">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-300">{step.description}</p>
+                  </div>
+
+                  {/* Mobile connector */}
+                  {index < processSteps.length - 1 && (
+                    <div className="md:hidden flex justify-center my-4">
+                      <div className="h-8 w-px bg-gradient-to-b from-blue-500/50 to-transparent"></div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Results Section */}
+      <section className="py-24 relative bg-gray-950/50">
+        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col items-center text-center mb-20 animate-on-scroll opacity-0">
+            <span className="inline-block px-3 py-1 rounded-full bg-blue-900/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800/30">
+              Client Success
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Real Results for Real Businesses
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl">
+              See how our services have transformed organizations across
+              industries.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 animate-on-scroll opacity-0">
+            {results.map((result, index) => (
               <div
                 key={index}
-                className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 transition-all duration-300 hover:border-blue-500/30 group"
+                className="bg-gray-800/30 backdrop-blur-md rounded-2xl border border-gray-700/30 overflow-hidden group hover:border-blue-500/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/5 hover:-translate-y-1"
               >
-                <div className="w-14 h-14 rounded-xl bg-gray-900/50 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                  {item.icon}
-                </div>
+                <div className="h-1 w-full bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600"></div>
 
-                <div className="space-y-3">
-                  <div className="flex items-center text-gray-400">
-                    <span className="mr-2">From:</span>
-                    <span className="text-gray-300 line-through decoration-red-500/50">
-                      {item.from}
-                    </span>
+                <div className="p-8">
+                  <div className="bg-blue-900/20 backdrop-blur-md rounded-lg inline-block px-3 py-1 text-sm text-blue-300 mb-6">
+                    {result.company}
                   </div>
 
-                  <div className="flex items-center text-blue-300">
-                    <span className="mr-2">To:</span>
-                    <span className="text-white font-semibold">{item.to}</span>
+                  <div className="text-4xl font-bold text-white mb-4">
+                    {result.highlight}
                   </div>
+
+                  <p className="text-gray-300">{result.description}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+      {/* Call to Action Section */}
+      <section className="py-16 relative">
+        <div className="absolute inset-0 bg-blue-900 bg-opacity-90 z-0"></div>
 
-      {/* Industries We Serve */}
-      <section id="industries" className="relative py-24">
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Industries
+        {/* Background pattern */}
+        <div className="absolute inset-0 bg-opacity-10 z-0">
+          <div className="absolute inset-0 overflow-hidden opacity-10">
+            <div className="h-full w-full grid grid-cols-10 grid-rows-6">
+              {[...Array(60)].map((_, i) => (
+                <div key={i} className="border-r border-b border-white"></div>
+              ))}
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Sectors We Serve
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our expertise spans across multiple industries, with specialized
-              approaches for each sector.
-            </p>
           </div>
+        </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {industries.map((industry, index) => (
-              <div key={index} className="group">
-                <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 h-full flex flex-col items-center justify-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-blue-900/30 backdrop-blur-sm flex items-center justify-center mb-4 border border-blue-800/30 group-hover:border-blue-500/50 transition-all duration-300">
-                    <span className="text-3xl text-blue-300 group-hover:text-blue-400 transition-all duration-300">
-                      {industry.icon}
-                    </span>
-                  </div>
-                  <h3 className="font-medium text-white group-hover:text-blue-300 transition-colors duration-300 mb-2">
-                    {industry.name}
-                  </h3>
-                  <p className="text-gray-400 text-sm">
-                    {industry.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30 z-0"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30 z-0"></div>
+
+        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+              Ready to Transform Your Business?
+            </h2>
+            <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
+              We specialize in helping businesses attract, hire, and retain
+              exceptional talent. And with our sales expertise, we also help you
+              turn leads into lasting customers.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/contact"
+                className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center hover:translate-y-[-2px] relative group overflow-hidden"
+              >
+                <span className="relative z-10">
+                  Let's Build Growth Together
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
+              </a>
+              <a
+                href="/services"
+                className="px-8 py-4 bg-blue-600 bg-opacity-40 hover:bg-opacity-50 text-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center backdrop-blur-sm border border-blue-400 border-opacity-30 hover:border-opacity-50 hover:translate-y-[-2px] relative group overflow-hidden"
+              >
+                <span className="relative z-10">Explore Our Services</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Forward Biz */}
-      <section id="why-us" className="relative py-24 bg-gray-950/50">
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Why Choose Us
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              The Forward Biz Difference
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              What sets our services apart from traditional consultancies.
-            </p>
-          </div>
+      {/* CTA/Contact Section */}
+      {/* <section id="contact" className="py-24 relative">
+        <div className="absolute inset-0 bg-blue-900/90 z-0"></div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50">
-              <div className="h-2 bg-blue-600"></div>
-              <div className="p-8">
+        <div className="absolute inset-0 bg-opacity-10 z-0">
+          <div className="absolute inset-0 overflow-hidden opacity-10">
+            <div className="h-full w-full grid grid-cols-10 grid-rows-6">
+              {[...Array(60)].map((_, i) => (
+                <div key={i} className="border-r border-b border-white"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30"></div>
+
+        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="animate-on-scroll opacity-0">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                Ready to transform your business?
+              </h2>
+              <p className="text-xl text-blue-100 mb-8">
+                Let's discuss how our services can help you build stronger
+                teams, develop effective leadership, and drive conversion
+                growth.
+              </p>
+
+              <div className="space-y-6 mb-8">
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white mr-4 mt-1">
+                    <Phone size={18} />
+                  </div>
+                  <div>
+                    <div className="text-white font-medium mb-1">Call Us</div>
+                    <p className="text-blue-100">+91 (123) 456-7890</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white mr-4 mt-1">
+                    <Mail size={18} />
+                  </div>
+                  <div>
+                    <div className="text-white font-medium mb-1">Email Us</div>
+                    <p className="text-blue-100">info@forwardbiz.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white mr-4 mt-1">
+                    <Building size={18} />
+                  </div>
+                  <div>
+                    <div className="text-white font-medium mb-1">Visit Us</div>
+                    <p className="text-blue-100">
+                      123 Business Avenue
+                      <br />
+                      New Delhi, 110001
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="animate-on-scroll opacity-0">
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
                 <h3 className="text-2xl font-bold text-white mb-6">
-                  Our Commitment
+                  Get in Touch
                 </h3>
-                <div className="space-y-5">
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center text-xl mr-4 mt-1">
-                      🎯
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-1">
-                        Results Focused
-                      </h4>
-                      <p className="text-gray-300">
-                        We measure our success through the tangible business
-                        outcomes we help you achieve.
-                      </p>
-                    </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-blue-100 mb-2 font-medium">
+                      Your Name
+                    </label>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 text-white placeholder-blue-200/50"
+                      placeholder="Enter your name"
+                    />
                   </div>
 
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center text-xl mr-4 mt-1">
-                      🔄
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-1">
-                        Integrated Approach
-                      </h4>
-                      <p className="text-gray-300">
-                        We connect talent, sales, and customer experience
-                        instead of treating them as separate functions.
-                      </p>
-                    </div>
+                  <div>
+                    <label className="block text-blue-100 mb-2 font-medium">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 text-white placeholder-blue-200/50"
+                      placeholder="Enter your email"
+                    />
                   </div>
 
-                  <div className="flex items-start">
-                    <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center text-xl mr-4 mt-1">
-                      📊
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-1">
-                        Data-Driven
-                      </h4>
-                      <p className="text-gray-300">
-                        All our recommendations and strategies are backed by
-                        robust data and analytics.
-                      </p>
-                    </div>
+                  <div>
+                    <label className="block text-blue-100 mb-2 font-medium">
+                      How can we help?
+                    </label>
+                    <select
+                      value={service}
+                      onChange={(e) => setService(e.target.value)}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 text-white"
+                    >
+                      <option value="" className="bg-gray-800">
+                        Select a service
+                      </option>
+                      <option
+                        value="talent-acquisition"
+                        className="bg-gray-800"
+                      >
+                        Talent Acquisition
+                      </option>
+                      <option value="sales-leadership" className="bg-gray-800">
+                        Sales Leadership
+                      </option>
+                      <option value="lead-conversion" className="bg-gray-800">
+                        Lead Conversion
+                      </option>
+                    </select>
                   </div>
+
+                  <button
+                    onClick={handleSubmit}
+                    className="w-full py-3 px-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg font-medium transition-all duration-300 flex items-center justify-center group"
+                  >
+                    <span>Schedule a Consultation</span>
+                    <ArrowRight
+                      className="ml-2 group-hover:ml-3 transition-all duration-300"
+                      size={16}
+                    />
+                  </button>
                 </div>
               </div>
             </div>
-
-            <div>
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 mb-8">
-                <div className="h-2 bg-blue-600"></div>
-                <div className="p-8">
-                  <div className="flex items-center mb-4">
-                    <span className="text-3xl mr-3">💡</span>
-                    <h3 className="text-xl font-bold text-white">
-                      Beyond Consulting
-                    </h3>
-                  </div>
-                  <p className="text-gray-300">
-                    Unlike traditional consultants who deliver strategies and
-                    leave, we partner with you throughout implementation,
-                    ensuring real change happens.
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50">
-                <div className="h-2 bg-blue-600"></div>
-                <div className="p-8">
-                  <div className="flex items-center mb-4">
-                    <span className="text-3xl mr-3">🚀</span>
-                    <h3 className="text-xl font-bold text-white">
-                      Speed to Value
-                    </h3>
-                  </div>
-                  <p className="text-gray-300">
-                    Our proven frameworks and methodologies allow us to deliver
-                    measurable results within weeks, not months or years.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <a
-              href="#"
-              className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              <span>Start Your Growth Journey</span>
-              <span className="ml-2">→</span>
-            </a>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <style jsx>{`
-        section {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
-        section.animate-in {
-          opacity: 1;
-          transform: translateY(0);
+        .animate-fade-in {
+          animation: fadeIn 0.8s ease-out forwards;
         }
       `}</style>
     </div>
