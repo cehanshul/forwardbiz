@@ -939,7 +939,7 @@ export default function ForwardBizHomepage() {
                     <address className="not-italic text-gray-300">
                       123 Business Avenue
                       <br />
-                      New Delhi, 110001
+                      Chennai, 171001
                       <br />
                       India
                     </address>

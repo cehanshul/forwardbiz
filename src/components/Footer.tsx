@@ -156,7 +156,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4 text-white">Contact</h3>
             <ul className="space-y-2 text-gray-400">
               <li>123 Business Avenue</li>
-              <li>New Delhi, 110001</li>
+              <li>Chennai, 171001</li>
               <li className="pt-2">
                 <a
                   href="mailto:info@forwardbiz.com"

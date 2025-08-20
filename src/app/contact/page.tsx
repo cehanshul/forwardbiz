@@ -28,13 +28,13 @@ export default function ContactPage() {
 
   // Office location data
   const office = {
-    name: "New Delhi HQ",
-    address: "123 Business Avenue, New Delhi, 110001",
+    name: "Chennai HQ",
+    address: "123 Business Avenue, Chennai, 110001",
     phone: "+91 (123) 456-7890",
     email: "info@forwardbiz.com",
     hours: "Mon-Fri: 9:00 AM - 6:00 PM",
     mapUrl:
-      "https://maps.google.com/maps?q=new+delhi&t=&z=13&ie=UTF8&iwloc=&output=embed",
+      "https://maps.google.com/maps?q=new+chennai&t=&z=13&ie=UTF8&iwloc=&output=embed",
   };
 
   // Animate on page load
