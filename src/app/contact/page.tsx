@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ArrowRight,
   Mail,
@@ -13,6 +13,7 @@ import {
   Instagram,
   ChevronRight,
   MessageSquare,
+  Building,
 } from "lucide-react";
 
 export default function ContactPage() {
@@ -20,23 +21,41 @@ export default function ContactPage() {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
-    subject: "",
+    company: "",
+    inquiryType: "Hiring",
     message: "",
   });
   const [formErrors, setFormErrors] = useState({});
   const [formStatus, setFormStatus] = useState(null); // null, "submitting", "success", "error"
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   // Office location data
   const office = {
-    name: "Chennai HQ",
-    address: "123 Business Avenue, Chennai, 110001",
-    phone: "+91 (123) 456-7890",
-    email: "info@forwardbiz.com",
+    location: "Velachery, Chennai",
+    phone: "+91 63692 07955",
+    email: "raji@forwardbiz.in",
+    linkedin: "https://www.linkedin.com/in/rajeswari-saravanamurthy-29618816/",
     hours: "Mon-Fri: 9:00 AM - 6:00 PM",
     mapUrl:
-      "https://maps.google.com/maps?q=new+chennai&t=&z=13&ie=UTF8&iwloc=&output=embed",
+      "https://maps.google.com/maps?q=velachery+chennai&t=&z=13&ie=UTF8&iwloc=&output=embed",
   };
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropdownOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setDropdownOpen(false);
+      }
+    }
 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen]);
   // Animate on page load
   useEffect(() => {
     setAnimateContent(true);
@@ -92,6 +111,8 @@ export default function ContactPage() {
       errors.email = "Email is invalid";
     }
 
+    if (!formState.company.trim()) errors.company = "Company is required";
+
     if (!formState.message.trim()) errors.message = "Message is required";
 
     setFormErrors(errors);
@@ -116,7 +137,8 @@ export default function ContactPage() {
         setFormState({
           name: "",
           email: "",
-          subject: "",
+          company: "",
+          inquiryType: "Hiring",
           message: "",
         });
         setFormStatus(null);
@@ -190,18 +212,19 @@ export default function ContactPage() {
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              Get in Touch
+              Contact Us
             </div>
 
             <h1
-              className={`text-4xl md:text-6xl font-bold text-white mb-6 transition-all duration-700 ${
+              className={`text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight transition-all duration-700 ${
                 animateContent
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: "400ms" }}
             >
-              Let's <span className="text-blue-400">Connect</span>
+              Let's Build Your{" "}
+              <span className="text-blue-400">Growth Story</span> Together
             </h1>
 
             <p
@@ -212,8 +235,8 @@ export default function ContactPage() {
               }`}
               style={{ transitionDelay: "600ms" }}
             >
-              Ready to transform your business? We're here to help with your
-              talent acquisition and lead conversion needs.
+              Whether you're looking to hire smarter, build stronger teams, or
+              accelerate conversions, we'd love to hear from you.
             </p>
           </div>
         </div>
@@ -229,7 +252,7 @@ export default function ContactPage() {
               <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg mb-8">
                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
                   <MapPin size={24} className="mr-3 text-blue-400" />
-                  Our Office
+                  Contact Information
                 </h2>
 
                 <div className="space-y-6">
@@ -239,9 +262,11 @@ export default function ContactPage() {
                       <MapPin size={20} />
                     </div>
                     <div className="ml-4">
-                      <h4 className="font-semibold text-white mb-1">Address</h4>
+                      <h4 className="font-semibold text-white mb-1">
+                        Location
+                      </h4>
                       <address className="not-italic text-gray-300">
-                        {office.address}
+                        {office.location}
                       </address>
                     </div>
                   </div>
@@ -252,7 +277,9 @@ export default function ContactPage() {
                       <Phone size={20} />
                     </div>
                     <div className="ml-4">
-                      <h4 className="font-semibold text-white mb-1">Phone</h4>
+                      <h4 className="font-semibold text-white mb-1">
+                        Phone / WhatsApp
+                      </h4>
                       <a
                         href={`tel:${office.phone}`}
                         className="text-blue-400 hover:text-blue-300"
@@ -277,6 +304,26 @@ export default function ContactPage() {
                       </a>
                     </div>
                   </div>
+
+                  {/* LinkedIn */}
+                  <div className="flex">
+                    <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 flex-shrink-0">
+                      <Linkedin size={20} />
+                    </div>
+                    <div className="ml-4">
+                      <h4 className="font-semibold text-white mb-1">
+                        LinkedIn
+                      </h4>
+                      <a
+                        href={office.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:text-blue-300"
+                      >
+                        ForwardBiz LinkedIn Profile
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -284,7 +331,7 @@ export default function ContactPage() {
               <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 overflow-hidden shadow-lg h-[300px]">
                 <iframe
                   src={office.mapUrl}
-                  title={`Map to ${office.name}`}
+                  title={`Map to ${office.location}`}
                   className="w-full h-full"
                   style={{ border: 0 }}
                   allowFullScreen=""
@@ -300,7 +347,7 @@ export default function ContactPage() {
                 </h3>
                 <div className="flex gap-4">
                   <a
-                    href="https://linkedin.com/company/forwardbiz"
+                    href={office.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-12 h-12 rounded-full bg-gray-800 bg-opacity-60 flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-300 border border-gray-700 border-opacity-50"
@@ -310,23 +357,21 @@ export default function ContactPage() {
                   </a>
 
                   <a
-                    href="https://twitter.com/forwardbiz"
+                    href="https://wa.me/916369207955"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-12 h-12 rounded-full bg-gray-800 bg-opacity-60 flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-300 border border-gray-700 border-opacity-50"
-                    aria-label="Twitter"
+                    className="w-12 h-12 rounded-full bg-gray-800 bg-opacity-60 flex items-center justify-center text-blue-400 hover:bg-green-600 hover:text-white transition-all duration-300 border border-gray-700 border-opacity-50"
+                    aria-label="WhatsApp"
                   >
-                    <Twitter size={20} />
+                    <Phone size={20} />
                   </a>
 
                   <a
-                    href="https://instagram.com/forwardbiz"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`mailto:${office.email}`}
                     className="w-12 h-12 rounded-full bg-gray-800 bg-opacity-60 flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-300 border border-gray-700 border-opacity-50"
-                    aria-label="Instagram"
+                    aria-label="Email"
                   >
-                    <Instagram size={20} />
+                    <Mail size={20} />
                   </a>
                 </div>
               </div>
@@ -337,8 +382,13 @@ export default function ContactPage() {
               <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg">
                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
                   <MessageSquare size={24} className="mr-3 text-blue-400" />
-                  Send Us a Message
+                  Get in Touch
                 </h2>
+
+                <p className="text-gray-300 mb-6">
+                  Fill out the form below and our team will connect with you
+                  shortly.
+                </p>
 
                 {/* Contact Form */}
                 <div className="space-y-5">
@@ -348,7 +398,7 @@ export default function ContactPage() {
                       htmlFor="name"
                       className="block text-sm font-medium text-gray-300 mb-1.5"
                     >
-                      Full Name <span className="text-blue-400">*</span>
+                      Name <span className="text-blue-400">*</span>
                     </label>
                     <div className="relative">
                       <input
@@ -381,7 +431,7 @@ export default function ContactPage() {
                       htmlFor="email"
                       className="block text-sm font-medium text-gray-300 mb-1.5"
                     >
-                      Email Address <span className="text-blue-400">*</span>
+                      Email <span className="text-blue-400">*</span>
                     </label>
                     <div className="relative">
                       <input
@@ -410,23 +460,98 @@ export default function ContactPage() {
                     )}
                   </div>
 
-                  {/* Subject Field */}
+                  {/* Company/Organization Field */}
                   <div>
                     <label
-                      htmlFor="subject"
+                      htmlFor="company"
                       className="block text-sm font-medium text-gray-300 mb-1.5"
                     >
-                      Subject
+                      Company / Organization{" "}
+                      <span className="text-blue-400">*</span>
                     </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formState.subject}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
-                      placeholder="What's this about?"
-                    />
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formState.company}
+                        onChange={handleInputChange}
+                        className={`w-full px-4 py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border ${
+                          formErrors.company
+                            ? "border-red-500"
+                            : "border-gray-600"
+                        } border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400`}
+                        placeholder="Your company name"
+                      />
+                      {formErrors.company && (
+                        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-500">
+                          <AlertCircle size={16} />
+                        </div>
+                      )}
+                    </div>
+                    {formErrors.company && (
+                      <p className="mt-1 text-sm text-red-400">
+                        {formErrors.company}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Inquiry Type Field - Custom Dropdown */}
+                  <div>
+                    <label
+                      htmlFor="inquiryType"
+                      className="block text-sm font-medium text-gray-300 mb-1.5"
+                    >
+                      Inquiry Type
+                    </label>
+
+                    {/* Custom Dropdown */}
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                        className="w-full px-4 py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white flex justify-between items-center"
+                      >
+                        {formState.inquiryType}
+                        <ChevronRight
+                          size={18}
+                          className={`transition-transform duration-300 ${
+                            dropdownOpen ? "rotate-90" : ""
+                          }`}
+                        />
+                      </button>
+
+                      {dropdownOpen && (
+                        <div
+                          ref={dropdownRef}
+                          className="absolute z-10 w-full mt-1 bg-gray-800 rounded-lg border border-gray-700 shadow-lg"
+                        >
+                          {["Hiring", "Sales Support", "General"].map(
+                            (option) => (
+                              <div
+                                key={option}
+                                className={`px-4 py-2.5 cursor-pointer hover:bg-gray-700 ${
+                                  option === formState.inquiryType
+                                    ? "bg-gray-700 text-blue-400"
+                                    : "text-white"
+                                } ${
+                                  option === "General" ? "rounded-b-lg" : ""
+                                } ${option === "Hiring" ? "rounded-t-lg" : ""}`}
+                                onClick={() => {
+                                  setFormState({
+                                    ...formState,
+                                    inquiryType: option,
+                                  });
+                                  setDropdownOpen(false);
+                                }}
+                              >
+                                {option}
+                              </div>
+                            )
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Message Field */}
@@ -470,7 +595,7 @@ export default function ContactPage() {
                     disabled={
                       formStatus === "submitting" || formStatus === "success"
                     }
-                    className={`w-full py-2.5 px-6 rounded-lg font-medium text-white flex items-center justify-center transition-all duration-300 ${
+                    className={`w-full py-3 px-6 rounded-lg font-medium text-white flex items-center justify-center transition-all duration-300 ${
                       formStatus === "success"
                         ? "bg-green-600 hover:bg-green-500"
                         : "bg-blue-600 hover:bg-blue-500"
@@ -479,17 +604,17 @@ export default function ContactPage() {
                     {formStatus === "submitting" ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                        Sending...
+                        Submitting...
                       </>
                     ) : formStatus === "success" ? (
                       <>
                         <Check size={18} className="mr-2" />
-                        Message Sent!
+                        Inquiry Submitted!
                       </>
                     ) : (
                       <>
                         <Send size={18} className="mr-2" />
-                        Send Message
+                        Submit Inquiry
                       </>
                     )}
                   </button>
@@ -518,15 +643,15 @@ export default function ContactPage() {
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="text-center animate-on-scroll opacity-0">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              Let's Grow Your Business Together
+              Ready to scale? Let's connect.
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Ready to take the next step? Our team is prepared to help you
-              achieve your business goals.
+              Take the first step toward growing your business with our expert
+              team.
             </p>
 
             <a
-              href="tel:+911234567890"
+              href={`tel:${office.phone}`}
               className="inline-flex items-center px-8 py-3 bg-white hover:bg-gray-100 text-blue-700 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium hover:translate-y-[-2px] group"
             >
               <Phone size={18} className="mr-2" />

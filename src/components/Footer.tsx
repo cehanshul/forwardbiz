@@ -62,31 +62,15 @@ export default function Footer() {
                   href="/services/talent-acquisition"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
-                  Talent Acquisition
+                  Strategic Talent Acquisition
                 </a>
               </li>
               <li>
                 <a
-                  href="/services/team-building"
+                  href="/services/sales-enablement"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
-                  Team Building
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/services/sales-leadership"
-                  className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
-                >
-                  Sales Leadership
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/services/lead-conversion"
-                  className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
-                >
-                  Lead Conversion
+                  Sales Enablement & Lead Conversion Excellence
                 </a>
               </li>
             </ul>

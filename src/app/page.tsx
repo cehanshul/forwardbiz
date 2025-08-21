@@ -243,7 +243,6 @@ const TestimonialCarousel = () => {
               >
                 <ChevronLeft size={24} />
               </button>
-
               {/* Indicator Dots */}
               <div className="flex space-x-2">
                 {Array.from({ length: testimonials.length }).map((_, idx) => (
@@ -257,7 +256,6 @@ const TestimonialCarousel = () => {
                   />
                 ))}
               </div>
-
               <button
                 onClick={nextSlide}
                 className="w-12 h-12 rounded-full bg-gray-800 bg-opacity-50 border border-gray-700 border-opacity-50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300"
@@ -265,6 +263,7 @@ const TestimonialCarousel = () => {
               >
                 <ChevronRight size={24} />
               </button>
+              x
             </div>
           </div>
         </div>
@@ -280,7 +279,7 @@ export default function ForwardBizHomepage() {
 
   // Removed currentTestimonial state and testimonialInterval ref since they're now in the TestimonialCarousel component
 
-  // Services data - reduced to 3 core services
+  // Services data - reduced to 2 core services
   const services = [
     {
       id: "talent-acquisition",
@@ -290,17 +289,10 @@ export default function ForwardBizHomepage() {
       icon: UserPlus,
     },
     {
-      id: "sales-leadership",
-      title: "Sales & CX Leadership",
+      id: "sales-enablement",
+      title: "Sales Enablement & Lead Conversion Excellence",
       description:
-        "Transform your customer experience and sales operations with strategies that increase retention and revenue.",
-      icon: HeartHandshake,
-    },
-    {
-      id: "lead-conversion",
-      title: "Lead Conversion Systems",
-      description:
-        "Convert more prospects into customers with data-driven pipeline optimization and proven closing techniques.",
+        "Transform your customer experience and sales operations with strategies that increase conversions, retention, and revenue.",
       icon: Target,
     },
   ];
@@ -497,7 +489,7 @@ export default function ForwardBizHomepage() {
               >
                 Our core: Strategic hiring and team building.
                 <br />
-                Our edge: ales leadership and conversion excellence.
+                Our edge: Sales leadership and conversion excellence.
               </p>
 
               <div
@@ -597,14 +589,14 @@ export default function ForwardBizHomepage() {
               Our Approach
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Where Talent Meets Conversion
+              Two Specialized Business Services
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed">
               In today's competitive landscape, businesses need both exceptional
-              talent and optimized conversion systems to thrive. At forwardbiz,
-              we bridge this gap by providing integrated solutions that build
-              high-performing teams while maximizing lead conversion and revenue
-              growth.
+              talent and optimized conversion systems to thrive. At ForwardBiz,
+              we offer two distinct specialized services: strategic talent
+              acquisition and sales enablement solutions. Each service is
+              designed to address specific growth challenges for your business.
             </p>
 
             {/* Visual element */}
@@ -661,7 +653,7 @@ export default function ForwardBizHomepage() {
           </div>
 
           {/* Clean, cohesive 3-column services layout */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {services.map((service, index) => (
               <div
                 key={index}

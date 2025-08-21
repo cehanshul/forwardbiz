@@ -1,78 +1,94 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { ArrowRight, Star, MessageSquare, CheckCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Star,
+  MessageSquare,
+  CheckCircle,
+  Globe,
+  Monitor,
+  Cpu,
+  GraduationCap,
+  Coffee,
+  BarChart,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 export default function ClientsPage() {
   const [animateHero, setAnimateHero] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
-  // Our clients - simple list with just essential information
-  const clients = [
+  // Industry data with percentages
+  const industries = [
     {
-      name: "TechNova Solutions",
-      logo: "TN",
+      name: "IT & SaaS",
+      percentage: 40,
+      icon: Monitor,
       color: "#3B82F6",
-      industry: "Technology",
-      location: "Bangalore",
-      relationship: "Strategic talent acquisition and sales leadership",
-      year: 2022,
     },
     {
-      name: "EduLearn Institute",
-      logo: "EL",
+      name: "AI & Emerging Tech",
+      percentage: 25,
+      icon: Cpu,
       color: "#8B5CF6",
-      industry: "Education",
-      location: "Chennai",
-      relationship: "Recruitment and team building",
-      year: 2023,
     },
     {
-      name: "HealthPlus Care",
-      logo: "HC",
+      name: "EdTech & Institutions",
+      percentage: 15,
+      icon: GraduationCap,
       color: "#14B8A6",
-      industry: "Healthcare",
-      location: "Mumbai",
-      relationship: "Sales process optimization",
-      year: 2022,
     },
     {
-      name: "FinSecure Analytics",
-      logo: "FA",
+      name: "Lifestyle & Consumer Brands",
+      percentage: 10,
+      icon: Coffee,
       color: "#F59E0B",
-      industry: "Finance",
-      location: "Hyderabad",
-      relationship: "Sales team development",
-      year: 2023,
+    },
+    {
+      name: "Professional Services & Enterprises",
+      percentage: 10,
+      icon: BarChart,
+      color: "#EC4899",
     },
   ];
 
-  // Client testimonials
+  // Client testimonials - anonymized
   const testimonials = [
     {
       quote:
-        "Working with Forward Biz transformed our approach to talent acquisition. They understood our needs perfectly and helped us build a team that's truly aligned with our goals.",
-      name: "Sanjay Kumar",
-      position: "CEO, TechNova Solutions",
-      logo: "TN",
+        "Working with Forward Biz transformed our approach to talent acquisition. They understood our needs perfectly and helped us build a team truly aligned with our goals.",
+      position: "Founder",
+      company: "Data Analytics Company, Bangalore",
+      industry: "IT & SaaS",
       color: "#3B82F6",
       rating: 5,
     },
     {
       quote:
-        "We struggled with admissions and retention until Forward Biz helped us rebuild our team. Their approach was methodical and results-oriented.",
-      name: "Priya Sharma",
-      position: "Managing Director, EduLearn Institute",
-      logo: "EL",
+        "Forward Biz helped us strengthen our inside sales process and improve lead conversions. Their strategies delivered measurable results within months.",
+      position: "Head of Marketing",
+      company: "EdTech Institute, Chennai",
+      industry: "EdTech & Institutions",
+      color: "#14B8A6",
+      rating: 5,
+    },
+    {
+      quote:
+        "What sets Forward Biz apart is their ability to bridge hiring and performance. They don't just place people — they ensure every hire contributes to business growth.",
+      position: "CEO",
+      company: "SaaS Company, New Delhi",
+      industry: "IT & SaaS",
       color: "#8B5CF6",
       rating: 5,
     },
     {
       quote:
-        "The team at Forward Biz understands that healthcare requires a unique approach to sales. They respected our patient-first philosophy while helping us grow.",
-      name: "Dr. Rahul Verma",
-      position: "Director, HealthPlus Care",
-      logo: "HC",
-      color: "#14B8A6",
+        "Partnering with Forward Biz gave us confidence in scaling. From building resilient teams to optimizing sales closures, their support has been invaluable to our growth journey.",
+      position: "CEO",
+      company: "AI Startup, Mumbai & New Jersey, US",
+      industry: "AI & Emerging Tech",
+      color: "#EC4899",
       rating: 5,
     },
   ];
@@ -82,33 +98,30 @@ export default function ClientsPage() {
     {
       title: "Strategic Talent Acquisition",
       description:
-        "We help you identify, attract, and retain the right talent for your specific business needs and culture.",
+        "We help you identify, attract, and retain the right talent for your specific business needs and culture to build high-performing teams.",
     },
     {
-      title: "Sales Leadership",
+      title: "Sales Enablement & Lead Conversion Excellence",
       description:
-        "Our experts optimize your sales processes and help build high-performing revenue teams.",
-    },
-    {
-      title: "Growth Consultation",
-      description:
-        "Get customized strategies to overcome your unique business challenges and accelerate growth.",
+        "Our experts transform your sales capabilities and lead conversion processes with data-driven strategies that increase retention, revenue, and conversion rates.",
     },
   ];
 
-  // Industry expertise areas
-  const industries = [
-    "Technology & SaaS",
-    "Education & EdTech",
-    "Healthcare & Wellness",
-    "Finance & FinTech",
-  ];
+  // Handle testimonial navigation
+  const navigateTestimonial = (direction) => {
+    if (direction === "next") {
+      setActiveTestimonial((current) => (current + 1) % testimonials.length);
+    } else {
+      setActiveTestimonial((current) =>
+        current === 0 ? testimonials.length - 1 : current - 1
+      );
+    }
+  };
 
-  // Trigger animation on load
+  // Trigger animation on load and auto-rotate testimonials
   useEffect(() => {
     setAnimateHero(true);
 
-    // Auto-rotate testimonials
     const interval = setInterval(() => {
       setActiveTestimonial((current) => (current + 1) % testimonials.length);
     }, 8000);
@@ -146,20 +159,20 @@ export default function ClientsPage() {
               }`}
               style={{ transitionDelay: "200ms" }}
             >
-              Our Partnerships
+              Trusted by 200+ Businesses Nationwide
             </div>
 
             <h1
-              className={`text-4xl md:text-6xl font-bold text-white mb-6 leading-tight transition-all duration-700 ${
+              className={`text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight transition-all duration-700 ${
                 animateHero
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: "400ms" }}
             >
-              Working with <span className="text-blue-400">ambitious</span>{" "}
+              Empowering <span className="text-blue-400">growth</span> across{" "}
               <br />
-              businesses across India
+              industries and regions
             </h1>
 
             <p
@@ -170,46 +183,77 @@ export default function ClientsPage() {
               }`}
               style={{ transitionDelay: "600ms" }}
             >
-              We partner with forward-thinking organizations to build
-              high-performing teams and optimize sales processes that drive
-              sustainable growth.
+              At Forward Biz, we've had the privilege of working with
+              organizations at every stage — from ambitious startups to industry
+              leaders. Our expertise in strategic talent acquisition and sales
+              enablement empowers clients to scale with confidence, delivering
+              measurable results and sustainable growth.
             </p>
           </div>
 
-          {/* Client Logos Section - Clean, modern grid with subtle animations */}
+          {/* Industry Distribution Section */}
           <div
-            className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto transition-all duration-1000 ${
+            className={`transition-all duration-1000 ${
               animateHero
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-12"
             }`}
             style={{ transitionDelay: "800ms" }}
           >
-            {clients.map((client, index) => (
-              <div
-                key={index}
-                className="group bg-gray-800/30 backdrop-blur-md rounded-xl border border-gray-700/30 p-6 transition-all duration-300 hover:border-blue-500/30 hover:bg-gray-800/40 flex flex-col items-center text-center hover:translate-y-[-4px]"
-              >
-                <div
-                  className="w-20 h-20 rounded-xl flex items-center justify-center text-white text-2xl font-bold mb-4 transform transition-transform duration-300 group-hover:scale-110 shadow-lg"
-                  style={{ backgroundColor: client.color }}
-                >
-                  {client.logo}
-                </div>
-                <h3 className="text-white font-medium mb-1">{client.name}</h3>
-                <p className="text-gray-400 text-sm mb-2">{client.industry}</p>
-                <div className="mt-auto pt-3 border-t border-gray-700/30 w-full">
-                  <p className="text-xs text-gray-400">
-                    Partner since {client.year}
-                  </p>
-                </div>
+            <div className="bg-gray-800/30 backdrop-blur-md rounded-xl border border-gray-700/30 p-8 max-w-4xl mx-auto">
+              <h3 className="text-xl font-medium text-white mb-8 text-center">
+                Driving growth across industries, nationwide
+              </h3>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+                {industries.map((industry, index) => (
+                  <div
+                    key={index}
+                    className="group bg-gray-800/40 backdrop-blur-md rounded-xl border border-gray-700/30 p-5 transition-all duration-300 hover:border-blue-500/30 hover:bg-gray-800/50 flex flex-col items-center text-center h-56 justify-between"
+                  >
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                      style={{ backgroundColor: `${industry.color}25` }}
+                    >
+                      <industry.icon
+                        className="text-2xl"
+                        style={{ color: industry.color }}
+                        size={28}
+                      />
+                    </div>
+
+                    <div className="flex flex-col items-center flex-grow justify-center ">
+                      <h4 className="text-white font-medium text-center h-12 flex items-center">
+                        {industry.name}
+                      </h4>
+                    </div>
+
+                    {/* <div className="w-full mt-6">
+                      <div className="w-full bg-gray-700/30 h-2 rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-1000 ease-out"
+                          style={{
+                            width: animateHero
+                              ? `${industry.percentage}%`
+                              : "0%",
+                            backgroundColor: industry.color,
+                            transitionDelay: `${900 + index * 100}ms`,
+                          }}
+                        ></div>
+                      </div>
+                      <p className="text-blue-300 font-semibold mt-2">
+                        {industry.percentage}%
+                      </p>
+                    </div> */}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonial Section - Simplified, elegant design */}
+      {/* Testimonial Section - Modern carousel */}
       <section className="relative py-24 bg-gray-950/50">
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
@@ -225,7 +269,7 @@ export default function ClientsPage() {
             </p>
           </div>
 
-          {/* Modern testimonial carousel with elegant transitions */}
+          {/* Enhanced testimonial carousel with navigation controls */}
           <div className="relative max-w-4xl mx-auto">
             <div className="relative h-auto overflow-hidden">
               <div
@@ -237,7 +281,7 @@ export default function ClientsPage() {
                 <div className="flex">
                   {testimonials.map((testimonial, index) => (
                     <div key={index} className="w-full flex-shrink-0 px-4">
-                      <div className="bg-gray-800/40 backdrop-blur-xl rounded-2xl p-8 border border-gray-700/50 transition-all duration-300 hover:border-blue-500/30">
+                      <div className="bg-gray-800/40 backdrop-blur-xl rounded-2xl p-8 border border-gray-700/50 transition-all duration-300 hover:border-blue-500/30 h-full">
                         {/* Star Rating */}
                         <div className="flex mb-6">
                           {[...Array(5)].map((_, i) => (
@@ -274,17 +318,17 @@ export default function ClientsPage() {
                         {/* Author */}
                         <div className="flex items-center">
                           <div
-                            className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold mr-4"
+                            className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mr-4"
                             style={{ backgroundColor: testimonial.color }}
                           >
-                            {testimonial.logo}
+                            {testimonial.position[0]}
                           </div>
                           <div>
                             <div className="font-medium text-white">
-                              {testimonial.name}
+                              {testimonial.position}
                             </div>
                             <div className="text-sm text-gray-400">
-                              {testimonial.position}
+                              {testimonial.company}
                             </div>
                           </div>
                         </div>
@@ -293,6 +337,26 @@ export default function ClientsPage() {
                   ))}
                 </div>
               </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="absolute top-1/2 -left-4 -translate-y-1/2">
+              <button
+                onClick={() => navigateTestimonial("prev")}
+                className="w-12 h-12 rounded-full bg-gray-800/70 border border-gray-700/50 flex items-center justify-center text-blue-300 hover:text-white hover:bg-blue-600/70 transition-all duration-300"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft size={20} />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -right-4 -translate-y-1/2">
+              <button
+                onClick={() => navigateTestimonial("next")}
+                className="w-12 h-12 rounded-full bg-gray-800/70 border border-gray-700/50 flex items-center justify-center text-blue-300 hover:text-white hover:bg-blue-600/70 transition-all duration-300"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight size={20} />
+              </button>
             </div>
 
             {/* Pagination Dots */}
@@ -363,56 +427,50 @@ export default function ClientsPage() {
               </div>
             </div>
 
-            {/* Visual element - Statistics with modern design */}
+            {/* Visual element - Industry reach stats */}
             <div className="bg-gray-800/20 backdrop-blur-sm rounded-2xl border border-gray-700/20 p-8 relative overflow-hidden">
               {/* Background decoration */}
               <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-blue-500/5 blur-xl"></div>
               <div className="absolute -bottom-24 -left-24 w-48 h-48 rounded-full bg-purple-500/5 blur-xl"></div>
 
               <h3 className="text-2xl font-bold text-white mb-8 flex items-center">
-                <MessageSquare size={20} className="mr-2 text-blue-400" />
-                Industry Expertise
+                <Globe size={20} className="mr-2 text-blue-400" />
+                Our Nationwide Impact
               </h3>
 
-              <div className="grid grid-cols-2 gap-6">
-                {industries.map((industry, index) => (
-                  <div
-                    key={index}
-                    className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-5 border border-gray-700/30 hover:border-blue-500/30 transition-all duration-300"
-                  >
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
-                      style={{
-                        background: `linear-gradient(135deg, rgba(59,130,246,0.2), rgba(59,130,246,0.05))`,
-                        border: `1px solid rgba(59,130,246,0.1)`,
-                      }}
-                    >
-                      <span className="text-blue-400 font-medium text-xl">
-                        {industry.charAt(0)}
-                      </span>
-                    </div>
-                    <h4 className="text-white font-medium">{industry}</h4>
+              {/* Statistics */}
+              <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+                  <div className="text-4xl font-bold text-white mb-2">200+</div>
+                  <div className="text-blue-300">Businesses Transformed</div>
+                </div>
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+                  <div className="text-4xl font-bold text-white mb-2">85%</div>
+                  <div className="text-blue-300">Client Retention Rate</div>
+                </div>
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+                  <div className="text-4xl font-bold text-white mb-2">
+                    2.5K+
                   </div>
-                ))}
+                  <div className="text-blue-300">Successful Placements</div>
+                </div>
+                <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+                  <div className="text-4xl font-bold text-white mb-2">150%</div>
+                  <div className="text-blue-300">Avg. Growth Increase</div>
+                </div>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-gray-700/30">
-                <div className="flex items-center justify-between">
+              {/* Map of India representation */}
+              <div className="relative h-40 border border-gray-700/30 rounded-xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-purple-900/20"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-white">4+</div>
-                    <div className="text-sm text-gray-400">
-                      Industries Served
+                    <div className="text-xl font-semibold text-white mb-2">
+                      Pan-India Presence
                     </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">85%</div>
-                    <div className="text-sm text-gray-400">
-                      Client Retention
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">2022</div>
-                    <div className="text-sm text-gray-400">Founded</div>
+                    <p className="text-gray-300">
+                      Serving businesses in all major cities
+                    </p>
                   </div>
                 </div>
               </div>
@@ -439,7 +497,7 @@ export default function ClientsPage() {
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              Ready to join our client roster?
+              Ready to join our success stories?
             </h2>
             <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
               Let's work together to build your dream team and optimize your

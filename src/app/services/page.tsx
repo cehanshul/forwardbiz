@@ -14,6 +14,8 @@ import {
   Building,
   Phone,
   Mail,
+  Zap,
+  Rocket,
 } from "lucide-react";
 
 export default function ServicesPage() {
@@ -23,7 +25,7 @@ export default function ServicesPage() {
   const [email, setEmail] = useState("");
   const [service, setService] = useState("");
 
-  // Core services data
+  // Updated core services data (2 instead of 3)
   const services = [
     {
       id: "talent-acquisition",
@@ -47,44 +49,23 @@ export default function ServicesPage() {
       ],
     },
     {
-      id: "sales-leadership",
-      title: "Sales & CX Leadership",
-      subtitle: "Transform customer experience",
+      id: "sales-enablement",
+      title: "Sales Enablement & Lead Conversion Excellence",
+      subtitle: "Maximize revenue potential",
       description:
-        "Develop customer-centric sales strategies and leadership capabilities that drive both retention and sustainable revenue growth.",
-      icon: HeartHandshake,
+        "Transform your sales capabilities with customer-centric strategies, optimized conversion processes, and leadership development that drives sustainable growth.",
+      icon: Rocket,
       color: "purple",
       keyPoints: [
         "Sales leadership development",
-        "Customer journey optimization",
-        "Performance management systems",
-        "Sales process refinement",
-        "Service-sales integration",
+        "Pipeline optimization",
+        "Conversion analytics & frameworks",
+        "Customer journey mapping",
+        "Sales enablement systems",
       ],
       metrics: [
         { label: "Revenue Growth", value: "63%" },
-        { label: "Conversion Rate", value: "42%" },
-        { label: "Customer Satisfaction", value: "89%" },
-      ],
-    },
-    {
-      id: "lead-conversion",
-      title: "Lead Conversion Systems",
-      subtitle: "Optimize your pipeline",
-      description:
-        "Transform your sales pipeline with data-driven strategies and optimized processes that increase conversion rates at every stage.",
-      icon: Target,
-      color: "teal",
-      keyPoints: [
-        "Lead qualification frameworks",
-        "Pipeline optimization",
-        "Conversion analytics",
-        "Sales enablement tools",
-        "Nurture sequence design",
-      ],
-      metrics: [
-        { label: "Pipeline Efficiency", value: "78%" },
-        { label: "Conversion Increase", value: "52%" },
+        { label: "Conversion Rate", value: "52%" },
         { label: "Sales Cycle Reduction", value: "31%" },
       ],
     },
@@ -128,13 +109,13 @@ export default function ServicesPage() {
       company: "Tech Startup",
       highlight: "3x Growth",
       description:
-        "Implemented talent acquisition strategy and sales leadership program, resulting in 3x revenue growth in 18 months.",
+        "Implemented talent acquisition strategy and sales enablement program, resulting in 3x revenue growth in 18 months.",
     },
     {
       company: "Education Provider",
-      highlight: "42% Conversion",
+      highlight: "52% Conversion",
       description:
-        "Redesigned lead conversion systems, increasing enrollment conversion rates from 29% to 42%.",
+        "Redesigned lead conversion systems, increasing enrollment conversion rates from 29% to 52%.",
     },
     {
       company: "Financial Services",
@@ -198,7 +179,7 @@ export default function ServicesPage() {
         shadow: "shadow-blue-500/10",
         gradient: "from-blue-600 to-blue-800",
       },
-      "sales-leadership": {
+      "sales-enablement": {
         bg: "bg-purple-600",
         bgLight: "bg-purple-500/10",
         bgMedium: "bg-purple-600/30",
@@ -208,17 +189,6 @@ export default function ServicesPage() {
         hover: "hover:bg-purple-500",
         shadow: "shadow-purple-500/10",
         gradient: "from-purple-600 to-purple-800",
-      },
-      "lead-conversion": {
-        bg: "bg-teal-600",
-        bgLight: "bg-teal-500/10",
-        bgMedium: "bg-teal-600/30",
-        bgDark: "bg-teal-900/20",
-        border: "border-teal-500/20",
-        text: "text-teal-400",
-        hover: "hover:bg-teal-500",
-        shadow: "shadow-teal-500/10",
-        gradient: "from-teal-600 to-teal-800",
       },
     };
 
@@ -279,7 +249,8 @@ export default function ServicesPage() {
               style={{ transitionDelay: "600ms" }}
             >
               We deliver integrated business growth strategies combining talent
-              acquisition, sales leadership, and conversion optimization.
+              acquisition and sales enablement to maximize your organization's
+              potential.
             </p>
 
             <div
@@ -318,7 +289,6 @@ export default function ServicesPage() {
             <div className="relative h-24 md:h-32">
               <div className="absolute top-0 left-1/4 w-48 h-48 md:w-64 md:h-64 bg-blue-600/10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"></div>
               <div className="absolute top-0 right-1/4 w-48 h-48 md:w-64 md:h-64 bg-purple-600/10 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2"></div>
-              <div className="absolute bottom-0 left-1/2 w-48 h-48 md:w-64 md:h-64 bg-teal-600/10 rounded-full blur-2xl -translate-x-1/2 translate-y-1/2"></div>
 
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-20 md:h-20 rounded-full bg-blue-600/20 backdrop-blur-md border border-blue-500/30 flex items-center justify-center">
                 <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-blue-600 flex items-center justify-center text-white">
@@ -332,9 +302,9 @@ export default function ServicesPage() {
                 </div>
               </div>
 
-              <div className="absolute top-1/2 right-1/3 transform translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-teal-600/20 backdrop-blur-md border border-teal-500/30 flex items-center justify-center">
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-teal-600 flex items-center justify-center text-white">
-                  <Target size={12} />
+              <div className="absolute top-1/2 right-1/3 transform translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-blue-600/20 backdrop-blur-md border border-blue-500/30 flex items-center justify-center">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-600 flex items-center justify-center text-white">
+                  <Rocket size={12} />
                 </div>
               </div>
             </div>
@@ -342,7 +312,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Section - COMPLETELY REDESIGNED */}
+      {/* Services Section - REDESIGNED FOR TWO SERVICES */}
       <section id="services" className="py-24 relative">
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="flex flex-col items-center text-center mb-20">
@@ -353,13 +323,13 @@ export default function ServicesPage() {
               Comprehensive Business Solutions
             </h2>
             <p className="text-xl text-gray-300 max-w-2xl">
-              Our specialized services work independently or as an integrated
-              system to accelerate your business growth.
+              Our specialized services work together as an integrated system to
+              accelerate your business growth.
             </p>
           </div>
 
-          {/* Services Container - NEW PREMIUM DESIGN */}
-          <div className="relative space-y-32">
+          {/* Services Container - PREMIUM DESIGN FOR TWO SERVICES */}
+          <div className="relative space-y-40">
             {services.map((service, index) => {
               const colorClasses = getColorClasses(service.id);
 
@@ -455,9 +425,7 @@ export default function ServicesPage() {
                       >
                         {service.id === "talent-acquisition"
                           ? "Talent"
-                          : service.id === "sales-leadership"
-                          ? "Leadership"
-                          : "Conversion"}
+                          : "Sales & Conversion"}
                       </div>
 
                       <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -502,7 +470,7 @@ export default function ServicesPage() {
 
                   {/* Connector Line (except for last item) */}
                   {index < services.length - 1 && (
-                    <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-4rem] h-8 w-px bg-gradient-to-b from-blue-500/50 to-transparent"></div>
+                    <div className="absolute left-1/2 transform -translate-x-1/2 bottom-[-4rem] h-20 w-px bg-gradient-to-b from-blue-500/50 to-transparent"></div>
                   )}
                 </div>
               );
@@ -511,7 +479,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Integration Section */}
+      {/* Integration Section - REDESIGNED FOR TWO SERVICES */}
       <section className="py-24 relative bg-gray-950/50">
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -523,9 +491,9 @@ export default function ServicesPage() {
                 How Our Services Work Together
               </h2>
               <p className="text-xl text-gray-300 mb-8">
-                Our unique value comes from the integration of talent,
-                leadership, and conversion strategies into a cohesive growth
-                system.
+                Our unique value comes from the integration of talent
+                acquisition and sales enablement strategies into a cohesive
+                growth system.
               </p>
 
               <div className="space-y-6">
@@ -550,33 +518,19 @@ export default function ServicesPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white mb-2">
-                      Leadership Development
+                      Sales & Conversion Excellence
                     </h3>
                     <p className="text-gray-300">
-                      We establish sales leadership capabilities that create a
-                      customer-centric culture and operational excellence.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-teal-600/20 flex items-center justify-center mr-4 mt-1">
-                    <span className="text-teal-400 font-bold">3</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      Conversion Optimization
-                    </h3>
-                    <p className="text-gray-300">
-                      We implement systems that maximize pipeline efficiency and
-                      convert more opportunities into revenue.
+                      We establish sales leadership capabilities and conversion
+                      systems that maximize pipeline efficiency and drive
+                      revenue growth.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Visual Element */}
+            {/* Visual Element - REDESIGNED FOR TWO SERVICES */}
             <div className="animate-on-scroll opacity-0">
               <div className="relative">
                 {/* Central hub */}
@@ -593,7 +547,7 @@ export default function ServicesPage() {
                 {/* Connection lines */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-full h-full max-w-md max-h-md relative">
-                    {/* Three outer circles */}
+                    {/* Two outer circles - positioned horizontally across from each other */}
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/4 w-28 h-28 bg-blue-600/10 backdrop-blur-md rounded-full border border-blue-500/20 flex items-center justify-center z-10">
                       <div className="text-center">
                         <UserPlus
@@ -607,30 +561,17 @@ export default function ServicesPage() {
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0.5 h-16 bg-gradient-to-b from-blue-500/50 to-transparent"></div>
                     </div>
 
-                    <div className="absolute bottom-0 left-0 transform -translate-x-1/4 translate-y-1/4 w-28 h-28 bg-purple-600/10 backdrop-blur-md rounded-full border border-purple-500/20 flex items-center justify-center z-10">
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/4 w-28 h-28 bg-purple-600/10 backdrop-blur-md rounded-full border border-purple-500/20 flex items-center justify-center z-10">
                       <div className="text-center">
-                        <HeartHandshake
+                        <Rocket
                           size={20}
                           className="text-purple-400 mx-auto mb-1"
                         />
-                        <p className="text-xs text-white">Leadership</p>
+                        <p className="text-xs text-white">Sales</p>
                       </div>
 
                       {/* Connection line */}
-                      <div className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 rotate-45 w-0.5 h-16 bg-gradient-to-t from-purple-500/50 to-transparent"></div>
-                    </div>
-
-                    <div className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4 w-28 h-28 bg-teal-600/10 backdrop-blur-md rounded-full border border-teal-500/20 flex items-center justify-center z-10">
-                      <div className="text-center">
-                        <Target
-                          size={20}
-                          className="text-teal-400 mx-auto mb-1"
-                        />
-                        <p className="text-xs text-white">Conversion</p>
-                      </div>
-
-                      {/* Connection line */}
-                      <div className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 -rotate-45 w-0.5 h-16 bg-gradient-to-t from-teal-500/50 to-transparent"></div>
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0.5 h-16 bg-gradient-to-t from-purple-500/50 to-transparent"></div>
                     </div>
                   </div>
                 </div>
@@ -746,7 +687,7 @@ export default function ServicesPage() {
                 key={index}
                 className="bg-gray-800/30 backdrop-blur-md rounded-2xl border border-gray-700/30 overflow-hidden group hover:border-blue-500/20 transition-all duration-500 hover:shadow-xl hover:shadow-blue-900/5 hover:-translate-y-1"
               >
-                <div className="h-1 w-full bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600"></div>
+                <div className="h-1 w-full bg-gradient-to-r from-blue-600 via-purple-600 to-blue-400"></div>
 
                 <div className="p-8">
                   <div className="bg-blue-900/20 backdrop-blur-md rounded-lg inline-block px-3 py-1 text-sm text-blue-300 mb-6">
@@ -764,6 +705,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
       {/* Call to Action Section */}
       <section className="py-16 relative">
         <div className="absolute inset-0 bg-blue-900 bg-opacity-90 z-0"></div>
@@ -788,9 +730,9 @@ export default function ServicesPage() {
               Ready to Transform Your Business?
             </h2>
             <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
-              We specialize in helping businesses attract, hire, and retain
-              exceptional talent. And with our sales expertise, we also help you
-              turn leads into lasting customers.
+              We specialize in helping businesses attract exceptional talent and
+              optimize sales processes to drive sustainable growth and maximize
+              revenue potential.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -814,149 +756,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
-      {/* CTA/Contact Section */}
-      {/* <section id="contact" className="py-24 relative">
-        <div className="absolute inset-0 bg-blue-900/90 z-0"></div>
-
-        <div className="absolute inset-0 bg-opacity-10 z-0">
-          <div className="absolute inset-0 overflow-hidden opacity-10">
-            <div className="h-full w-full grid grid-cols-10 grid-rows-6">
-              {[...Array(60)].map((_, i) => (
-                <div key={i} className="border-r border-b border-white"></div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30"></div>
-
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="animate-on-scroll opacity-0">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                Ready to transform your business?
-              </h2>
-              <p className="text-xl text-blue-100 mb-8">
-                Let's discuss how our services can help you build stronger
-                teams, develop effective leadership, and drive conversion
-                growth.
-              </p>
-
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white mr-4 mt-1">
-                    <Phone size={18} />
-                  </div>
-                  <div>
-                    <div className="text-white font-medium mb-1">Call Us</div>
-                    <p className="text-blue-100">+91 (123) 456-7890</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white mr-4 mt-1">
-                    <Mail size={18} />
-                  </div>
-                  <div>
-                    <div className="text-white font-medium mb-1">Email Us</div>
-                    <p className="text-blue-100">info@forwardbiz.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white mr-4 mt-1">
-                    <Building size={18} />
-                  </div>
-                  <div>
-                    <div className="text-white font-medium mb-1">Visit Us</div>
-                    <p className="text-blue-100">
-                      123 Business Avenue
-                      <br />
-                      New Delhi, 110001
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="animate-on-scroll opacity-0">
-              <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-                <h3 className="text-2xl font-bold text-white mb-6">
-                  Get in Touch
-                </h3>
-
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-blue-100 mb-2 font-medium">
-                      Your Name
-                    </label>
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 text-white placeholder-blue-200/50"
-                      placeholder="Enter your name"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-blue-100 mb-2 font-medium">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 text-white placeholder-blue-200/50"
-                      placeholder="Enter your email"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-blue-100 mb-2 font-medium">
-                      How can we help?
-                    </label>
-                    <select
-                      value={service}
-                      onChange={(e) => setService(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/20 text-white"
-                    >
-                      <option value="" className="bg-gray-800">
-                        Select a service
-                      </option>
-                      <option
-                        value="talent-acquisition"
-                        className="bg-gray-800"
-                      >
-                        Talent Acquisition
-                      </option>
-                      <option value="sales-leadership" className="bg-gray-800">
-                        Sales Leadership
-                      </option>
-                      <option value="lead-conversion" className="bg-gray-800">
-                        Lead Conversion
-                      </option>
-                    </select>
-                  </div>
-
-                  <button
-                    onClick={handleSubmit}
-                    className="w-full py-3 px-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg font-medium transition-all duration-300 flex items-center justify-center group"
-                  >
-                    <span>Schedule a Consultation</span>
-                    <ArrowRight
-                      className="ml-2 group-hover:ml-3 transition-all duration-300"
-                      size={16}
-                    />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
 
       <style jsx>{`
         @keyframes fadeIn {

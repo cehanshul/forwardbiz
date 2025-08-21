@@ -61,7 +61,7 @@ export default function Navbar() {
               { url: "/services", label: "Services" },
               { url: "/about", label: "About" },
               { url: "/clients", label: "Clients" },
-              { url: "/contact", label: "Contact" },
+              { url: "/career", label: "Career" },
             ].map((item, index) => (
               <Link
                 key={index}
@@ -139,16 +139,16 @@ export default function Navbar() {
                 { url: "/services", label: "Services" },
                 { url: "/about", label: "About" },
                 { url: "/clients", label: "Clients" },
-                { url: "/contact", label: "Contact" },
+                { url: "/career", label: "Career" },
               ].map((item, index) => (
-                <a
+                <Link
                   key={index}
                   href={item.url}
                   className="text-left text-lg font-medium text-gray-300 hover:text-white transition-all duration-300"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
