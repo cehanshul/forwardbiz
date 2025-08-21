@@ -31,42 +31,42 @@ export default function ServicesPage() {
     {
       id: "talent-acquisition",
       title: "Strategic Talent Acquisition",
-      subtitle: "Build high-performing teams",
+      subtitle: "Build exceptional teams",
       description:
-        "Create sustainable competitive advantage through strategic hiring, retention, and team development tailored to your business goals.",
+        "Transform your hiring process with our comprehensive talent acquisition strategies. We help you identify, attract, and retain top performers who drive your business forward.",
       icon: UserPlus,
       color: "blue",
       keyPoints: [
-        "Role-specific sourcing strategies",
-        "Competency-based selection frameworks",
-        "Onboarding and retention systems",
-        "Leadership development pipelines",
-        "Performance optimization",
+        "Executive search and leadership hiring",
+        "Technical and specialized role recruitment",
+        "Employer branding and talent attraction",
+        "Interview process optimization",
+        "Onboarding and retention strategies",
       ],
       metrics: [
-        { label: "Retention Rate", value: "94%" },
+        { label: "Successful Placements", value: "94%" },
         { label: "Time-to-Hire Reduction", value: "45%" },
-        { label: "Performance Improvement", value: "3x" },
+        { label: "Candidate Quality Score", value: "9.2/10" },
       ],
     },
     {
       id: "sales-enablement",
-      title: "Sales Enablement & Lead Conversion Excellence",
+      title: "Sales Enablement & Lead Conversion",
       subtitle: "Maximize revenue potential",
       description:
-        "Transform your sales capabilities with customer-centric strategies, optimized conversion processes, and leadership development that drives sustainable growth.",
+        "Accelerate your sales performance with data-driven strategies that convert prospects into customers. We optimize every stage of your sales funnel for maximum impact.",
       icon: Rocket,
       color: "purple",
       keyPoints: [
-        "Sales leadership development",
-        "Pipeline optimization",
-        "Conversion analytics & frameworks",
-        "Customer journey mapping",
-        "Sales enablement systems",
+        "Sales process design and optimization",
+        "Lead nurturing and conversion strategies",
+        "Sales team training and development",
+        "CRM implementation and automation",
+        "Performance analytics and reporting",
       ],
       metrics: [
         { label: "Revenue Growth", value: "63%" },
-        { label: "Conversion Rate", value: "52%" },
+        { label: "Lead Conversion Rate", value: "52%" },
         { label: "Sales Cycle Reduction", value: "31%" },
       ],
     },
@@ -76,30 +76,30 @@ export default function ServicesPage() {
   const processSteps = [
     {
       number: "01",
-      title: "Discovery & Assessment",
+      title: "Initial Consultation",
       description:
-        "We begin with a thorough analysis of your current systems, team capabilities, and business objectives.",
+        "We conduct a comprehensive assessment of your current challenges and define clear objectives for success.",
       icon: PieChart,
     },
     {
       number: "02",
-      title: "Strategy Development",
+      title: "Custom Strategy Design",
       description:
-        "Our experts create a tailored approach based on your specific challenges and growth targets.",
+        "Our experts develop a tailored action plan based on your industry, company size, and specific requirements.",
       icon: LineChart,
     },
     {
       number: "03",
-      title: "Implementation",
+      title: "Expert Implementation",
       description:
-        "We execute the plan with precision, providing training and systems to support your team.",
+        "We execute the strategy with precision, providing ongoing support and guidance throughout the process.",
       icon: BarChart4,
     },
     {
       number: "04",
-      title: "Measurement & Refinement",
+      title: "Results & Optimization",
       description:
-        "We track key metrics and continuously optimize for maximum impact and ROI.",
+        "We track performance metrics and continuously refine our approach to ensure maximum return on investment.",
       icon: Target,
     },
   ];
@@ -107,22 +107,22 @@ export default function ServicesPage() {
   // Results showcases
   const results = [
     {
-      company: "Tech Startup",
-      highlight: "3x Growth",
+      company: "Technology Startup",
+      highlight: "300% Growth",
       description:
-        "Implemented talent acquisition strategy and sales enablement program, resulting in 3x revenue growth in 18 months.",
+        "Scaled from 12 to 45 employees in 18 months while maintaining 95% retention rate through strategic talent acquisition.",
     },
     {
-      company: "Education Provider",
+      company: "Educational Institute",
       highlight: "52% Conversion",
       description:
-        "Redesigned lead conversion systems, increasing enrollment conversion rates from 29% to 52%.",
+        "Increased enrollment conversions from 29% to 52% through optimized lead nurturing and sales process improvements.",
     },
     {
       company: "Financial Services",
-      highlight: "62% Retention",
+      highlight: "85% Retention",
       description:
-        "Developed talent and leadership systems that improved team retention from 38% to 62% annually.",
+        "Improved team retention from 60% to 85% through better hiring practices and enhanced onboarding processes.",
     },
   ];
 
@@ -243,21 +243,22 @@ export default function ServicesPage() {
                 }`}
                 style={{ transitionDelay: "400ms" }}
               >
-                Specialized solutions for <br />
-                <span className="text-blue-400">exceptional growth</span>
+                Professional services for <br />
+                <span className="text-blue-400">business growth</span>
               </h1>
 
               <p
-                className={`text-xl text-gray-300 max-w-2xl mb-12 transition-all duration-700 ${
+                className={`text-xl text-gray-300 max-w-5xl mb-12 transition-all duration-700 ${
                   animatePage
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: "600ms" }}
               >
-                We deliver integrated business growth strategies combining
-                talent acquisition and sales enablement to maximize your
-                organization's potential.
+                We offer two specialized services designed to address your most
+                critical business challenges: building outstanding teams and
+                driving sales success. Each service delivers measurable results
+                that fuel sustainable growth.
               </p>
 
               <div
@@ -327,11 +328,11 @@ export default function ServicesPage() {
                 Core Services
               </span>
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Comprehensive Business Solutions
+                Choose Your Growth Path
               </h2>
               <p className="text-xl text-gray-300 max-w-2xl">
-                Our specialized services work together as an integrated system
-                to accelerate your business growth.
+                Select the service that aligns with your current business
+                priorities and objectives.
               </p>
             </div>
 
@@ -494,15 +495,14 @@ export default function ServicesPage() {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="animate-on-scroll opacity-0">
                 <span className="inline-block px-3 py-1 rounded-full bg-blue-900/30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800/30">
-                  Integrated Approach
+                  Why Choose Us
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                  How Our Services Work Together
+                  Expertise That Delivers Results
                 </h2>
                 <p className="text-xl text-gray-300 mb-8">
-                  Our unique value comes from the integration of talent
-                  acquisition and sales enablement strategies into a cohesive
-                  growth system.
+                  Our specialized approach ensures you get the right solution
+                  for your specific business needs.
                 </p>
 
                 <div className="space-y-6">
@@ -512,11 +512,11 @@ export default function ServicesPage() {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-white mb-2">
-                        Strategic Talent Foundation
+                        Talent Acquisition Excellence
                       </h3>
                       <p className="text-gray-300">
-                        We build high-performing teams with the right skills and
-                        cultural alignment to execute your business strategy.
+                        We connect you with exceptional talent that matches your
+                        company culture and drives performance from day one.
                       </p>
                     </div>
                   </div>
@@ -527,12 +527,12 @@ export default function ServicesPage() {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-white mb-2">
-                        Sales & Conversion Excellence
+                        Sales Performance Optimization
                       </h3>
                       <p className="text-gray-300">
-                        We establish sales leadership capabilities and
-                        conversion systems that maximize pipeline efficiency and
-                        drive revenue growth.
+                        We transform your sales operations with proven
+                        strategies that increase conversions and accelerate
+                        revenue growth.
                       </p>
                     </div>
                   </div>
@@ -546,10 +546,10 @@ export default function ServicesPage() {
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-36 bg-blue-900/20 backdrop-blur-md rounded-full border border-blue-500/20 flex items-center justify-center z-20">
                     <div className="text-center">
                       <p className="text-xs text-blue-300 uppercase tracking-wider">
-                        Integrated
+                        Expert
                       </p>
-                      <p className="text-white font-bold">Growth</p>
-                      <p className="text-white font-bold">System</p>
+                      <p className="text-white font-bold">Solutions</p>
+                      <p className="text-white font-bold">Provider</p>
                     </div>
                   </div>
 
@@ -736,12 +736,12 @@ export default function ServicesPage() {
           <div className="max-w-screen-xl mx-auto px-6 relative z-10">
             <div className="text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-                Ready to Transform Your Business?
+                Ready to Drive Your Business Forward?
               </h2>
               <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
-                We specialize in helping businesses attract exceptional talent
-                and optimize sales processes to drive sustainable growth and
-                maximize revenue potential.
+                Whether you need exceptional talent or want to boost your sales
+                performance, we have the expertise to help you achieve your
+                goals.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -750,15 +750,17 @@ export default function ServicesPage() {
                   className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center hover:translate-y-[-2px] relative group overflow-hidden"
                 >
                   <span className="relative z-10">
-                    Let's Build Growth Together
+                    Start Your Growth Journey
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
                 </a>
                 <a
-                  href="/services"
+                  href="/about"
                   className="px-8 py-4 bg-blue-600 bg-opacity-40 hover:bg-opacity-50 text-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center backdrop-blur-sm border border-blue-400 border-opacity-30 hover:border-opacity-50 hover:translate-y-[-2px] relative group overflow-hidden"
                 >
-                  <span className="relative z-10">Explore Our Services</span>
+                  <span className="relative z-10">
+                    Learn About Our Approach
+                  </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
                 </a>
               </div>
