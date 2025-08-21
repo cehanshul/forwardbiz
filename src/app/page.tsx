@@ -20,6 +20,8 @@ import {
   UserPlus,
   Building,
   ChevronLeft,
+  Check,
+  AlertCircle,
 } from "lucide-react";
 import Lottie from "lottie-react";
 import {
@@ -268,6 +270,12 @@ export default function ForwardBizHomepage() {
   const [animateHero, setAnimateHero] = useState(false);
   const [animationData, setAnimationData] = useState(null);
 
+  const [quickContactForm, setQuickContactForm] = useState({
+    name: "",
+    email: "",
+  });
+  const [formStatus, setFormStatus] = useState(null); // null, "submitting", "success", "error"
+
   const services = [
     {
       id: "talent-acquisition",
@@ -431,6 +439,66 @@ export default function ForwardBizHomepage() {
       .then((data) => setAnimationData(data))
       .catch((error) => console.error("Error loading animation:", error));
   }, []);
+
+  // Add a function to handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setQuickContactForm({
+      ...quickContactForm,
+      [name]: value,
+    });
+  };
+
+  const handleQuickContactSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!quickContactForm.name || !quickContactForm.email) {
+      // Simple validation
+      return;
+    }
+
+    setFormStatus("submitting");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...quickContactForm,
+          company: "Not provided", // Add required fields for API
+          inquiryType: "Quick Contact",
+          message: "This is a quick contact request from the homepage.",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      setFormStatus("success");
+
+      // Reset form after success
+      setTimeout(() => {
+        setQuickContactForm({
+          name: "",
+          email: "",
+        });
+        setFormStatus(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setFormStatus("error");
+
+      // Reset error status after a few seconds
+      setTimeout(() => {
+        setFormStatus(null);
+      }, 3000);
+    }
+  };
 
   return (
     <>
@@ -967,7 +1035,10 @@ export default function ForwardBizHomepage() {
                   </h3>
 
                   {/* Simplified Form */}
-                  <form className="space-y-6">
+                  <form
+                    className="space-y-6"
+                    onSubmit={handleQuickContactSubmit}
+                  >
                     {/* Name Field */}
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -975,8 +1046,12 @@ export default function ForwardBizHomepage() {
                       </label>
                       <input
                         type="text"
+                        name="name"
+                        value={quickContactForm.name}
+                        onChange={handleInputChange}
                         className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
                         placeholder="Your name"
+                        required
                       />
                     </div>
 
@@ -987,18 +1062,44 @@ export default function ForwardBizHomepage() {
                       </label>
                       <input
                         type="email"
+                        name="email"
+                        value={quickContactForm.email}
+                        onChange={handleInputChange}
                         className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
                         placeholder="your@email.com"
+                        required
                       />
                     </div>
 
                     {/* Submit Button */}
                     <button
                       type="submit"
+                      disabled={
+                        formStatus === "submitting" || formStatus === "success"
+                      }
                       className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 flex items-center justify-center"
                     >
-                      <span>Send Message</span>
-                      <ArrowRight size={16} className="ml-2" />
+                      {formStatus === "submitting" ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                          Sending...
+                        </>
+                      ) : formStatus === "success" ? (
+                        <>
+                          <Check size={18} className="mr-2" />
+                          Message Sent!
+                        </>
+                      ) : formStatus === "error" ? (
+                        <>
+                          <AlertCircle size={18} className="mr-2" />
+                          Failed! Try Again
+                        </>
+                      ) : (
+                        <>
+                          <span>Send Message</span>
+                          <ArrowRight size={16} className="ml-2" />
+                        </>
+                      )}
                     </button>
                   </form>
                 </div>
