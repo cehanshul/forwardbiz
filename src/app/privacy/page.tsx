@@ -83,7 +83,7 @@ export default function PrivacyPage() {
               }`}
               style={{ transitionDelay: "600ms" }}
             >
-              Last updated: June 1, 2023
+              Last updated: August 21, 2025
             </p>
           </div>
         </div>
