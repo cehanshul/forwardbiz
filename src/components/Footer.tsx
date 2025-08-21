@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Footer() {
@@ -17,7 +18,10 @@ export default function Footer() {
       <div className="max-w-screen-xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-4">
-            <a href="/" className="flex items-center group relative z-10 mb-4">
+            <Link
+              href="/"
+              className="flex items-center group relative z-10 mb-4"
+            >
               <div className="mr-3">
                 <img
                   src="/biz-logo.png"
@@ -25,34 +29,34 @@ export default function Footer() {
                   className="h-10 w-auto group-hover:opacity-80 transition-all duration-300"
                 />
               </div>
-            </a>
+            </Link>
             <p className="text-gray-400 mb-6">
               Forward Business Solutions helps companies build high-performing
               teams and optimize lead conversion with specialized talent
               acquisition and sales strategies.
             </p>
             <div className="flex space-x-4">
-              <a
+              <Link
                 href="#"
                 className="w-10 h-10 rounded-full bg-gray-800 bg-opacity-60 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:bg-opacity-60 hover:text-white transition-all duration-300 backdrop-blur-sm border border-gray-700 border-opacity-50 hover:border-blue-500 hover:border-opacity-50 group"
               >
                 <span className="sr-only">LinkedIn</span>
                 <span>in</span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="w-10 h-10 rounded-full bg-gray-800 bg-opacity-60 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:bg-opacity-60 hover:text-white transition-all duration-300 backdrop-blur-sm border border-gray-700 border-opacity-50 hover:border-blue-500 hover:border-opacity-50 group"
               >
                 <span className="sr-only">Twitter</span>
                 <span>𝕏</span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
                 className="w-10 h-10 rounded-full bg-gray-800 bg-opacity-60 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:bg-opacity-60 hover:text-white transition-all duration-300 backdrop-blur-sm border border-gray-700 border-opacity-50 hover:border-blue-500 hover:border-opacity-50 group"
               >
                 <span className="sr-only">Facebook</span>
                 <span>f</span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -60,20 +64,20 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4 text-white">Services</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="/services/talent-acquisition"
+                <Link
+                  href="/services"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
                   Strategic Talent Acquisition
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/services/sales-enablement"
+                <Link
+                  href="/services"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
                   Sales Enablement & Lead Conversion Excellence
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -82,28 +86,28 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4 text-white">Company</h3>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   href="/about"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/clients"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
                   Clients
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/careers"
+                <Link
+                  href="/career"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
                   Careers
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -112,28 +116,28 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4 text-white">Support</h3>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   href="/contact"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/faq"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
                   FAQ
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/privacy"
                   className="text-gray-400 hover:text-blue-300 transition-all duration-300 inline-block"
                 >
                   Privacy
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -144,12 +148,12 @@ export default function Footer() {
               <li>123 Business Avenue</li>
               <li>Chennai, 171001</li>
               <li className="pt-2">
-                <a
+                <Link
                   href="mailto:info@forwardbiz.com"
                   className="text-blue-400 hover:text-blue-300 transition-all duration-300"
                 >
                   info@forwardbiz.com
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -160,24 +164,18 @@ export default function Footer() {
             © {new Date().getFullYear()} forwardbiz. All rights reserved.
           </div>
           <div className="flex space-x-6">
-            <a
+            <Link
               href="/terms"
               className="text-gray-500 hover:text-white transition-all duration-300 text-sm"
             >
               Terms
-            </a>
-            <a
+            </Link>
+            <Link
               href="/privacy"
               className="text-gray-500 hover:text-white transition-all duration-300 text-sm"
             >
               Privacy
-            </a>
-            <a
-              href="/cookies"
-              className="text-gray-500 hover:text-white transition-all duration-300 text-sm"
-            >
-              Cookies
-            </a>
+            </Link>
           </div>
         </div>
       </div>

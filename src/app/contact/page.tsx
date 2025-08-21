@@ -220,7 +220,7 @@ export default function ContactPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 overflow-hidden">
+      <section className="relative pt-36 pb-16 overflow-hidden">
         <CirclePattern />
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="text-center">

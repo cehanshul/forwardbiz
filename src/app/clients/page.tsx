@@ -130,7 +130,7 @@ export default function ClientsPage() {
   }, [testimonials.length]);
 
   return (
-    <div className="bg-gray-900 font-sans antialiased text-gray-200">
+    <div className="bg-gray-900  font-sans antialiased text-gray-200">
       {/* Fixed background elements */}
       <div className="fixed inset-0 z-0 overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
@@ -148,7 +148,7 @@ export default function ClientsPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center pt-24 pb-16 overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center pt-36 pb-16 overflow-hidden">
         <div className="max-w-screen-xl mx-auto px-6 relative z-10 w-full">
           <div className="flex flex-col items-center text-center mb-16">
             <div

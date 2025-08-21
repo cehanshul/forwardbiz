@@ -48,7 +48,7 @@ export default function TermsPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-24 pb-12">
+      <section className="relative pt-36 pb-12">
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="text-center">
             <div

@@ -19,7 +19,7 @@ export function getServiceMetadata(type: ServiceType) {
       title: "Strategic Talent Acquisition | ForwardBiz",
       description:
         "Build high-performing teams with our specialized recruiting strategies that attract, retain, and develop top talent across India.",
-      canonical: `${baseUrl}/services/talent-acquisition`,
+      canonical: `${baseUrl}/services`,
       ogImage: `${baseUrl}/images/talent-acquisition-og.jpg`,
       keywords: [
         "talent acquisition",
@@ -34,7 +34,7 @@ export function getServiceMetadata(type: ServiceType) {
       title: "Sales Enablement & Lead Conversion | ForwardBiz",
       description:
         "Transform your customer experience and sales operations with strategies that increase conversions, retention, and revenue.",
-      canonical: `${baseUrl}/services/sales-enablement`,
+      canonical: `${baseUrl}/services`,
       ogImage: `${baseUrl}/images/sales-enablement-og.jpg`,
       keywords: [
         "sales enablement",

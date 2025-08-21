@@ -38,6 +38,7 @@ import {
   LocalBusinessJsonLd,
   OrganizationJsonLd,
 } from "@/components/seo/JsonLd";
+import Link from "next/link";
 
 // Import the TestimonialCarousel component
 const TestimonialCarousel = () => {
@@ -267,7 +268,6 @@ const TestimonialCarousel = () => {
               >
                 <ChevronRight size={24} />
               </button>
-              x
             </div>
           </div>
         </div>
@@ -456,7 +456,7 @@ export default function ForwardBizHomepage() {
       <LocalBusinessJsonLd />
       <OrganizationJsonLd />
 
-      <div className="min-h-screen bg-gray-900 font-sans antialiased text-gray-200 overflow-x-hidden">
+      <div className="min-h-screen  bg-gray-900 font-sans antialiased text-gray-200 overflow-x-hidden">
         {/* Ambient background elements */}
         <div className="fixed inset-0 z-0">
           <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
@@ -468,7 +468,7 @@ export default function ForwardBizHomepage() {
         </div>
 
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 overflow-hidden">
+        <section className="relative pt-36 pb-20 overflow-hidden">
           <CirclePattern />
           <div className="max-w-screen-xl mx-auto px-6 relative z-10">
             <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -507,7 +507,7 @@ export default function ForwardBizHomepage() {
                       : "opacity-0 translate-y-8"
                   }`}
                 >
-                  <a
+                  <Link
                     href="/services"
                     className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 inline-flex items-center shadow-lg hover:translate-y-[-2px] group"
                   >
@@ -516,7 +516,7 @@ export default function ForwardBizHomepage() {
                       size={16}
                       className="ml-2 group-hover:ml-3 transition-all duration-300"
                     />
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Key Stats */}
@@ -674,8 +674,8 @@ export default function ForwardBizHomepage() {
                   </h3>
                   <p className="text-gray-300 mb-6">{service.description}</p>
 
-                  <a
-                    href={`/services/${service.id}`}
+                  <Link
+                    href={`/services`}
                     className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-all duration-300 group"
                   >
                     Learn More{" "}
@@ -683,7 +683,7 @@ export default function ForwardBizHomepage() {
                       size={16}
                       className="ml-1 group-hover:ml-2 transition-all duration-300"
                     />
-                  </a>
+                  </Link>
 
                   {/* Subtle background decoration */}
                   <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-blue-500 opacity-5 rounded-full"></div>
@@ -786,7 +786,7 @@ export default function ForwardBizHomepage() {
                 </div>
 
                 <div className="hidden lg:block">
-                  <a
+                  <Link
                     href="/faq"
                     className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-2px] group"
                   >
@@ -795,7 +795,7 @@ export default function ForwardBizHomepage() {
                       size={16}
                       className="ml-2 group-hover:ml-3 transition-all duration-300"
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -843,12 +843,12 @@ export default function ForwardBizHomepage() {
                 </div>
 
                 <div className="mt-8 lg:hidden">
-                  <a
+                  <Link
                     href="/faq"
                     className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
                   >
                     View All FAQs <ArrowRight size={16} className="ml-2" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -885,7 +885,7 @@ export default function ForwardBizHomepage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
+                <Link
                   href="/contact"
                   className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center hover:translate-y-[-2px] relative group overflow-hidden"
                 >
@@ -893,14 +893,14 @@ export default function ForwardBizHomepage() {
                     Let's Build Growth Together
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/services"
                   className="px-8 py-4 bg-blue-600 bg-opacity-40 hover:bg-opacity-50 text-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center backdrop-blur-sm border border-blue-400 border-opacity-30 hover:border-opacity-50 hover:translate-y-[-2px] relative group overflow-hidden"
                 >
                   <span className="relative z-10">Explore Our Services</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -952,12 +952,12 @@ export default function ForwardBizHomepage() {
                       <h3 className="font-semibold text-white mb-1">
                         Email Us
                       </h3>
-                      <a
+                      <Link
                         href="mailto:info@forwardbiz.com"
                         className="text-blue-400 hover:text-blue-300 hover:underline"
                       >
                         info@forwardbiz.com
-                      </a>
+                      </Link>
                     </div>
                   </div>
 
@@ -967,12 +967,12 @@ export default function ForwardBizHomepage() {
                     </div>
                     <div className="ml-4">
                       <h3 className="font-semibold text-white mb-1">Call Us</h3>
-                      <a
+                      <Link
                         href="tel:+911234567890"
                         className="text-blue-400 hover:text-blue-300 hover:underline"
                       >
                         +91 (123) 456-7890
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
