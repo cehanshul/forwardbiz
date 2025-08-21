@@ -34,6 +34,10 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import Lottie from "lottie-react";
+import {
+  LocalBusinessJsonLd,
+  OrganizationJsonLd,
+} from "@/components/seo/JsonLd";
 
 // Import the TestimonialCarousel component
 const TestimonialCarousel = () => {
@@ -448,577 +452,582 @@ export default function ForwardBizHomepage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 font-sans antialiased text-gray-200 overflow-x-hidden">
-      {/* Ambient background elements */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-purple-500 opacity-10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-        <div className="absolute top-1/4 left-1/4 w-1/4 h-1/4 bg-teal-500 opacity-5 rounded-full blur-3xl"></div>
+    <>
+      <LocalBusinessJsonLd />
+      <OrganizationJsonLd />
 
-        {/* Subtle grid pattern overlay */}
-        <GridPattern />
-      </div>
+      <div className="min-h-screen bg-gray-900 font-sans antialiased text-gray-200 overflow-x-hidden">
+        {/* Ambient background elements */}
+        <div className="fixed inset-0 z-0">
+          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-purple-500 opacity-10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+          <div className="absolute top-1/4 left-1/4 w-1/4 h-1/4 bg-teal-500 opacity-5 rounded-full blur-3xl"></div>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <CirclePattern />
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
-              <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-                Business Growth Specialists
-              </span>
+          {/* Subtle grid pattern overlay */}
+          <GridPattern />
+        </div>
 
-              {/* Replace the current h1 element with this */}
-              <div
-                className={`transition-all duration-1000 ${
-                  animateHero
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                }`}
-              >
-                <TypewriterText />
+        {/* Hero Section */}
+        <section className="relative pt-32 pb-20 overflow-hidden">
+          <CirclePattern />
+          <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+            <div className="grid lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-7">
+                <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
+                  Business Growth Specialists
+                </span>
+
+                {/* Replace the current h1 element with this */}
+                <div
+                  className={`transition-all duration-1000 ${
+                    animateHero
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
+                  }`}
+                >
+                  <TypewriterText />
+                </div>
+
+                <p
+                  className={`text-xl text-gray-300 mb-8 max-w-lg transition-all duration-1000 delay-300 ${
+                    animateHero
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
+                  }`}
+                >
+                  Our core: Strategic hiring and team building.
+                  <br />
+                  Our edge: Sales leadership and conversion excellence.
+                </p>
+
+                <div
+                  className={`flex flex-wrap gap-4 transition-all duration-1000 delay-500 ${
+                    animateHero
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
+                  }`}
+                >
+                  <a
+                    href="/services"
+                    className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 inline-flex items-center shadow-lg hover:translate-y-[-2px] group"
+                  >
+                    <span>Hire Right. Convert More. Grow Forward.</span>
+                    <ArrowRight
+                      size={16}
+                      className="ml-2 group-hover:ml-3 transition-all duration-300"
+                    />
+                  </a>
+                </div>
+
+                {/* Key Stats */}
+                <div className="mt-16 grid grid-cols-3 gap-3 lg:gap-6">
+                  {businessStats.map((stat, index) => (
+                    <CountUpStat
+                      key={index}
+                      stat={stat}
+                      animateHero={animateHero}
+                      index={index}
+                    />
+                  ))}
+                </div>
               </div>
 
-              <p
-                className={`text-xl text-gray-300 mb-8 max-w-lg transition-all duration-1000 delay-300 ${
-                  animateHero
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                }`}
-              >
-                Our core: Strategic hiring and team building.
-                <br />
-                Our edge: Sales leadership and conversion excellence.
+              <div className="lg:col-span-5 relative">
+                <div className="relative z-20 transform">
+                  <div
+                    className={`relative z-10 rounded-2xl overflow-hidden transition-all duration-300 group transform ${
+                      animateHero
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 translate-x-4"
+                    }`}
+                    style={{ height: "400px" }}
+                  >
+                    {animationData && (
+                      <Lottie
+                        animationData={animationData}
+                        loop={true}
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    )}
+                  </div>
+                </div>
+
+                {/* Decorative elements */}
+                <div className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500 opacity-10 rounded-full blur-3xl z-0"></div>
+                <div className="absolute bottom-0 left-0 transform -translate-x-1/4 translate-y-1/4 w-48 h-48 bg-purple-500 opacity-10 rounded-full blur-3xl z-0"></div>
+
+                {/* Floating shapes */}
+                <div className="absolute -top-10 -left-10 z-0 w-20 h-20 border-2 border-blue-400 border-opacity-20 rounded-xl transform rotate-45 animate-float"></div>
+                <div className="absolute bottom-10 right-0 z-0 w-16 h-16 border-2 border-purple-400 border-opacity-20 rounded-full animate-float-slow"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Trusted clients logos section */}
+          <div className="max-w-screen-xl mx-auto mt-16 px-6 relative z-10">
+            <p className="text-sm text-gray-400 mb-6 text-center">
+              Trusted by innovative companies
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+              {clientLogos.map((client, index) => (
+                <div key={index} className="group relative">
+                  <div className="w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center transition-all duration-300 opacity-60 hover:opacity-100">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-gray-800 bg-opacity-70 backdrop-blur-sm border border-gray-700 border-opacity-50 flex items-center justify-center group-hover:border-blue-500 group-hover:border-opacity-50 transition-all duration-300">
+                      <client.icon
+                        size={24}
+                        className="text-gray-400 group-hover:text-blue-400 transition-all duration-300"
+                      />
+                    </div>
+                    <span className="mt-2 text-xs text-gray-500 group-hover:text-gray-300 transition-all duration-300">
+                      {client.name}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Introduction Section */}
+        <section className="py-20 relative">
+          <GridPattern />
+          <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+            <div className="max-w-3xl mx-auto text-center">
+              <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
+                Our Approach
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                We focus on what drives growth
+              </h2>
+              <p className="text-xl text-gray-300 leading-relaxed">
+                building exceptional teams and optimizing sales performance.
+                These are distinct services with one mission: sustainable
+                success.
               </p>
 
-              <div
-                className={`flex flex-wrap gap-4 transition-all duration-1000 delay-500 ${
-                  animateHero
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                }`}
-              >
-                <a
-                  href="/services"
-                  className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 inline-flex items-center shadow-lg hover:translate-y-[-2px] group"
-                >
-                  <span>Hire Right. Convert More. Grow Forward.</span>
-                  <ArrowRight
-                    size={16}
-                    className="ml-2 group-hover:ml-3 transition-all duration-300"
-                  />
-                </a>
+              {/* Visual element */}
+              <div className="mt-12 flex justify-center">
+                <div className="inline-flex items-center gap-4 py-3 px-5 bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-full border border-gray-700 border-opacity-30">
+                  <div className="flex -space-x-3">
+                    {[...Array(4)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="w-10 h-10 rounded-full border-2 border-gray-700 bg-gray-800 flex items-center justify-center overflow-hidden"
+                      >
+                        <div
+                          className={`w-full h-full ${
+                            [
+                              "bg-blue-500",
+                              "bg-purple-500",
+                              "bg-teal-500",
+                              "bg-amber-500",
+                            ][i]
+                          } bg-opacity-30 flex items-center justify-center`}
+                        >
+                          <span className="text-white text-xs font-bold">
+                            {["T", "C", "S", "G"][i]}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-gray-300">
+                    Partner with our specialists
+                  </span>
+                  <ArrowRight size={16} className="text-blue-400" />
+                </div>
               </div>
+            </div>
+          </div>
+        </section>
 
-              {/* Key Stats */}
-              <div className="mt-16 grid grid-cols-3 gap-3 lg:gap-6">
-                {businessStats.map((stat, index) => (
-                  <CountUpStat
-                    key={index}
-                    stat={stat}
-                    animateHero={animateHero}
-                    index={index}
-                  />
+        {/* Services Section - REDESIGNED */}
+        <section className="py-24 relative bg-gray-950 bg-opacity-50">
+          <CirclePattern />
+          <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
+                Our Expertise
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                Specialized Business Solutions
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                We deliver tailored strategies to build your team and boost your
+                business growth.
+              </p>
+            </div>
+
+            {/* Clean, cohesive 3-column services layout */}
+            <div className="grid md:grid-cols-2 gap-8">
+              {services.map((service, index) => (
+                <div
+                  key={index}
+                  className="bg-gray-800 bg-opacity-40 backdrop-blur-md rounded-xl border border-gray-700 border-opacity-50 p-8 hover:shadow-lg transition-all duration-300 hover:border-gray-600 hover:border-opacity-50 hover:translate-y-[-2px] group relative overflow-hidden"
+                >
+                  <div className="w-14 h-14 rounded-lg bg-blue-900 bg-opacity-30 border border-blue-800 border-opacity-30 flex items-center justify-center mb-6 backdrop-blur-sm">
+                    <service.icon size={24} className="text-blue-400" />
+                  </div>
+
+                  <h3 className="text-xl font-bold mb-4 text-white">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-300 mb-6">{service.description}</p>
+
+                  <a
+                    href={`/services/${service.id}`}
+                    className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-all duration-300 group"
+                  >
+                    Learn More{" "}
+                    <ChevronRight
+                      size={16}
+                      className="ml-1 group-hover:ml-2 transition-all duration-300"
+                    />
+                  </a>
+
+                  {/* Subtle background decoration */}
+                  <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-blue-500 opacity-5 rounded-full"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Approach Section */}
+        <section className="py-24 relative">
+          <DotPattern />
+          <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
+                Our Process
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                How We Work
+              </h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                Our structured approach ensures consistent results and
+                exceptional service delivery.
+              </p>
+            </div>
+
+            <div className="relative">
+              {/* Connection line */}
+              <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30"></div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {approachSteps.map((step, index) => (
+                  <div key={index} className="relative">
+                    <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:border-gray-600 hover:border-opacity-50 hover:translate-y-[-2px] group relative overflow-hidden">
+                      {/* Background illustration */}
+                      <div className="absolute right-0 bottom-0 w-32 h-32 opacity-10">
+                        <div className="w-full h-full relative">
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 border-2 border-white rounded-full"></div>
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-white rounded-full"></div>
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-white rounded-full"></div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center mb-6">
+                        <div className="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-lg mr-4">
+                          {step.number}
+                        </div>
+                        <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-blue-800 border-opacity-30">
+                          <step.icon size={18} className="text-blue-300" />
+                        </div>
+                      </div>
+
+                      <h3 className="text-xl font-bold mb-3 text-white">
+                        {step.title}
+                      </h3>
+                      <p className="text-gray-300 relative z-10">
+                        {step.description}
+                      </p>
+                    </div>
+
+                    {/* Arrow for mobile */}
+                    {index < approachSteps.length - 1 && (
+                      <div className="flex justify-center lg:hidden my-4">
+                        <ArrowRight size={24} className="text-blue-400" />
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
-
-            <div className="lg:col-span-5 relative">
-              <div className="relative z-20 transform">
-                <div
-                  className={`relative z-10 rounded-2xl overflow-hidden transition-all duration-300 group transform ${
-                    animateHero
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 translate-x-4"
-                  }`}
-                  style={{ height: "400px" }}
-                >
-                  {animationData && (
-                    <Lottie
-                      animationData={animationData}
-                      loop={true}
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  )}
-                </div>
-              </div>
-
-              {/* Decorative elements */}
-              <div className="absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500 opacity-10 rounded-full blur-3xl z-0"></div>
-              <div className="absolute bottom-0 left-0 transform -translate-x-1/4 translate-y-1/4 w-48 h-48 bg-purple-500 opacity-10 rounded-full blur-3xl z-0"></div>
-
-              {/* Floating shapes */}
-              <div className="absolute -top-10 -left-10 z-0 w-20 h-20 border-2 border-blue-400 border-opacity-20 rounded-xl transform rotate-45 animate-float"></div>
-              <div className="absolute bottom-10 right-0 z-0 w-16 h-16 border-2 border-purple-400 border-opacity-20 rounded-full animate-float-slow"></div>
-            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Trusted clients logos section */}
-        <div className="max-w-screen-xl mx-auto mt-16 px-6 relative z-10">
-          <p className="text-sm text-gray-400 mb-6 text-center">
-            Trusted by innovative companies
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {clientLogos.map((client, index) => (
-              <div key={index} className="group relative">
-                <div className="w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center transition-all duration-300 opacity-60 hover:opacity-100">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-gray-800 bg-opacity-70 backdrop-blur-sm border border-gray-700 border-opacity-50 flex items-center justify-center group-hover:border-blue-500 group-hover:border-opacity-50 transition-all duration-300">
-                    <client.icon
-                      size={24}
-                      className="text-gray-400 group-hover:text-blue-400 transition-all duration-300"
-                    />
+        {/* Testimonials Section - UPDATED MULTI-CARD CAROUSEL */}
+        <TestimonialCarousel />
+
+        {/* FAQ Section */}
+        <section className="py-24 relative">
+          <DotPattern />
+          <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+            <div className="grid lg:grid-cols-12 gap-16">
+              <div className="lg:col-span-5">
+                <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
+                  FAQ
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                  Frequently Asked Questions
+                </h2>
+                <p className="text-xl text-gray-300 mb-8">
+                  Find answers to common questions about our services.
+                </p>
+
+                {/* Visual element */}
+                <div className="hidden lg:block mb-8">
+                  <div className="relative">
+                    <div className="w-40 h-40 border-2 border-gray-700 rounded-xl transform rotate-12 opacity-30"></div>
+                    <div className="absolute top-5 left-5 w-40 h-40 border-2 border-blue-700 rounded-xl transform -rotate-3 opacity-40"></div>
+                    <div className="absolute top-10 left-10 w-40 h-40 border-2 border-purple-700 rounded-xl transform rotate-6 opacity-50"></div>
                   </div>
-                  <span className="mt-2 text-xs text-gray-500 group-hover:text-gray-300 transition-all duration-300">
-                    {client.name}
-                  </span>
+                </div>
+
+                <div className="hidden lg:block">
+                  <a
+                    href="/faq"
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-2px] group"
+                  >
+                    View All FAQs{" "}
+                    <ArrowRight
+                      size={16}
+                      className="ml-2 group-hover:ml-3 transition-all duration-300"
+                    />
+                  </a>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Introduction Section */}
-      <section className="py-20 relative">
-        <GridPattern />
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Our Approach
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Two Specialized Business Services
-            </h2>
-            <p className="text-xl text-gray-300 leading-relaxed">
-              In today's competitive landscape, businesses need both exceptional
-              talent and optimized conversion systems to thrive. At ForwardBiz,
-              we offer two distinct specialized services: strategic talent
-              acquisition and sales enablement solutions. Each service is
-              designed to address specific growth challenges for your business.
-            </p>
-
-            {/* Visual element */}
-            <div className="mt-12 flex justify-center">
-              <div className="inline-flex items-center gap-4 py-3 px-5 bg-gray-800 bg-opacity-30 backdrop-blur-sm rounded-full border border-gray-700 border-opacity-30">
-                <div className="flex -space-x-3">
-                  {[...Array(4)].map((_, i) => (
+              <div className="lg:col-span-7">
+                <div className="space-y-6">
+                  {faqItems.map((item, index) => (
                     <div
-                      key={i}
-                      className="w-10 h-10 rounded-full border-2 border-gray-700 bg-gray-800 flex items-center justify-center overflow-hidden"
+                      key={index}
+                      className="border border-gray-700 border-opacity-50 hover:border-gray-600 hover:border-opacity-50 rounded-xl overflow-hidden transition-all duration-300 bg-gray-800 bg-opacity-40 backdrop-blur-md"
                     >
-                      <div
-                        className={`w-full h-full ${
-                          [
-                            "bg-blue-500",
-                            "bg-purple-500",
-                            "bg-teal-500",
-                            "bg-amber-500",
-                          ][i]
-                        } bg-opacity-30 flex items-center justify-center`}
+                      <button
+                        className="w-full flex justify-between items-center p-6 text-left hover:bg-gray-700 hover:bg-opacity-30 transition-all duration-300"
+                        onClick={() => toggleAccordion(index)}
                       >
-                        <span className="text-white text-xs font-bold">
-                          {["T", "C", "S", "G"][i]}
+                        <span className="font-semibold text-white flex items-center">
+                          <div className="w-8 h-8 rounded-full bg-gray-700 bg-opacity-50 flex items-center justify-center mr-3 text-gray-300">
+                            Q
+                          </div>
+                          {item.question}
                         </span>
+                        <span
+                          className={`text-blue-400 transition-transform duration-300 ${
+                            activeAccordion === index ? "rotate-45" : ""
+                          }`}
+                        >
+                          <Plus size={20} />
+                        </span>
+                      </button>
+                      <div
+                        className={`overflow-hidden transition-all duration-500 ${
+                          activeAccordion === index
+                            ? "max-h-96 opacity-100"
+                            : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div className="p-6 pt-0 text-gray-300 border-t border-gray-700 border-opacity-30 flex">
+                          <div className="w-8 h-8 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center mr-3 text-blue-300 flex-shrink-0 mt-1">
+                            A
+                          </div>
+                          <div>{item.answer}</div>
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <span className="text-gray-300">
-                  Partner with our specialists
-                </span>
-                <ArrowRight size={16} className="text-blue-400" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Services Section - REDESIGNED */}
-      <section className="py-24 relative bg-gray-950 bg-opacity-50">
-        <CirclePattern />
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Our Expertise
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Specialized Business Solutions
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              We deliver tailored strategies to build your team and boost your
-              business growth.
-            </p>
-          </div>
-
-          {/* Clean, cohesive 3-column services layout */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="bg-gray-800 bg-opacity-40 backdrop-blur-md rounded-xl border border-gray-700 border-opacity-50 p-8 hover:shadow-lg transition-all duration-300 hover:border-gray-600 hover:border-opacity-50 hover:translate-y-[-2px] group relative overflow-hidden"
-              >
-                <div className="w-14 h-14 rounded-lg bg-blue-900 bg-opacity-30 border border-blue-800 border-opacity-30 flex items-center justify-center mb-6 backdrop-blur-sm">
-                  <service.icon size={24} className="text-blue-400" />
-                </div>
-
-                <h3 className="text-xl font-bold mb-4 text-white">
-                  {service.title}
-                </h3>
-                <p className="text-gray-300 mb-6">{service.description}</p>
-
-                <a
-                  href={`/services/${service.id}`}
-                  className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-all duration-300 group"
-                >
-                  Learn More{" "}
-                  <ChevronRight
-                    size={16}
-                    className="ml-1 group-hover:ml-2 transition-all duration-300"
-                  />
-                </a>
-
-                {/* Subtle background decoration */}
-                <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-blue-500 opacity-5 rounded-full"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Approach Section */}
-      <section className="py-24 relative">
-        <DotPattern />
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-              Our Process
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              How We Work
-            </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Our structured approach ensures consistent results and exceptional
-              service delivery.
-            </p>
-          </div>
-
-          <div className="relative">
-            {/* Connection line */}
-            <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30"></div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {approachSteps.map((step, index) => (
-                <div key={index} className="relative">
-                  <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:border-gray-600 hover:border-opacity-50 hover:translate-y-[-2px] group relative overflow-hidden">
-                    {/* Background illustration */}
-                    <div className="absolute right-0 bottom-0 w-32 h-32 opacity-10">
-                      <div className="w-full h-full relative">
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 border-2 border-white rounded-full"></div>
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-white rounded-full"></div>
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-white rounded-full"></div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center mb-6">
-                      <div className="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-lg mr-4">
-                        {step.number}
-                      </div>
-                      <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 backdrop-blur-sm flex items-center justify-center border border-blue-800 border-opacity-30">
-                        <step.icon size={18} className="text-blue-300" />
-                      </div>
-                    </div>
-
-                    <h3 className="text-xl font-bold mb-3 text-white">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-300 relative z-10">
-                      {step.description}
-                    </p>
-                  </div>
-
-                  {/* Arrow for mobile */}
-                  {index < approachSteps.length - 1 && (
-                    <div className="flex justify-center lg:hidden my-4">
-                      <ArrowRight size={24} className="text-blue-400" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section - UPDATED MULTI-CARD CAROUSEL */}
-      <TestimonialCarousel />
-
-      {/* FAQ Section */}
-      <section className="py-24 relative">
-        <DotPattern />
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-12 gap-16">
-            <div className="lg:col-span-5">
-              <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-                FAQ
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-xl text-gray-300 mb-8">
-                Find answers to common questions about our services.
-              </p>
-
-              {/* Visual element */}
-              <div className="hidden lg:block mb-8">
-                <div className="relative">
-                  <div className="w-40 h-40 border-2 border-gray-700 rounded-xl transform rotate-12 opacity-30"></div>
-                  <div className="absolute top-5 left-5 w-40 h-40 border-2 border-blue-700 rounded-xl transform -rotate-3 opacity-40"></div>
-                  <div className="absolute top-10 left-10 w-40 h-40 border-2 border-purple-700 rounded-xl transform rotate-6 opacity-50"></div>
-                </div>
-              </div>
-
-              <div className="hidden lg:block">
-                <a
-                  href="/faq"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-2px] group"
-                >
-                  View All FAQs{" "}
-                  <ArrowRight
-                    size={16}
-                    className="ml-2 group-hover:ml-3 transition-all duration-300"
-                  />
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="space-y-6">
-                {faqItems.map((item, index) => (
-                  <div
-                    key={index}
-                    className="border border-gray-700 border-opacity-50 hover:border-gray-600 hover:border-opacity-50 rounded-xl overflow-hidden transition-all duration-300 bg-gray-800 bg-opacity-40 backdrop-blur-md"
+                <div className="mt-8 lg:hidden">
+                  <a
+                    href="/faq"
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
                   >
-                    <button
-                      className="w-full flex justify-between items-center p-6 text-left hover:bg-gray-700 hover:bg-opacity-30 transition-all duration-300"
-                      onClick={() => toggleAccordion(index)}
-                    >
-                      <span className="font-semibold text-white flex items-center">
-                        <div className="w-8 h-8 rounded-full bg-gray-700 bg-opacity-50 flex items-center justify-center mr-3 text-gray-300">
-                          Q
-                        </div>
-                        {item.question}
-                      </span>
-                      <span
-                        className={`text-blue-400 transition-transform duration-300 ${
-                          activeAccordion === index ? "rotate-45" : ""
-                        }`}
-                      >
-                        <Plus size={20} />
-                      </span>
-                    </button>
-                    <div
-                      className={`overflow-hidden transition-all duration-500 ${
-                        activeAccordion === index
-                          ? "max-h-96 opacity-100"
-                          : "max-h-0 opacity-0"
-                      }`}
-                    >
-                      <div className="p-6 pt-0 text-gray-300 border-t border-gray-700 border-opacity-30 flex">
-                        <div className="w-8 h-8 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center mr-3 text-blue-300 flex-shrink-0 mt-1">
-                          A
-                        </div>
-                        <div>{item.answer}</div>
-                      </div>
-                    </div>
-                  </div>
+                    View All FAQs <ArrowRight size={16} className="ml-2" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Call to Action Section */}
+        <section className="py-16 relative">
+          <div className="absolute inset-0 bg-blue-900 bg-opacity-90 z-0"></div>
+
+          {/* Background pattern */}
+          <div className="absolute inset-0 bg-opacity-10 z-0">
+            <div className="absolute inset-0 overflow-hidden opacity-10">
+              <div className="h-full w-full grid grid-cols-10 grid-rows-6">
+                {[...Array(60)].map((_, i) => (
+                  <div key={i} className="border-r border-b border-white"></div>
                 ))}
               </div>
+            </div>
+          </div>
 
-              <div className="mt-8 lg:hidden">
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30 z-0"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30 z-0"></div>
+
+          <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+            <div className="text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+                Ready to Transform Your Business?
+              </h2>
+              <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
+                We specialize in helping businesses attract, hire, and retain
+                exceptional talent. And with our sales expertise, we also help
+                you turn leads into lasting customers.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="/faq"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+                  href="/contact"
+                  className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center hover:translate-y-[-2px] relative group overflow-hidden"
                 >
-                  View All FAQs <ArrowRight size={16} className="ml-2" />
+                  <span className="relative z-10">
+                    Let's Build Growth Together
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
+                </a>
+                <a
+                  href="/services"
+                  className="px-8 py-4 bg-blue-600 bg-opacity-40 hover:bg-opacity-50 text-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center backdrop-blur-sm border border-blue-400 border-opacity-30 hover:border-opacity-50 hover:translate-y-[-2px] relative group overflow-hidden"
+                >
+                  <span className="relative z-10">Explore Our Services</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
                 </a>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Call to Action Section */}
-      <section className="py-16 relative">
-        <div className="absolute inset-0 bg-blue-900 bg-opacity-90 z-0"></div>
-
-        {/* Background pattern */}
-        <div className="absolute inset-0 bg-opacity-10 z-0">
-          <div className="absolute inset-0 overflow-hidden opacity-10">
-            <div className="h-full w-full grid grid-cols-10 grid-rows-6">
-              {[...Array(60)].map((_, i) => (
-                <div key={i} className="border-r border-b border-white"></div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30 z-0"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent opacity-30 z-0"></div>
-
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
-              We specialize in helping businesses attract, hire, and retain
-              exceptional talent. And with our sales expertise, we also help you
-              turn leads into lasting customers.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="px-8 py-4 bg-white hover:bg-gray-100 text-blue-700 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center hover:translate-y-[-2px] relative group overflow-hidden"
-              >
-                <span className="relative z-10">
-                  Let's Build Growth Together
+        {/* Contact Section - REDESIGNED */}
+        <section className="py-24 relative">
+          <GridPattern />
+          <div className="max-w-screen-xl mx-auto px-6 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Contact Info Column */}
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
+                  Contact Us
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
-              </a>
-              <a
-                href="/services"
-                className="px-8 py-4 bg-blue-600 bg-opacity-40 hover:bg-opacity-50 text-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 font-medium text-center backdrop-blur-sm border border-blue-400 border-opacity-30 hover:border-opacity-50 hover:translate-y-[-2px] relative group overflow-hidden"
-              >
-                <span className="relative z-10">Explore Our Services</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transform translate-x-full group-hover:translate-x-0 transition-all duration-700"></div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                  Get In Touch
+                </h2>
+                <p className="text-xl text-gray-300 mb-8 max-w-lg">
+                  Have questions or ready to start? Contact us today to discuss
+                  how we can help your business succeed.
+                </p>
 
-      {/* Contact Section - REDESIGNED */}
-      <section className="py-24 relative">
-        <GridPattern />
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Contact Info Column */}
-            <div>
-              <span className="inline-block px-3 py-1 rounded-full bg-blue-900 bg-opacity-30 text-blue-300 text-sm font-medium mb-6 backdrop-blur-sm border border-blue-800 border-opacity-30">
-                Contact Us
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Get In Touch
-              </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-lg">
-                Have questions or ready to start? Contact us today to discuss
-                how we can help your business succeed.
-              </p>
+                {/* Contact Details */}
+                <div className="space-y-6 mb-8">
+                  <div className="flex items-start">
+                    <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
+                      <MapPin size={20} />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="font-semibold text-white mb-1">
+                        Our Location
+                      </h3>
+                      <address className="not-italic text-gray-300">
+                        123 Business Avenue
+                        <br />
+                        Chennai, 171001
+                        <br />
+                        India
+                      </address>
+                    </div>
+                  </div>
 
-              {/* Contact Details */}
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
-                    <MapPin size={20} />
+                  <div className="flex items-start">
+                    <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
+                      <Mail size={20} />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="font-semibold text-white mb-1">
+                        Email Us
+                      </h3>
+                      <a
+                        href="mailto:info@forwardbiz.com"
+                        className="text-blue-400 hover:text-blue-300 hover:underline"
+                      >
+                        info@forwardbiz.com
+                      </a>
+                    </div>
                   </div>
-                  <div className="ml-4">
-                    <h3 className="font-semibold text-white mb-1">
-                      Our Location
-                    </h3>
-                    <address className="not-italic text-gray-300">
-                      123 Business Avenue
-                      <br />
-                      Chennai, 171001
-                      <br />
-                      India
-                    </address>
-                  </div>
-                </div>
 
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
-                    <Mail size={20} />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="font-semibold text-white mb-1">Email Us</h3>
-                    <a
-                      href="mailto:info@forwardbiz.com"
-                      className="text-blue-400 hover:text-blue-300 hover:underline"
-                    >
-                      info@forwardbiz.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
-                    <Phone size={20} />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="font-semibold text-white mb-1">Call Us</h3>
-                    <a
-                      href="tel:+911234567890"
-                      className="text-blue-400 hover:text-blue-300 hover:underline"
-                    >
-                      +91 (123) 456-7890
-                    </a>
+                  <div className="flex items-start">
+                    <div className="w-10 h-10 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center text-blue-300 border border-blue-800 border-opacity-30 mt-1">
+                      <Phone size={20} />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="font-semibold text-white mb-1">Call Us</h3>
+                      <a
+                        href="tel:+911234567890"
+                        className="text-blue-400 hover:text-blue-300 hover:underline"
+                      >
+                        +91 (123) 456-7890
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Contact Form Column */}
-            <div>
-              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-                  <Mail size={18} className="mr-2 text-blue-400" /> Send Us a
-                  Message
-                </h3>
+              {/* Contact Form Column */}
+              <div>
+                <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg">
+                  <h3 className="text-xl font-bold text-white mb-6 flex items-center">
+                    <Mail size={18} className="mr-2 text-blue-400" /> Send Us a
+                    Message
+                  </h3>
 
-                {/* Simplified Form */}
-                <form className="space-y-6">
-                  {/* Name Field */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
-                      placeholder="Your name"
-                    />
-                  </div>
+                  {/* Simplified Form */}
+                  <form className="space-y-6">
+                    {/* Name Field */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
+                        placeholder="Your name"
+                      />
+                    </div>
 
-                  {/* Email Field */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
-                      placeholder="your@email.com"
-                    />
-                  </div>
+                    {/* Email Field */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        className="w-full px-4 py-3 bg-gray-700 bg-opacity-50 backdrop-blur-sm border border-gray-600 border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400"
+                        placeholder="your@email.com"
+                      />
+                    </div>
 
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 flex items-center justify-center"
-                  >
-                    <span>Send Message</span>
-                    <ArrowRight size={16} className="ml-2" />
-                  </button>
-                </form>
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 flex items-center justify-center"
+                    >
+                      <span>Send Message</span>
+                      <ArrowRight size={16} className="ml-2" />
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }
 

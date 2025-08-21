@@ -3,6 +3,7 @@ import { Sora } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import DevAttribution from "@/components/DevAttribution";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -10,8 +11,56 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "ForwardBiz - Business Growth Solutions",
-  description: "Building high-performing teams and optimizing lead conversion",
+  metadataBase: new URL("https://forwardbiz.in"),
+  title: {
+    default: "ForwardBiz - Business Growth Solutions",
+    template: "%s | ForwardBiz",
+  },
+  description:
+    "ForwardBiz specializes in strategic talent acquisition and sales enablement to help businesses build high-performing teams and optimize lead conversion.",
+  keywords: [
+    "business growth",
+    "talent acquisition",
+    "sales enablement",
+    "India",
+    "Chennai",
+    "recruitment",
+    "lead conversion",
+  ],
+  authors: [
+    { name: "ForwardBiz" },
+    { name: "Anshul Sharma", url: "https://anshul.lol" },
+  ],
+  creator: "Anshul Sharma",
+
+  publisher: "ForwardBiz",
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
+  verification: {
+    other: {
+      "developer-verification": "anshul-sharma-developer-verification",
+      portfolio: "https://anshul.lol",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -20,19 +69,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${sora.variable} antialiased`}>
-        <div className="min-h-screen bg-gray-900 font-sans text-gray-200 overflow-x-hidden">
-          {/* Fixed background elements */}
-          <div className="fixed inset-0 z-0 overflow-hidden">
-            <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-purple-500 opacity-10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-            <div className="absolute top-1/3 left-1/4 w-1/4 h-1/4 bg-teal-500 opacity-5 rounded-full blur-3xl"></div>
-          </div>
-          <Navbar />
-          <main className="relative z-10 pt-16">{children}</main>
-          <Footer />
-        </div>
+    <html lang="en" className={sora.variable}>
+      {/* Website designed and developed by Anshul Sharma (https://anshul.lol) */}
+      <body className="bg-gray-900">
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <DevAttribution />
       </body>
     </html>
   );

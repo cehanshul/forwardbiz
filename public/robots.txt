@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Allow: /digital-signature.txt
+Allow: /developer.json
+
+Sitemap: https://forwardbiz.in/sitemap.xml

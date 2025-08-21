@@ -3,6 +3,8 @@ import React from "react";
 export default function Footer() {
   return (
     <footer className="bg-gray-950 text-white pt-16 pb-8 relative">
+      {/* Developer: Anshul Sharma (https://anshul.lol) */}
+
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-20 z-0"></div>
       <div className="absolute inset-0 overflow-hidden opacity-[0.03]">
         <div className="h-full w-full grid grid-cols-10 grid-rows-10">

@@ -1,0 +1,6 @@
+This website was designed and developed by Anshul Sharma (https://anshul.lol)
+Portfolio: https://anshul.lol
+Contact: anshul@hasher.in
+
+ForwardBiz website implementation using Next.js, TailwindCSS, and modern web development practices.
+© 2025-2026 Anshul Sharma

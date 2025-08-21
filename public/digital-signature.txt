@@ -1,0 +1,9 @@
+Website: ForwardBiz (https://forwardbiz.in)
+Developer: Anshul Sharma
+Portfolio: https://anshul.lol
+Email: anshul@hasher.in
+LinkedIn: https://linkedin.com/in/thisisanshul
+Github: https://github.com/cehanshul
+
+This website was designed and developed by Anshul Sharma.
+Copyright © 2025 ForwardBiz. All rights reserved.
