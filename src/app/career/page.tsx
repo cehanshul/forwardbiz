@@ -120,15 +120,30 @@ export default function CareersPage() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("resume", formData.resume);
+
+      const response = await fetch("/api/career", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
       setIsSubmitting(false);
       setIsSubmitted(true);
 
@@ -142,7 +157,11 @@ export default function CareersPage() {
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
-    }, 1500);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setIsSubmitting(false);
+      // You might want to show an error message to the user here
+    }
   };
 
   return (

@@ -120,16 +120,28 @@ export default function ContactPage() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateForm()) return;
 
     setFormStatus("submitting");
 
-    // Simulate API call
-    setTimeout(() => {
-      // Simulate successful submission
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
       setFormStatus("success");
 
       // Reset form after 3 seconds
@@ -143,7 +155,15 @@ export default function ContactPage() {
         });
         setFormStatus(null);
       }, 3000);
-    }, 1500);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setFormStatus("error");
+
+      // Reset error status after 3 seconds
+      setTimeout(() => {
+        setFormStatus(null);
+      }, 3000);
+    }
   };
 
   // Grid Pattern for background
@@ -610,6 +630,11 @@ export default function ContactPage() {
                       <>
                         <Check size={18} className="mr-2" />
                         Inquiry Submitted!
+                      </>
+                    ) : formStatus === "error" ? (
+                      <>
+                        <AlertCircle size={18} className="mr-2" />
+                        Failed to Submit! Try Again
                       </>
                     ) : (
                       <>
