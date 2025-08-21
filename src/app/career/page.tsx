@@ -283,7 +283,7 @@ export default function CareersPage() {
       {/* Main Content Section */}
       <section className="relative py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
             {/* Left Column - Content */}
             <div className="animate-on-scroll opacity-0 transition-all duration-700 transform translate-y-4">
               <div className="max-w-lg">
@@ -336,7 +336,7 @@ export default function CareersPage() {
             {/* Right Column - Application Form */}
             <div
               id="apply-form"
-              className="animate-on-scroll opacity-0 transition-all duration-700 transform translate-y-4"
+              className="animate-on-scroll opacity-0 transition-all duration-700 transform translate-y-4 w-full"
             >
               <div className="bg-gray-800/50 backdrop-blur-md rounded-2xl border border-gray-700/50 overflow-hidden shadow-xl">
                 {isSubmitted ? (
@@ -363,17 +363,21 @@ export default function CareersPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="p-8 md:p-10">
-                    <div className="flex items-center justify-between mb-8">
-                      <h3 className="text-2xl font-bold text-white">
+                  <div className="p-4 sm:p-6 md:p-8 lg:p-10">
+                    <div className="flex items-center justify-between mb-6 md:mb-8">
+                      <h3 className="text-xl sm:text-2xl font-bold text-white">
                         Join Our Talent Network
                       </h3>
-                      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500/20 text-blue-400">
-                        <Users size={18} />
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-blue-500/20 text-blue-400">
+                        <Users size={16} className="sm:hidden" />
+                        <Users size={18} className="hidden sm:block" />
                       </div>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form
+                      onSubmit={handleSubmit}
+                      className="space-y-5 md:space-y-6"
+                    >
                       {/* Name Field */}
                       <div>
                         <label
@@ -452,15 +456,15 @@ export default function CareersPage() {
                             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                             accept=".pdf,.doc,.docx"
                           />
-                          <div className="flex items-center justify-between px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg text-gray-300">
-                            <span className="truncate">
+                          <div className="flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-900/50 border border-gray-700 rounded-lg text-gray-300">
+                            <span className="truncate text-sm sm:text-base">
                               {formData.resume
                                 ? formData.resume.name
-                                : "Upload your resume (PDF, DOC, DOCX)"}
+                                : "Upload your resume (PDF, DOC)"}
                             </span>
                             <div className="ml-2 flex-shrink-0 bg-gray-800 rounded-md p-1.5">
                               <svg
-                                className="w-5 h-5 text-blue-400"
+                                className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"

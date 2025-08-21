@@ -220,7 +220,7 @@ export default function ContactPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-36 pb-16 overflow-hidden">
+      <section className="relative pt-36 pb-10 sm:pb-16 overflow-hidden">
         <CirclePattern />
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
           <div className="text-center">
@@ -263,13 +263,13 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Content Section */}
-      <section className="py-16 relative">
-        <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12">
+      <section className="py-10 sm:py-16 relative">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {/* Contact Info Column */}
             <div className="animate-on-scroll opacity-0">
               {/* Office Information Card */}
-              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg mb-8">
+              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-5 sm:p-8 shadow-lg mb-6 sm:mb-8">
                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
                   <MapPin size={24} className="mr-3 text-blue-400" />
                   Contact Information
@@ -348,7 +348,7 @@ export default function ContactPage() {
               </div>
 
               {/* Map */}
-              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 overflow-hidden shadow-lg h-[300px]">
+              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 overflow-hidden shadow-lg h-[250px] sm:h-[300px]">
                 <iframe
                   src={office.mapUrl}
                   title={`Map to ${office.location}`}
@@ -361,7 +361,7 @@ export default function ContactPage() {
               </div>
 
               {/* Social Media Section */}
-              <div className="mt-8">
+              <div className="mt-6 sm:mt-8">
                 <h3 className="text-xl font-bold text-white mb-6">
                   Connect With Us
                 </h3>
@@ -397,26 +397,29 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Contact Form Column */}
+            {/* Contact Form Column - Update this section */}
             <div className="animate-on-scroll opacity-0">
-              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-8 shadow-lg">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                  <MessageSquare size={24} className="mr-3 text-blue-400" />
+              <div className="bg-gray-800 bg-opacity-40 backdrop-blur-xl rounded-xl border border-gray-700 border-opacity-50 p-5 sm:p-8 shadow-lg">
+                <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center">
+                  <MessageSquare
+                    size={20}
+                    className="mr-2 sm:mr-3 text-blue-400"
+                  />
                   Get in Touch
                 </h2>
 
-                <p className="text-gray-300 mb-6">
+                <p className="text-gray-300 mb-5 sm:mb-6">
                   Fill out the form below and our team will connect with you
                   shortly.
                 </p>
 
                 {/* Contact Form */}
-                <div className="space-y-5">
+                <div className="space-y-4 sm:space-y-5">
                   {/* Name Field */}
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium text-gray-300 mb-1.5"
+                      className="block text-sm font-medium text-gray-300 mb-1 sm:mb-1.5"
                     >
                       Name <span className="text-blue-400">*</span>
                     </label>
@@ -427,9 +430,9 @@ export default function ContactPage() {
                         name="name"
                         value={formState.name}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border ${
+                        className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border ${
                           formErrors.name ? "border-red-500" : "border-gray-600"
-                        } border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400`}
+                        } border-opacity-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-30 focus:outline-none rounded-lg text-white placeholder-gray-400 text-sm sm:text-base`}
                         placeholder="Your name"
                       />
                       {formErrors.name && (
@@ -460,7 +463,7 @@ export default function ContactPage() {
                         name="email"
                         value={formState.email}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border ${
+                        className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border ${
                           formErrors.email
                             ? "border-red-500"
                             : "border-gray-600"
@@ -496,7 +499,7 @@ export default function ContactPage() {
                         name="company"
                         value={formState.company}
                         onChange={handleInputChange}
-                        className={`w-full px-4 py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border ${
+                        className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-gray-700 bg-opacity-50 backdrop-blur-sm border ${
                           formErrors.company
                             ? "border-red-500"
                             : "border-gray-600"
@@ -615,7 +618,7 @@ export default function ContactPage() {
                     disabled={
                       formStatus === "submitting" || formStatus === "success"
                     }
-                    className={`w-full py-3 px-6 rounded-lg font-medium text-white flex items-center justify-center transition-all duration-300 ${
+                    className={`w-full py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg font-medium text-white flex items-center justify-center transition-all duration-300 ${
                       formStatus === "success"
                         ? "bg-green-600 hover:bg-green-500"
                         : "bg-blue-600 hover:bg-blue-500"
