@@ -1,13 +1,10 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import {
-  Menu,
-  X,
   ArrowRight,
   ChevronRight,
   Users,
   Target,
-  BarChart4,
   Star,
   Globe,
   TrendingUp,
@@ -15,22 +12,13 @@ import {
   Award,
   Activity,
   Briefcase,
-  PieChart,
   LineChart,
-  CheckCircle,
   Mail,
   Phone,
   MapPin,
-  ExternalLink,
   Plus,
-  ChevronDown,
   UserPlus,
   Building,
-  HeartHandshake,
-  MessageSquare,
-  MousePointer,
-  Clock,
-  Layers,
   ChevronLeft,
 } from "lucide-react";
 import Lottie from "lottie-react";
@@ -40,10 +28,9 @@ import {
 } from "@/components/seo/JsonLd";
 import Link from "next/link";
 
-// Import the TestimonialCarousel component
 const TestimonialCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const testimonialInterval = useRef(null);
+  const testimonialInterval = useRef<NodeJS.Timeout | null>(null);
 
   // Testimonials data
   const testimonials = [
@@ -277,13 +264,10 @@ const TestimonialCarousel = () => {
 };
 
 export default function ForwardBizHomepage() {
-  const [activeAccordion, setActiveAccordion] = useState(null);
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(null);
   const [animateHero, setAnimateHero] = useState(false);
   const [animationData, setAnimationData] = useState(null);
 
-  // Removed currentTestimonial state and testimonialInterval ref since they're now in the TestimonialCarousel component
-
-  // Services data - reduced to 2 core services
   const services = [
     {
       id: "talent-acquisition",
@@ -301,7 +285,6 @@ export default function ForwardBizHomepage() {
     },
   ];
 
-  // Approach steps
   const approachSteps = [
     {
       number: "01",
@@ -349,8 +332,6 @@ export default function ForwardBizHomepage() {
     { name: "E-commerce", icon: Globe },
   ];
 
-  // Testimonials data removed as it's now inside the TestimonialCarousel component
-
   // FAQ items
   const faqItems = [
     {
@@ -383,11 +364,11 @@ export default function ForwardBizHomepage() {
     setAnimateHero(true);
   }, []);
 
-  // Testimonial navigation functions and automatic rotation useEffect removed
-  // as they're now handled in the TestimonialCarousel component
+  interface ToggleAccordionFn {
+    (index: number): void;
+  }
 
-  // Toggle accordion
-  const toggleAccordion = (index) => {
+  const toggleAccordion: ToggleAccordionFn = (index) => {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
@@ -477,7 +458,6 @@ export default function ForwardBizHomepage() {
                   Business Growth Specialists
                 </span>
 
-                {/* Replace the current h1 element with this */}
                 <div
                   className={`transition-all duration-1000 ${
                     animateHero
@@ -1032,14 +1012,12 @@ export default function ForwardBizHomepage() {
 }
 
 // Typewriter text component
+
 function TypewriterText() {
   const phrases = [
     { text: "Building Talent.", className: "text-white" },
     { text: "Driving Growth.", className: "text-white" },
-    {
-      text: "Advancing Business.",
-      className: "text-white",
-    },
+    { text: "Advancing Business.", className: "text-white" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -1048,6 +1026,7 @@ function TypewriterText() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(100);
 
+  // Cursor blinking effect
   useEffect(() => {
     const cursorInterval = setInterval(() => {
       setShowCursor((prev) => !prev);
@@ -1056,38 +1035,48 @@ function TypewriterText() {
     return () => clearInterval(cursorInterval);
   }, []);
 
+  // Main typewriter effect
   useEffect(() => {
     const currentPhrase = phrases[currentIndex].text;
 
+    const typeNextChar = () => {
+      setDisplayText(currentPhrase.substring(0, displayText.length + 1));
+    };
+
+    const deleteLastChar = () => {
+      setDisplayText(currentPhrase.substring(0, displayText.length - 1));
+    };
+
+    const moveToNextPhrase = () => {
+      setIsDeleting(false);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % phrases.length);
+      setDisplayText("");
+      setTypingSpeed(100); // Reset typing speed
+    };
+
+    let timeout: NodeJS.Timeout;
+
     if (!isDeleting && displayText.length < currentPhrase.length) {
       // Typing the current phrase
-      const timeoutId = setTimeout(() => {
-        setDisplayText(currentPhrase.substring(0, displayText.length + 1));
-        setTypingSpeed(100);
-      }, typingSpeed);
-      return () => clearTimeout(timeoutId);
+      timeout = setTimeout(typeNextChar, typingSpeed);
     } else if (!isDeleting && displayText.length === currentPhrase.length) {
       // Finished typing, pause before deleting
-      const timeoutId = setTimeout(() => {
+      timeout = setTimeout(() => {
         setIsDeleting(true);
         setTypingSpeed(50); // Faster when deleting
       }, 2000);
-      return () => clearTimeout(timeoutId);
     } else if (isDeleting && displayText.length > 0) {
       // Deleting the current phrase
-      const timeoutId = setTimeout(() => {
-        setDisplayText(currentPhrase.substring(0, displayText.length - 1));
-      }, typingSpeed);
-      return () => clearTimeout(timeoutId);
+      timeout = setTimeout(deleteLastChar, typingSpeed);
     } else if (isDeleting && displayText.length === 0) {
       // Move to next phrase
-      const timeoutId = setTimeout(() => {
-        setIsDeleting(false);
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % phrases.length);
-      }, 500);
-      return () => clearTimeout(timeoutId);
+      timeout = setTimeout(moveToNextPhrase, 500);
     }
-  }, [displayText, isDeleting, currentIndex, phrases, typingSpeed]);
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [currentIndex, isDeleting, displayText.length, typingSpeed]); // Remove displayText from dependencies
 
   return (
     <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
@@ -1106,7 +1095,17 @@ function TypewriterText() {
 }
 
 // CountUpStat component for animated statistics
-function CountUpStat({ stat, animateHero, index }) {
+interface CountUpStatProps {
+  stat: {
+    value: string;
+    label: string;
+    icon: React.ComponentType<{ size?: number }>;
+  };
+  animateHero: boolean;
+  index: number;
+}
+
+function CountUpStat({ stat, animateHero, index }: CountUpStatProps) {
   const { value, label, icon: Icon } = stat;
 
   // Parse the string to extract numeric value and suffix
@@ -1115,7 +1114,7 @@ function CountUpStat({ stat, animateHero, index }) {
       const numPart = parseFloat(value.replace("K+", ""));
       return {
         number: numPart * 1000, // Convert K to actual thousands
-        displayFunc: (num) => {
+        displayFunc: (num: number): string => {
           const inK = (num / 1000).toFixed(1).replace(/\.0$/, "");
           return `${inK}K+`;
         },
@@ -1124,18 +1123,18 @@ function CountUpStat({ stat, animateHero, index }) {
       const numPart = parseInt(value.replace("+", ""));
       return {
         number: numPart,
-        displayFunc: (num) => `${Math.round(num)}+`,
+        displayFunc: (num: number): string => `${Math.round(num)}+`,
       };
     } else if (value.includes("%")) {
       const numPart = parseInt(value.replace("%", ""));
       return {
         number: numPart,
-        displayFunc: (num) => `${Math.round(num)}%`,
+        displayFunc: (num: number): string => `${Math.round(num)}%`,
       };
     } else {
       return {
         number: parseInt(value),
-        displayFunc: (num) => `${Math.round(num)}`,
+        displayFunc: (num: number): string => `${Math.round(num)}%`,
       };
     }
   };

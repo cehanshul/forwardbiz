@@ -83,12 +83,12 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <a
+            <Link
               href="/contact"
               className="ml-4 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 shadow-lg shadow-blue-900/20"
             >
               Get in Touch
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -153,13 +153,13 @@ export default function Navbar() {
             </nav>
 
             <div className="mt-8">
-              <a
+              <Link
                 href="/contact"
                 className="block w-full px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition-all duration-300 text-center shadow-lg shadow-blue-900/20"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Get in Touch
-              </a>
+              </Link>
             </div>
           </div>
         </div>
