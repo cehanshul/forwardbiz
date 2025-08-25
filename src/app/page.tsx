@@ -648,7 +648,7 @@ export default function ForwardBizHomepage() {
                 We focus on what drives growth
               </h2>
               <p className="text-xl text-gray-300 leading-relaxed">
-                building exceptional teams and optimizing sales performance.
+                Building exceptional teams and optimizing sales performance.
                 These are distinct services with one mission: sustainable
                 success.
               </p>
@@ -983,9 +983,9 @@ export default function ForwardBizHomepage() {
                         Our Location
                       </h3>
                       <address className="not-italic text-gray-300">
-                        123 Business Avenue
+                        VGP Selva Nagar, Velachery
                         <br />
-                        Chennai, 171001
+                        Chennai, 600042
                         <br />
                         India
                       </address>
@@ -1001,10 +1001,10 @@ export default function ForwardBizHomepage() {
                         Email Us
                       </h3>
                       <Link
-                        href="mailto:info@forwardbiz.com"
+                        href="mailto:hr@forwardbiz.in"
                         className="text-blue-400 hover:text-blue-300 hover:underline"
                       >
-                        info@forwardbiz.com
+                        hr@forwardbiz.in
                       </Link>
                     </div>
                   </div>

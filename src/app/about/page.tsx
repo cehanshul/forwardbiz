@@ -462,9 +462,9 @@ export default function FinalAboutUsPage() {
               </div>
 
               <p className="text-xl md:text-2xl text-white font-light italic mb-8 relative z-10">
-                Working with forwardbiz transformed not just our talent
-                acquisition strategy, but our entire approach to growth. Our
-                conversion rates increased by 120% in just six months.
+                Working with ForwardBiz made hiring much easier for us. We found
+                great people for our team, and our hiring speed and quality
+                improved a lot in just six months.
               </p>
 
               <div className="flex items-center justify-center">
@@ -472,9 +472,9 @@ export default function FinalAboutUsPage() {
                   SK
                 </div>
                 <div className="text-left">
-                  <div className="font-medium text-white">Sanjay Kumar</div>
+                  <div className="font-medium text-white">Saranya K</div>
                   <div className="text-blue-300 text-sm">
-                    CEO, TechNova Solutions
+                    CEO & Founder Cuedo Analytics
                   </div>
                 </div>
               </div>

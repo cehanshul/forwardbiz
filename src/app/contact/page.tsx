@@ -35,7 +35,7 @@ export default function ContactPage() {
     location: "Velachery, Chennai",
     phone: "+91 63692 07955",
     email: "raji@forwardbiz.in",
-    linkedin: "https://www.linkedin.com/in/rajeswari-saravanamurthy-29618816/",
+    linkedin: "https://www.linkedin.com/company/forward-biz-pvt-ltd/",
     hours: "Mon-Fri: 9:00 AM - 6:00 PM",
     mapUrl:
       "https://maps.google.com/maps?q=velachery+chennai&t=&z=13&ie=UTF8&iwloc=&output=embed",

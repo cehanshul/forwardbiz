@@ -145,14 +145,14 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <h3 className="text-lg font-semibold mb-4 text-white">Contact</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>123 Business Avenue</li>
-              <li>Chennai, 171001</li>
+              <li>VGP Selva Nagar, Velachery</li>
+              <li>Chennai, 600042</li>
               <li className="pt-2">
                 <Link
-                  href="mailto:info@forwardbiz.com"
+                  href="mailto:hr@forwardbiz.in"
                   className="text-blue-400 hover:text-blue-300 transition-all duration-300"
                 >
-                  info@forwardbiz.com
+                  hr@forwardbiz.in
                 </Link>
               </li>
             </ul>
